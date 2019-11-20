@@ -1,5 +1,8 @@
 package com.example.selfbuy.data.manager
 
+import com.example.selfbuy.data.entity.remote.Token
+import com.example.selfbuy.data.entity.local.LoginDto
+import com.example.selfbuy.data.entity.remote.ResultApi
 import com.example.selfbuy.data.manager.api.BaseApi.API_BASE_URL
 import com.example.selfbuy.data.manager.service.ApiService
 import io.reactivex.Single
@@ -15,4 +18,9 @@ class ApiManager {
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(ApiService::class.java)
+
+    /**
+     *  Permet de se connecter et retourne l'utilisateur connecté si il n'y a pas d'erreur
+     */
+    fun authenticate(loginDto: LoginDto): Single<ResultApi<Token>> = service.authenticate(loginDto)
 }

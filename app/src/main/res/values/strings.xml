@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">SelfBuy</string>
+
+    <!-- Navbar -->
     <string name="home">Accueil</string>
-    <string name="card">Panier</string>
+    <string name="cart">Panier</string>
     <string name="profile">Profile</string>
+
+    <!-- Profile -->
+    <string name="loginDto">Se connecter</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="connect">Connexion</string>
+    <string name="register">S\'inscrire</string>
+    <string name="mail_invalid">Le mail n\'est pas correct</string>
+    <string name="complete_password">Veuillez renseigner votre mot de passe</string>
 </resources>

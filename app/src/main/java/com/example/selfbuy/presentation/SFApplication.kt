@@ -2,7 +2,7 @@ package com.example.selfbuy.presentation
 
 import android.app.Application
 import com.example.selfbuy.data.manager.ApiManager
-import com.example.selfbuy.data.repository.DataRepository
+import com.example.selfbuy.data.repository.connexion.ConnexionRepository
 
 class SFApplication: Application() {
 
@@ -10,7 +10,7 @@ class SFApplication: Application() {
         lateinit var app: SFApplication
     }
 
-    lateinit var dataRepository: DataRepository
+    lateinit var connexionRepository: ConnexionRepository
 
     override fun onCreate() {
         super.onCreate()
@@ -21,6 +21,6 @@ class SFApplication: Application() {
 
     private fun initInjection() {
         val apiManager = ApiManager()
-        dataRepository = DataRepository(apiManager)
+        connexionRepository = ConnexionRepository(apiManager)
     }
 }

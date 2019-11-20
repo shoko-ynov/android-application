@@ -6,9 +6,9 @@
         android:title="@string/home"/>
 
     <item
-        android:id="@+id/navigation_card"
-        android:icon="@mipmap/ic_card"
-        android:title="@string/card"/>
+        android:id="@+id/navigation_cart"
+        android:icon="@mipmap/ic_cart"
+        android:title="@string/cart"/>
 
     <item
         android:id="@+id/navigation_profile"
