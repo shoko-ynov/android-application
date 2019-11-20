@@ -1,4 +1,4 @@
-package com.example.selfbuy.presentation.main.fragments
+package com.example.selfbuy.presentation.home.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,20 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
-import com.example.selfbuy.presentation.main.viewModels.MainViewModel
+import com.example.selfbuy.presentation.home.viewModels.HomeViewModel
 
-class MainFragment : Fragment() {
+class CardFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_main, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_card, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = MainViewModel()
+        viewModel = HomeViewModel()
     }
 }
