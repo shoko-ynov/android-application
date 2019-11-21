@@ -9,18 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.data.entity.local.LoginDto
-import com.example.selfbuy.data.entity.remote.ResultApi
-import com.example.selfbuy.data.entity.remote.Token
+import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
-import com.google.gson.Gson
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_connexion.*
-import retrofit2.HttpException
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
 
 class ConnexionFragment : Fragment() {
 
+    private var isBusy: Boolean = false
     private lateinit var viewModelConnexion: ConnexionViewModel
 
     override fun onCreateView(
@@ -42,30 +38,16 @@ class ConnexionFragment : Fragment() {
         viewModelConnexion = ConnexionViewModel()
 
         viewModelConnexion.userLiveData.observe(viewLifecycleOwner, Observer {
+            isBusy = false
+
             Toast.makeText(this.activity, it.data?.userId, Toast.LENGTH_SHORT).show()
         })
 
         viewModelConnexion.errorLiveData.observe(viewLifecycleOwner, Observer {
-            var error = it as HttpException
+            isBusy = false
 
-            var reader: BufferedReader?
-            var errorBody = ""
-            try {
-                reader = BufferedReader(InputStreamReader(error.response().errorBody()?.byteStream()))
-
-                try {
-                    errorBody = reader.readLine()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-            }
-            catch (e: IOException) {
-                e.printStackTrace()
-            }
-
-            val finallyError = Gson().fromJson(errorBody, ResultApi::class.java)
-            Toast.makeText(this.activity, finallyError.error.message, Toast.LENGTH_SHORT).show()
+            val errorBodyApi = ErrorUtils.getErrorApi(it)
+            view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_SHORT).show() }
         })
     }
 
@@ -75,9 +57,11 @@ class ConnexionFragment : Fragment() {
     private fun setOnClickListener(){
         btn_login.setOnClickListener{
             if (checkFields()){
-
                 val login = LoginDto(editText_email.text.toString(), editText_password.text.toString())
-                viewModelConnexion.authenticate(login)
+                if (!isBusy){
+                    isBusy = true
+                    viewModelConnexion.authenticate(login)
+                }
             }
         }
 

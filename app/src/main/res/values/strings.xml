@@ -14,4 +14,10 @@
     <string name="register">S\'inscrire</string>
     <string name="mail_invalid">Le mail n\'est pas correct</string>
     <string name="complete_password">Veuillez renseigner votre mot de passe</string>
+
+    <!-- User error -->
+    <string name="cannot_get_user">Une erreur est survenue lors de la récupération de vos donneées</string>
+    <string name="bad_credentials">L\'email ou le mot de passe est incorrect</string>
+    <string name="cannot_update_user">Une erreur est survenue lors de la mise à jour de vos donneées</string>
+    <string name="error_call_api">Un problème est survenu lors de l\'appel au serveur</string>
 </resources>
