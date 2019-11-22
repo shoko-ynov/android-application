@@ -1,37 +1,39 @@
 package com.example.selfbuy.handleError.utils
 
-import android.view.View
 import com.example.selfbuy.data.entity.remote.ErrorApi
 import com.example.selfbuy.data.entity.remote.ResultApi
 import com.example.selfbuy.handleError.user.InvalidUserError
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.BufferedReader
-import java.io.IOException
 import java.io.InputStreamReader
+import java.lang.Exception
+import java.net.UnknownHostException
 
 object ErrorUtils {
 
     fun getErrorApi(errorThrowable: Throwable): ErrorApi{
-        var errorBody = ""
+        var codeResult = errorThrowable.message.toString()
 
         try {
             val error = errorThrowable as HttpException
-            val reader: BufferedReader?
-            reader = BufferedReader(InputStreamReader(error.response().errorBody()?.byteStream()))
+            val reader = BufferedReader(InputStreamReader(error.response().errorBody()?.byteStream()))
 
-            try {
-                errorBody = reader.readLine()
-            }
-            catch (e: IOException) {
-                e.printStackTrace()
+            val errorBody = reader.readLine()
+
+            codeResult = if (errorBody == "Unauthorized"){
+                errorThrowable.code().toString()
+            } else{
+                val resultApiBody = Gson().fromJson(errorBody, ResultApi::class.java)
+                resultApiBody.error.code
             }
         }
-        catch (e: IOException) {
-            e.printStackTrace()
+        catch (e: Exception) {
+            if (errorThrowable is UnknownHostException){
+                codeResult = "UNKNOWN_HOST"
+            }
+            return InvalidUserError.handleError(codeResult)
         }
-
-        val resultApiBody = Gson().fromJson(errorBody, ResultApi::class.java)
-        return InvalidUserError.handleError(resultApiBody.error.code)
+        return InvalidUserError.handleError(codeResult)
     }
 }

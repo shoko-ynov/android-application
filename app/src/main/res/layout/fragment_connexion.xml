@@ -92,4 +92,9 @@
                 android:textSize="14sp"/>
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/progressBar_connexion"
+        android:visibility="gone"
+        layout="@layout/progress_bar"/>
 </FrameLayout>

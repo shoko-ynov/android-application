@@ -11,6 +11,7 @@ object InvalidUserError : AbstractHandleError(){
             "CANNOT_GET_USER" -> ErrorApi(code, SFApplication.app.resources.getString(R.string.cannot_get_user))
             "CANNOT_UPDATE_USER" -> ErrorApi(code, SFApplication.app.resources.getString(R.string.cannot_update_user))
             "BAD_CREDENTIALS" -> ErrorApi(code, SFApplication.app.resources.getString(R.string.bad_credentials))
+            "UNKNOWN_HOST" -> ErrorApi(code, SFApplication.app.resources.getString(R.string.no_internet_access))
             else -> ErrorApi(code, SFApplication.app.resources.getString(R.string.error_call_api))
         }
 }

@@ -1,14 +1,14 @@
 package com.example.selfbuy.presentation.home.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.selfbuy.R
+import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.home.fragments.CartFragment
-import com.example.selfbuy.presentation.home.fragments.HomeFragment
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
+import com.example.selfbuy.presentation.home.fragments.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private val homeFragment = HomeFragment()
     private val cartFragment = CartFragment()

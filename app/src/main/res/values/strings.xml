@@ -20,4 +20,10 @@
     <string name="bad_credentials">L\'email ou le mot de passe est incorrect</string>
     <string name="cannot_update_user">Une erreur est survenue lors de la mise à jour de vos donneées</string>
     <string name="error_call_api">Un problème est survenu lors de l\'appel au serveur</string>
+
+    <!-- Progressbar -->
+    <string name="loading_in_progress">Chargement en cours...</string>
+
+    <!-- No internet -->
+    <string name="no_internet_access">Vous n\'êtes pas connecté à Internet</string>
 </resources>

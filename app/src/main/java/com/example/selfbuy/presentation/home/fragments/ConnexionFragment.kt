@@ -1,14 +1,23 @@
 package com.example.selfbuy.presentation.home.fragments
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.example.selfbuy.UIUtils.InteractionUserUtils
+import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.data.entity.local.LoginDto
+import com.example.selfbuy.data.entity.remote.ResultApi
+import com.example.selfbuy.data.entity.remote.Token
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -16,8 +25,9 @@ import kotlinx.android.synthetic.main.fragment_connexion.*
 
 class ConnexionFragment : Fragment() {
 
-    private var isBusy: Boolean = false
     private lateinit var viewModelConnexion: ConnexionViewModel
+    private lateinit var loginPreferences: SharedPreferences
+    private lateinit var loginPrefsEditor: SharedPreferences.Editor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,47 +41,89 @@ class ConnexionFragment : Fragment() {
         this.bindViewModelConnexion()
     }
 
+    @SuppressLint("CommitPrefEdits")
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        loginPreferences = activity!!.getSharedPreferences("loginPrefs", AppCompatActivity.MODE_PRIVATE)
+        loginPrefsEditor = loginPreferences.edit()
+
+        val tokenSaved = loginPreferences.getString("token", "")
+        val refreshTokenSaved = loginPreferences.getString("refreshToken", "")
+
+        if (!tokenSaved.isNullOrEmpty() && !refreshTokenSaved.isNullOrEmpty()){
+            val token = Token(tokenSaved, refreshTokenSaved)
+            CurrentUser.token = token
+            view?.let { v -> Snackbar.make(v, CurrentUser.token!!.token, Snackbar.LENGTH_SHORT).show() }
+        }
+    }
+
     /**
      * Lie le viewModel au fragment et s'abonne aux differents evenements
      */
     private fun bindViewModelConnexion(){
         viewModelConnexion = ConnexionViewModel()
 
-        viewModelConnexion.userLiveData.observe(viewLifecycleOwner, Observer {
-            isBusy = false
+        viewModelConnexion.userLiveData.observe(viewLifecycleOwner, Observer { result: ResultApi<Token> ->
+            activity?.let { InteractionUserUtils.enableInteractionUser(it) }
+            progressBar_connexion.visibility = View.GONE
 
-            Toast.makeText(this.activity, it.data?.userId, Toast.LENGTH_SHORT).show()
+            loginPrefsEditor.putString("token", result.data?.token)
+            loginPrefsEditor.putString("refreshToken", result.data?.refreshToken)
+            loginPrefsEditor.commit()
+
+            val token = Token(result.data!!.token, result.data.refreshToken)
+            CurrentUser.token = token
+
+            view?.let { v -> Snackbar.make(v, CurrentUser.token!!.token, Snackbar.LENGTH_SHORT).show() }
         })
 
         viewModelConnexion.errorLiveData.observe(viewLifecycleOwner, Observer {
-            isBusy = false
+            activity?.let { InteractionUserUtils.enableInteractionUser(it) }
+            progressBar_connexion.visibility = View.GONE
 
             val errorBodyApi = ErrorUtils.getErrorApi(it)
-            view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_SHORT).show() }
+            view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
         })
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        activity?.let { InteractionUserUtils.enableInteractionUser(it) }
+    }
+
     /**
-    Abonnement aux évènements de bouton de connexion et d'inscription
+     * Abonnement aux évènements de bouton de connexion et d'inscription
      */
     private fun setOnClickListener(){
         btn_login.setOnClickListener{
             if (checkFields()){
-                val login = LoginDto(editText_email.text.toString(), editText_password.text.toString())
-                if (!isBusy){
-                    isBusy = true
+                val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+                val isConnected: Boolean = activeNetwork?.isConnected == true
+
+                if(!isConnected){
+                    view?.let { v -> Snackbar.make(v, "Pas d'internet", Snackbar.LENGTH_SHORT).show() }
+                }
+                else{
+                    val login = LoginDto(editText_email.text.toString(), editText_password.text.toString())
+
+                    activity?.let { InteractionUserUtils.disableInteractionUser(it) }
+                    progressBar_connexion.visibility = View.VISIBLE
+
                     viewModelConnexion.authenticate(login)
                 }
             }
         }
 
         btn_register.setOnClickListener{
-            Toast.makeText(activity, "Inscription OK", Toast.LENGTH_SHORT).show()
+            view?.let { v -> Snackbar.make(v, "Inscription OK", Snackbar.LENGTH_SHORT).show() }
         }
     }
 
     /**
-    Contrôle des différents champs que l'utilisateur doit renseigner
+     * Contrôle des différents champs que l'utilisateur doit renseigner
      */
     private fun checkFields(): Boolean{
         var isValide = true
