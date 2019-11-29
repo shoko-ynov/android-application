@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.example.selfbuy.R
 import com.example.selfbuy.UIUtils.InteractionUserUtils
 import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.data.entity.local.LoginDto
@@ -74,8 +75,6 @@ class ConnexionFragment : Fragment() {
 
             val token = Token(result.data!!.token, result.data.refreshToken)
             CurrentUser.token = token
-
-            view?.let { v -> Snackbar.make(v, CurrentUser.token!!.token, Snackbar.LENGTH_SHORT).show() }
         })
 
         viewModelConnexion.errorLiveData.observe(viewLifecycleOwner, Observer {
@@ -99,25 +98,22 @@ class ConnexionFragment : Fragment() {
     private fun setOnClickListener(){
         btn_login.setOnClickListener{
             if (checkFields()){
-                val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-                val isConnected: Boolean = activeNetwork?.isConnected == true
+                val login = LoginDto(editText_email.text.toString(), editText_password.text.toString())
 
-                if(!isConnected){
-                    view?.let { v -> Snackbar.make(v, "Pas d'internet", Snackbar.LENGTH_SHORT).show() }
-                }
-                else{
-                    val login = LoginDto(editText_email.text.toString(), editText_password.text.toString())
+                activity?.let { InteractionUserUtils.disableInteractionUser(it) }
+                progressBar_connexion.visibility = View.VISIBLE
 
-                    activity?.let { InteractionUserUtils.disableInteractionUser(it) }
-                    progressBar_connexion.visibility = View.VISIBLE
-
-                    viewModelConnexion.authenticate(login)
-                }
+                viewModelConnexion.authenticate(login)
             }
         }
 
         btn_register.setOnClickListener{
+
+            this.activity?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.home_activity_fragment_container, HomeFragment())
+                ?.commit()
+
             view?.let { v -> Snackbar.make(v, "Inscription OK", Snackbar.LENGTH_SHORT).show() }
         }
     }
