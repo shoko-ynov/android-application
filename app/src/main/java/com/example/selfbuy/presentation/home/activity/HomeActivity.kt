@@ -1,18 +1,29 @@
 package com.example.selfbuy.presentation.home.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.example.selfbuy.R
+import com.example.selfbuy.data.entity.remote.ResultApi
+import com.example.selfbuy.data.entity.remote.User
+import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.home.fragments.CartFragment
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.fragments.HomeFragment
+import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_connexion.*
 
 class HomeActivity : BaseActivity() {
 
     private val homeFragment = HomeFragment()
     private val cartFragment = CartFragment()
     private val connexionFragment = ConnexionFragment()
+
+    private val userViewModel = UserViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +37,30 @@ class HomeActivity : BaseActivity() {
         }
 
         setUpBottomNavigationView()
+        bindUserViewModel()
+    }
+
+    /**
+     * On s'abonne aux differents evenements de UserViewModel
+     */
+    private fun bindUserViewModel(){
+        userViewModel.userLiveData.observe(this, Observer { result: ResultApi<User> ->
+
+            //Passer l'utilisateur a l'activity de profile et charger le fragment profile
+            val user = result.data
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.home_activity_fragment_container, homeFragment)
+                .commit()
+        })
+
+        userViewModel.errorLiveData.observe(this, Observer { error: Throwable ->
+            //si probleme revenir sur le fragment connexion
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.home_activity_fragment_container, connexionFragment)
+                .commit()
+        })
     }
 
     /**
@@ -56,10 +91,7 @@ class HomeActivity : BaseActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.home_activity_fragment_container, connexionFragment)
-                    .commit()
+                userViewModel.getCurrentUser()
                 return@OnNavigationItemSelectedListener true
             }
         }
