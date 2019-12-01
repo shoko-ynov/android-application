@@ -13,15 +13,18 @@ import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.data.entity.local.LoginDto
 import com.example.selfbuy.data.entity.remote.ResultApi
 import com.example.selfbuy.data.entity.remote.Token
+import com.example.selfbuy.data.entity.remote.User
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
+import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_connexion.*
 
 class ConnexionFragment : Fragment() {
 
     private lateinit var connexionViewModel: ConnexionViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,7 @@ class ConnexionFragment : Fragment() {
 
         this.setOnClickListener()
         this.bindConnexionViewModel()
+        this.bindUserViewModel()
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -43,9 +47,39 @@ class ConnexionFragment : Fragment() {
         val refreshTokenSaved = SFApplication.app.loginPreferences.getString("refreshToken", "")
 
         if (!tokenSaved.isNullOrEmpty() && !refreshTokenSaved.isNullOrEmpty()){
-            val token = Token(tokenSaved, refreshTokenSaved)
+            progressBar_connexion.visibility = View.VISIBLE
+
+            val token = Token(tokenSaved.toString(), refreshTokenSaved.toString())
             CurrentUser.token = token
+            userViewModel.getCurrentUser()
         }
+    }
+
+    /**
+     * On s'abonne aux differents evenements de UserViewModel
+     */
+    private fun bindUserViewModel(){
+        userViewModel = UserViewModel()
+
+        userViewModel.userLiveData.observe(this, Observer { result: ResultApi<User> ->
+            progressBar_connexion.visibility = View.GONE
+            val user = result.data
+
+            //Passer l'utilisateur a l'activity de profile et charger le fragment profile a la place de cette snackbar
+            view?.let { v ->
+                if (user != null ) {
+                    Snackbar.make(v, user.mail, Snackbar.LENGTH_LONG).show()
+                }
+            }
+        })
+
+        userViewModel.errorLiveData.observe(this, Observer { error: Throwable ->
+            //si probleme revenir sur le fragment connexion
+            progressBar_connexion.visibility = View.GONE
+
+            val errorBodyApi = ErrorUtils.getErrorApi(error)
+            view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
+        })
     }
 
     /**
