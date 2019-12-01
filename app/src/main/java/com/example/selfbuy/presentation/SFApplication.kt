@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import com.example.selfbuy.data.manager.ApiManager
 import com.example.selfbuy.data.repository.connexion.ConnexionRepository
+import com.example.selfbuy.data.repository.product.ProductRepository
 import com.example.selfbuy.data.repository.user.UserRepository
 
 class SFApplication: Application() {
@@ -16,6 +17,7 @@ class SFApplication: Application() {
 
     lateinit var connexionRepository: ConnexionRepository
     lateinit var userRepository: UserRepository
+    lateinit var productRepository: ProductRepository
 
     lateinit var loginPreferences: SharedPreferences
     lateinit var loginPrefsEditor: SharedPreferences.Editor
@@ -32,6 +34,7 @@ class SFApplication: Application() {
         val apiManager = ApiManager()
         connexionRepository = ConnexionRepository(apiManager)
         userRepository = UserRepository(apiManager)
+        productRepository = ProductRepository(apiManager)
     }
 
     @SuppressLint("CommitPrefEdits")

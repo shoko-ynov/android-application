@@ -1,7 +1,7 @@
 package com.example.selfbuy.handleError.utils
 
-import com.example.selfbuy.data.entity.remote.ErrorApi
-import com.example.selfbuy.data.entity.remote.ResultApi
+import com.example.selfbuy.data.entity.remote.ErrorApiDto
+import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.user.InvalidUserError
 import com.google.gson.Gson
 import retrofit2.HttpException
@@ -12,7 +12,7 @@ import java.net.UnknownHostException
 
 object ErrorUtils {
 
-    fun getErrorApi(errorThrowable: Throwable): ErrorApi{
+    fun getErrorApi(errorThrowable: Throwable): ErrorApiDto{
         var codeResult = errorThrowable.message.toString()
 
         try {
@@ -24,8 +24,8 @@ object ErrorUtils {
             codeResult = if (errorBody == "Unauthorized"){
                 errorThrowable.code().toString()
             } else{
-                val resultApiBody = Gson().fromJson(errorBody, ResultApi::class.java)
-                resultApiBody.error.code
+                val resultApiBody = Gson().fromJson(errorBody, ResultApiDto::class.java)
+                resultApiBody.errorDto.code
             }
         }
         catch (e: Exception) {

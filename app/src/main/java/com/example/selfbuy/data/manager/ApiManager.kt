@@ -1,9 +1,10 @@
 package com.example.selfbuy.data.manager
 
-import com.example.selfbuy.data.entity.remote.Token
-import com.example.selfbuy.data.entity.local.LoginDto
-import com.example.selfbuy.data.entity.remote.ResultApi
-import com.example.selfbuy.data.entity.remote.User
+import com.example.selfbuy.data.entity.remote.TokenDto
+import com.example.selfbuy.data.entity.local.Login
+import com.example.selfbuy.data.entity.remote.ProductDto
+import com.example.selfbuy.data.entity.remote.ResultApiDto
+import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.data.manager.api.BaseApi.API_BASE_URL
 import com.example.selfbuy.data.manager.service.InterceptorService
 import com.example.selfbuy.data.manager.service.ApiService
@@ -33,10 +34,15 @@ class ApiManager {
     /**
      *  Permet de se connecter et retourne l'utilisateur connecté si il n'y a pas d'erreur
      */
-    fun authenticate(loginDto: LoginDto): Single<ResultApi<Token>> = service.authenticate(loginDto)
+    fun authenticate(login: Login): Single<ResultApiDto<TokenDto>> = service.authenticate(login)
 
     /**
      * Route permettant de récupérer les informations de l'utilisateur connecté en fonction de son token
      */
-    fun getCurrentUser() : Single<ResultApi<User>> = service.getCurrentUser()
+    fun getCurrentUser() : Single<ResultApiDto<UserDto>> = service.getCurrentUser()
+
+    /**
+     * Route permettant de récupérer la liste de produit
+     */
+    fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>> = service.getProducts()
 }

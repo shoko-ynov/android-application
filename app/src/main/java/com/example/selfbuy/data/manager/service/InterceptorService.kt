@@ -17,9 +17,9 @@ class InterceptorService : Interceptor {
 
         synchronized(this){
             if(request.header("No-Authentication")==null){
-                if(!CurrentUser.token?.token.isNullOrEmpty())
+                if(!CurrentUser.tokenDto?.token.isNullOrEmpty())
                 {
-                    val finalToken =  "Bearer ${CurrentUser.token!!.token}"
+                    val finalToken =  "Bearer ${CurrentUser.tokenDto!!.token}"
                     request = request.newBuilder()
                         .addHeader("Authorization", finalToken)
                         .build()
@@ -36,7 +36,7 @@ class InterceptorService : Interceptor {
                                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                                     .build()
                                     .create(ApiService::class.java)
-                                    .refreshToken(CurrentUser.token!!.refreshToken)
+                                    .refreshToken(CurrentUser.tokenDto!!.refreshToken)
                                     .execute()
 
                             return when {

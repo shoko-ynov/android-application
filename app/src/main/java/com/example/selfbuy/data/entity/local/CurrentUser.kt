@@ -1,7 +1,7 @@
 package com.example.selfbuy.data.entity.local
 
-import com.example.selfbuy.data.entity.remote.Token
+import com.example.selfbuy.data.entity.remote.TokenDto
 
 object CurrentUser{
-    var token: Token? = null
+    var tokenDto: TokenDto? = null
 }

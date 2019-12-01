@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.local.CurrentUser
-import com.example.selfbuy.data.entity.local.LoginDto
-import com.example.selfbuy.data.entity.remote.ResultApi
-import com.example.selfbuy.data.entity.remote.Token
-import com.example.selfbuy.data.entity.remote.User
+import com.example.selfbuy.data.entity.local.Login
+import com.example.selfbuy.data.entity.remote.ResultApiDto
+import com.example.selfbuy.data.entity.remote.TokenDto
+import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
@@ -49,8 +49,8 @@ class ConnexionFragment : Fragment() {
         if (!tokenSaved.isNullOrEmpty() && !refreshTokenSaved.isNullOrEmpty()){
             progressBar_connexion.visibility = View.VISIBLE
 
-            val token = Token(tokenSaved.toString(), refreshTokenSaved.toString())
-            CurrentUser.token = token
+            val token = TokenDto(tokenSaved.toString(), refreshTokenSaved.toString())
+            CurrentUser.tokenDto = token
             userViewModel.getCurrentUser()
         }
     }
@@ -61,9 +61,9 @@ class ConnexionFragment : Fragment() {
     private fun bindUserViewModel(){
         userViewModel = UserViewModel()
 
-        userViewModel.userLiveData.observe(this, Observer { result: ResultApi<User> ->
+        userViewModel.userDtoLiveData.observe(viewLifecycleOwner, Observer { resultDto: ResultApiDto<UserDto> ->
             progressBar_connexion.visibility = View.GONE
-            val user = result.data
+            val user = resultDto.data
 
             //Passer l'utilisateur a l'activity de profile et charger le fragment profile a la place de cette snackbar
             view?.let { v ->
@@ -73,7 +73,7 @@ class ConnexionFragment : Fragment() {
             }
         })
 
-        userViewModel.errorLiveData.observe(this, Observer { error: Throwable ->
+        userViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
             //si probleme revenir sur le fragment connexion
             progressBar_connexion.visibility = View.GONE
 
@@ -88,15 +88,15 @@ class ConnexionFragment : Fragment() {
     private fun bindConnexionViewModel(){
         connexionViewModel = ConnexionViewModel()
 
-        connexionViewModel.tokenLiveData.observe(viewLifecycleOwner, Observer { result: ResultApi<Token> ->
+        connexionViewModel.tokenDtoLiveData.observe(viewLifecycleOwner, Observer { resultDto: ResultApiDto<TokenDto> ->
             progressBar_connexion.visibility = View.GONE
 
-            SFApplication.app.loginPrefsEditor.putString("token", result.data?.token)
-            SFApplication.app.loginPrefsEditor.putString("refreshToken", result.data?.refreshToken)
+            SFApplication.app.loginPrefsEditor.putString("token", resultDto.data?.token)
+            SFApplication.app.loginPrefsEditor.putString("refreshToken", resultDto.data?.refreshToken)
             SFApplication.app.loginPrefsEditor.commit()
 
-            val token = Token(result.data!!.token, result.data.refreshToken)
-            CurrentUser.token = token
+            val token = TokenDto(resultDto.data!!.token, resultDto.data.refreshToken)
+            CurrentUser.tokenDto = token
         })
 
         connexionViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
@@ -113,7 +113,7 @@ class ConnexionFragment : Fragment() {
     private fun setOnClickListener(){
         btn_login.setOnClickListener{
             if (checkFields()){
-                val login = LoginDto(editText_email.text.toString(), editText_password.text.toString())
+                val login = Login(editText_email.text.toString(), editText_password.text.toString())
 
                 progressBar_connexion.visibility = View.VISIBLE
 
