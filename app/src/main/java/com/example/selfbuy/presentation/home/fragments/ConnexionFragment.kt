@@ -18,6 +18,7 @@ import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
+import com.example.selfbuy.presentation.profile.fragment.ProfileFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_connexion.*
 
@@ -66,11 +67,7 @@ class ConnexionFragment : Fragment() {
             val user = resultDto.data
 
             //Passer l'utilisateur a l'activity de profile et charger le fragment profile a la place de cette snackbar
-            view?.let { v ->
-                if (user != null ) {
-                    Snackbar.make(v, user.mail, Snackbar.LENGTH_LONG).show()
-                }
-            }
+            //childFragmentManager.beginTransaction().replace(R.id.home_activity_fragment_container, ProfileFragment()).commit()
         })
 
         userViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
@@ -97,6 +94,8 @@ class ConnexionFragment : Fragment() {
 
             val token = TokenDto(resultDto.data!!.token, resultDto.data.refreshToken)
             CurrentUser.tokenDto = token
+
+            //childFragmentManager.beginTransaction().replace(R.id.home_activity_fragment_container, ProfileFragment()).commit()
         })
 
         connexionViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
