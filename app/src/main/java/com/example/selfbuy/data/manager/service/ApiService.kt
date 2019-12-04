@@ -14,6 +14,7 @@ interface ApiService {
     /**
      *  Route pour l'authentification
      */
+    @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("auth")
     fun authenticate(@Body login: Login) : Single<ResultApiDto<TokenDto>>
 

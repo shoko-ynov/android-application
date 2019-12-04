@@ -14,15 +14,11 @@ class HomeViewModel: ViewModel() {
     val productLiveData: MutableLiveData<ResultApiDto<ArrayList<ProductDto>>> = MutableLiveData()
     val errorLiveData: MutableLiveData<Throwable> = MutableLiveData()
 
-    init {
-        this.getProducts()
-    }
-
     /**
      * Permet de recuperer la liste des produits
      */
     @SuppressLint("CheckResult")
-    private fun getProducts() {
+    fun getProducts() {
         SFApplication
             .app
             .productRepository

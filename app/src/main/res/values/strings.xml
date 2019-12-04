@@ -15,6 +15,12 @@
     <string name="mail_invalid">Le mail n\'est pas correct</string>
     <string name="complete_password">Veuillez renseigner votre mot de passe</string>
 
+    <!-- List -->
+    <string name="list_empty">Aucun résultat</string>
+
+    <!-- Products list -->
+    <string name="product_image_description">Image chocolat</string>
+
     <!-- User error -->
     <string name="cannot_get_user">Une erreur est survenue lors de la récupération de vos donneées</string>
     <string name="bad_credentials">L\'email ou le mot de passe est incorrect</string>
@@ -26,4 +32,7 @@
 
     <!-- No internet -->
     <string name="no_internet_access">Vous n\'êtes pas connecté à Internet</string>
+
+    <!-- Currency -->
+    <string name="euro_symbol">€</string>
 </resources>
