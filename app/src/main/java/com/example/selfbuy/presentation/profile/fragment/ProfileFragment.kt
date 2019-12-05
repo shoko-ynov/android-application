@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
+import com.example.selfbuy.data.entity.remote.UserDto
+import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : Fragment() {
+class ProfileFragment(val userDto: UserDto) : Fragment() {
 
     //private val profileViewModel: ProfileViewModel()
 
@@ -19,6 +21,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //viewModel = HomeViewModel()
+        tw_user_mail.text = this.userDto.mail
     }
 }

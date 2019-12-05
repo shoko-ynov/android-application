@@ -20,18 +20,16 @@
             android:orientation="vertical" android:layout_gravity="center_vertical">
 
             <TextView
-                android:id="@+id/tw_login"
+                android:id="@+id/tw_connect"
+                style="@style/Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="0dp"
-                android:text="@string/loginDto"
-                android:textAlignment="center"
-                android:textSize="20sp"/>
+                android:text="@string/loginDto"/>
 
             <TextView
-                android:id="@+id/tw_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
@@ -45,11 +43,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"/>
 
             <TextView
-                android:id="@+id/tw_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
@@ -63,8 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"/>
 
             <Button
                 android:id="@+id/btn_login"
@@ -76,8 +71,7 @@
                 android:layout_marginBottom="20dp"
                 android:text="@string/connect"
                 android:background="@drawable/rounded_button"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"/>
+                android:textColor="@color/colorPrimary"/>
 
             <Button
                 android:id="@+id/btn_register"
@@ -88,8 +82,7 @@
                 android:layout_marginBottom="40dp"
                 android:text="@string/register"
                 android:background="@drawable/rounded_button"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"/>
+                android:textColor="@color/colorPrimary"/>
         </LinearLayout>
     </ScrollView>
 

@@ -67,7 +67,14 @@ class ConnexionFragment : Fragment() {
             val user = resultDto.data
 
             //Passer l'utilisateur a l'activity de profile et charger le fragment profile a la place de cette snackbar
-            //childFragmentManager.beginTransaction().replace(R.id.home_activity_fragment_container, ProfileFragment()).commit()
+            if (user != null){
+                CurrentUser.userDto = user
+
+                this.activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.home_activity_fragment_container, ProfileFragment(user))
+                    ?.commit()
+            }
         })
 
         userViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
@@ -86,8 +93,6 @@ class ConnexionFragment : Fragment() {
         connexionViewModel = ConnexionViewModel()
 
         connexionViewModel.tokenDtoLiveData.observe(viewLifecycleOwner, Observer { resultDto: ResultApiDto<TokenDto> ->
-            progressBar_connexion.visibility = View.GONE
-
             SFApplication.app.loginPrefsEditor.putString("token", resultDto.data?.token)
             SFApplication.app.loginPrefsEditor.putString("refreshToken", resultDto.data?.refreshToken)
             SFApplication.app.loginPrefsEditor.commit()
@@ -95,7 +100,7 @@ class ConnexionFragment : Fragment() {
             val token = TokenDto(resultDto.data!!.token, resultDto.data.refreshToken)
             CurrentUser.tokenDto = token
 
-            //childFragmentManager.beginTransaction().replace(R.id.home_activity_fragment_container, ProfileFragment()).commit()
+            userViewModel.getCurrentUser()
         })
 
         connexionViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->

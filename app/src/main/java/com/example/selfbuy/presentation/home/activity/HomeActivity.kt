@@ -1,12 +1,16 @@
 package com.example.selfbuy.presentation.home.activity
 
+import android.content.Context
 import android.os.Bundle
 import com.example.selfbuy.R
+import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.home.fragments.CartFragment
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.fragments.HomeFragment
+import com.example.selfbuy.presentation.profile.fragment.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class HomeActivity : BaseActivity() {
 
@@ -26,6 +30,10 @@ class HomeActivity : BaseActivity() {
         }
 
         setUpBottomNavigationView()
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
     /**
@@ -56,10 +64,19 @@ class HomeActivity : BaseActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.home_activity_fragment_container, connexionFragment)
-                    .commit()
+                
+                if (CurrentUser.userDto != null){
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.home_activity_fragment_container, ProfileFragment(CurrentUser.userDto!!))
+                        .commit()
+                }
+                else{
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.home_activity_fragment_container, connexionFragment)
+                        .commit()
+                }
                 return@OnNavigationItemSelectedListener true
             }
         }
