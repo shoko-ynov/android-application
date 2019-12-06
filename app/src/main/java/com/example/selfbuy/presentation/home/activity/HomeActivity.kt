@@ -27,6 +27,8 @@ class HomeActivity : BaseActivity() {
                 .beginTransaction()
                 .replace(R.id.home_activity_fragment_container, HomeFragment())
                 .commit()
+
+            this.title = getString(R.string.home)
         }
 
         setUpBottomNavigationView()
@@ -54,6 +56,8 @@ class HomeActivity : BaseActivity() {
                     .beginTransaction()
                     .replace(R.id.home_activity_fragment_container, homeFragment)
                     .commit()
+
+                this.title = getString(R.string.home)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_cart -> {
@@ -61,6 +65,8 @@ class HomeActivity : BaseActivity() {
                     .beginTransaction()
                     .replace(R.id.home_activity_fragment_container, cartFragment)
                     .commit()
+
+                this.title = getString(R.string.cart)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
@@ -77,6 +83,7 @@ class HomeActivity : BaseActivity() {
                         .replace(R.id.home_activity_fragment_container, connexionFragment)
                         .commit()
                 }
+                this.title = getString(R.string.profile)
                 return@OnNavigationItemSelectedListener true
             }
         }

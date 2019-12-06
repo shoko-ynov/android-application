@@ -14,6 +14,11 @@
     <string name="register">S\'inscrire</string>
     <string name="mail_invalid">Le mail n\'est pas correct</string>
     <string name="complete_password">Veuillez renseigner votre mot de passe</string>
+    <string name="account">Account</string>
+    <string name="orders">Orders</string>
+    <string name="payment">Payment</string>
+    <string name="privacy">Privacy &amp; Policy</string>
+    <string name="aboutus">About us</string>
 
     <!-- List -->
     <string name="list_empty">Aucun résultat</string>

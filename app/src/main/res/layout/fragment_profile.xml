@@ -5,21 +5,105 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".presentation.home.fragments.HomeFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tw_user_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.178" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btn_user_aboutus"
+                    style="@style/ButtonProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/profile_button"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:text="@string/aboutus"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_user_privacy" />
+
+                <Button
+                    android:id="@+id/btn_user_privacy"
+                    style="@style/ButtonProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/profile_button"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:text="@string/privacy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_user_payment" />
+
+                <TextView
+                    android:id="@+id/tw_user_mail"
+                    style="@style/Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_user_account"
+                    style="@style/ButtonProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/profile_button"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:text="@string/account"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tw_user_mail" />
+
+                <Button
+                    android:id="@+id/btn_user_orders"
+                    style="@style/ButtonProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/profile_button"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:text="@string/orders"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_user_account" />
+
+                <Button
+                    android:id="@+id/btn_user_payment"
+                    style="@style/ButtonProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/profile_button"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:text="@string/payment"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_user_orders" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
