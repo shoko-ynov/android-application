@@ -10,9 +10,7 @@ import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.remote.UserDto
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment(val userDto: UserDto) : Fragment() {
-
-    //private val profileViewModel: ProfileViewModel()
+class ProfileFragment(private val userDto: UserDto) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,23 +29,23 @@ class ProfileFragment(val userDto: UserDto) : Fragment() {
      */
     private fun setOnClickListener(){
         btn_user_account.setOnClickListener{
-           Toast.makeText(this.activity, "Account", Toast.LENGTH_LONG).show()
+           Toast.makeText(this.activity, getString(R.string.account), Toast.LENGTH_LONG).show()
         }
 
         btn_user_orders.setOnClickListener{
-            Toast.makeText(this.activity, "Orders", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.activity, getString(R.string.orders), Toast.LENGTH_LONG).show()
         }
 
         btn_user_payment.setOnClickListener{
-            Toast.makeText(this.activity, "Payment", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.activity, getString(R.string.payment), Toast.LENGTH_LONG).show()
         }
 
         btn_user_privacy.setOnClickListener{
-            Toast.makeText(this.activity, "Privacy", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.activity, getString(R.string.privacy), Toast.LENGTH_LONG).show()
         }
 
         btn_user_aboutus.setOnClickListener{
-            Toast.makeText(this.activity, "About us", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.activity, getString(R.string.aboutus), Toast.LENGTH_LONG).show()
         }
     }
 }

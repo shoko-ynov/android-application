@@ -1,5 +1,6 @@
 package com.example.selfbuy.data.manager.service
 
+import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.data.entity.remote.TokenDto
 import com.example.selfbuy.data.entity.local.Login
 import com.example.selfbuy.data.entity.remote.ProductDto
@@ -21,9 +22,9 @@ interface ApiService {
     /**
      * Route pour le refreshToken
      */
-    @FormUrlEncoded
+    @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("auth/refresh")
-    fun refreshToken(@Field("refreshToken") refreshToken: String?) : Call<ResultApiDto<TokenDto>>
+    fun refreshToken(@Body refreshToken: TokenDto) : Call<ResultApiDto<TokenDto>>
 
     /**
      * Route permettant de récupérer les informations de l'utilisateur connecté en fonction de son token

@@ -36,7 +36,7 @@ class InterceptorService : Interceptor {
                                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                                     .build()
                                     .create(ApiService::class.java)
-                                    .refreshToken(CurrentUser.tokenDto!!.refreshToken)
+                                    .refreshToken(CurrentUser.tokenDto!!)
                                     .execute()
 
                             return when {
