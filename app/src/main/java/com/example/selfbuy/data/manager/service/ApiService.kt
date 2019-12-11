@@ -1,6 +1,7 @@
 package com.example.selfbuy.data.manager.service
 
 import com.example.selfbuy.data.entity.local.CurrentUser
+import com.example.selfbuy.data.entity.local.InscriptionDto
 import com.example.selfbuy.data.entity.remote.TokenDto
 import com.example.selfbuy.data.entity.local.Login
 import com.example.selfbuy.data.entity.remote.ProductDto
@@ -37,4 +38,10 @@ interface ApiService {
      */
     @GET("products")
     fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>>
+
+    /**
+     * Route pour l'inscription
+     */
+    @POST("users")
+    fun inscription(@Body inscriptionDto: InscriptionDto) : Single<ResultApiDto<TokenDto>>
 }

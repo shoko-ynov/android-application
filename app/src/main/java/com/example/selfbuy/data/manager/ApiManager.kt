@@ -1,5 +1,6 @@
 package com.example.selfbuy.data.manager
 
+import com.example.selfbuy.data.entity.local.InscriptionDto
 import com.example.selfbuy.data.entity.remote.TokenDto
 import com.example.selfbuy.data.entity.local.Login
 import com.example.selfbuy.data.entity.remote.ProductDto
@@ -45,4 +46,6 @@ class ApiManager {
      * Route permettant de récupérer la liste de produit
      */
     fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>> = service.getProducts()
+
+    fun inscription(inscriptionDto: InscriptionDto):Single<ResultApiDto<TokenDto>> = service.inscription(inscriptionDto)
 }

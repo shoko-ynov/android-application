@@ -11,6 +11,7 @@
     <string name="email">Email</string>
     <string name="password">Mot de passe</string>
     <string name="connect">Connexion</string>
+    <string name="register_title">Inscription</string>
     <string name="register">S\'inscrire</string>
     <string name="mail_invalid">Le mail n\'est pas correct</string>
     <string name="complete_password">Veuillez renseigner votre mot de passe</string>

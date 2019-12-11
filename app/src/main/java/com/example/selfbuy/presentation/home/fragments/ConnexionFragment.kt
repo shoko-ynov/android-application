@@ -127,12 +127,20 @@ class ConnexionFragment : Fragment() {
 
         btn_register.setOnClickListener{
 
+
+            val inscriptionFragment = InscriptionFragment()
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
+                replace(R.id.home_activity_fragment_container,inscriptionFragment)
+                addToBackStack(null)
+            }
+            fragmentTransaction.commit()
+            /*
             this.activity?.supportFragmentManager
                 ?.beginTransaction()
                 ?.replace(R.id.home_activity_fragment_container, HomeFragment())
                 ?.commit()
 
-            view?.let { v -> Snackbar.make(v, "Inscription OK", Snackbar.LENGTH_SHORT).show() }
+            view?.let { v -> Snackbar.make(v, "Inscription OK", Snackbar.LENGTH_SHORT).show() }*/
         }
     }
 
