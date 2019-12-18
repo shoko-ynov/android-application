@@ -45,4 +45,9 @@ class ApiManager {
      * Route permettant de récupérer la liste de produit
      */
     fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>> = service.getProducts()
+
+    /**
+     * Route permettant de récupérer le détail d'un produit
+     */
+    fun getProductById(idProduct : String) : Single<ResultApiDto<ProductDto>> = service.getProductById(idProduct)
 }

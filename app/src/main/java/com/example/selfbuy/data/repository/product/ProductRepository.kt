@@ -12,4 +12,9 @@ class ProductRepository(apiManager: ApiManager) : DataRepository(apiManager) {
      * Route permettant de récupérer la liste de produit
      */
     fun getProducts(): Single<ResultApiDto<ArrayList<ProductDto>>> = apiManager.getProducts()
+
+    /**
+     * Route permettant de récupérer le détail d'un produit
+     */
+    fun getProductById(idProduct : String) : Single<ResultApiDto<ProductDto>> = apiManager.getProductById(idProduct)
 }

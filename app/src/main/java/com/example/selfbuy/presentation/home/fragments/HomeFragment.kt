@@ -1,5 +1,6 @@
 package com.example.selfbuy.presentation.home.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.selfbuy.adapters.productList.SFProductListAdapter
 import com.example.selfbuy.data.entity.remote.ProductDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
+import com.example.selfbuy.presentation.detailProduct.activity.DetailProductActivity
 import com.example.selfbuy.presentation.home.viewModels.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -39,21 +41,25 @@ class HomeFragment : Fragment() {
     /**
      * On s'abonne aux differents evenements de HomeViewModel
      */
-    private fun bindHomeViewModel(recycleView: RecyclerView){
-        homeViewModel.productLiveData.observe(viewLifecycleOwner, Observer { resultDto: ResultApiDto<ArrayList<ProductDto>> ->
-            progressBar_list_product.visibility = View.GONE
+    private fun bindHomeViewModel(recycleView: RecyclerView) {
+        homeViewModel.productLiveData.observe(
+            viewLifecycleOwner,
+            Observer { resultDto: ResultApiDto<ArrayList<ProductDto>> ->
+                progressBar_list_product.visibility = View.GONE
 
-            products_recycle_view.layoutManager = GridLayoutManager(this.context, 2)
+                products_recycle_view.layoutManager = GridLayoutManager(this.context, 2)
 
-            if (resultDto.data != null){
-                updateList(resultDto.data)
-                productListAdapter.onClickListener = { id ->
-                    view?.let { v -> Snackbar.make(v, id, Snackbar.LENGTH_LONG).show() }
+                if (resultDto.data != null) {
+                    updateList(resultDto.data)
+                    productListAdapter.onClickListener = { id ->
+                        val intent = Intent(this.context, DetailProductActivity::class.java)
+                        intent.putExtra("idProduct", id)
+                        startActivity(intent)
+                    }
+
+                    recycleView.adapter = productListAdapter
                 }
-
-                recycleView.adapter = productListAdapter
-            }
-        })
+            })
 
         homeViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
             progressBar_list_product.visibility = View.GONE
@@ -70,10 +76,9 @@ class HomeFragment : Fragment() {
         product_refresh_layout.isRefreshing = false
         productListAdapter.updateList(productList)
 
-        if(productList.any()){
+        if (productList.any()) {
             twEmptyListProduct.visibility = TextView.INVISIBLE
-        }
-        else{
+        } else {
             twEmptyListProduct.visibility = TextView.VISIBLE
         }
     }
@@ -81,7 +86,7 @@ class HomeFragment : Fragment() {
     /**
      * Charge la liste de produits
      */
-    private fun loadProducts(){
+    private fun loadProducts() {
         progressBar_list_product.visibility = View.VISIBLE
         homeViewModel.getProducts()
     }

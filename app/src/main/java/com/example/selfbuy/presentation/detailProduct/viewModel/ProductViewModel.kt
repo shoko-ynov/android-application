@@ -1,4 +1,4 @@
-package com.example.selfbuy.presentation.home.viewModels
+package com.example.selfbuy.presentation.detailProduct.viewModel
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
@@ -9,20 +9,20 @@ import com.example.selfbuy.presentation.SFApplication
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class HomeViewModel: ViewModel() {
+class ProductViewModel: ViewModel() {
 
-    val productLiveData: MutableLiveData<ResultApiDto<ArrayList<ProductDto>>> = MutableLiveData()
+    val productLiveData: MutableLiveData<ResultApiDto<ProductDto>> = MutableLiveData()
     val errorLiveData: MutableLiveData<Throwable> = MutableLiveData()
 
     /**
-     * Permet de recuperer la liste des produits
+     * Permet de recuperer le détail d'un produit
      */
     @SuppressLint("CheckResult")
-    fun getProducts() {
+    fun getProductById(idProduct : String) {
         SFApplication
             .app
             .productRepository
-            .getProducts()
+            .getProductById(idProduct)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

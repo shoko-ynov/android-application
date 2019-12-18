@@ -36,4 +36,10 @@ interface ApiService {
      */
     @GET("products")
     fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>>
+
+    /**
+     * Route permettant de récupérer le détail d'un produit
+     */
+    @GET("products/{idProduct}")
+    fun getProductById(@Path("idProduct") idProduct: String) : Single<ResultApiDto<ProductDto>>
 }
