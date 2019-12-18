@@ -1,5 +1,8 @@
 package com.example.selfbuy.presentation.home.fragments
 
+//import com.example.selfbuy.UIUtils.InteractionUserUtils
+
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,27 +11,25 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
-//import com.example.selfbuy.UIUtils.InteractionUserUtils
 import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.data.entity.local.InscriptionDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
-
-
 import com.example.selfbuy.data.entity.remote.TokenDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.home.viewModels.InscriptionViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.fragment_connexion.*
 import kotlinx.android.synthetic.main.fragment_connexion.progressBar_connexion
 import kotlinx.android.synthetic.main.fragment_inscription.*
+
 
 class InscriptionFragment : Fragment() {
 
@@ -53,6 +54,8 @@ class InscriptionFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        this.manageBackButtonActionBar(true)
+
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", AppCompatActivity.MODE_PRIVATE)
         loginPrefsEditor = loginPreferences.edit()
 
@@ -64,6 +67,19 @@ class InscriptionFragment : Fragment() {
             CurrentUser.tokenDto = token
             view?.let { v -> Snackbar.make(v, CurrentUser.tokenDto!!.token, Snackbar.LENGTH_SHORT).show() }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.manageBackButtonActionBar(false)
+    }
+
+    /**
+     * Gere l'affichage de bouton retour dans l'actionbar
+     */
+    private fun manageBackButtonActionBar(isVisible: Boolean){
+        val currentActivity = this.activity as AppCompatActivity
+        currentActivity.supportActionBar?.setDisplayHomeAsUpEnabled(isVisible)
     }
 
     /**
@@ -128,12 +144,6 @@ class InscriptionFragment : Fragment() {
             val errorBodyApi = ErrorUtils.getErrorApi(it)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
         })
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        //activity?.let { InteractionUserUtils.enableInteractionUser(it) }
     }
 
     /**
