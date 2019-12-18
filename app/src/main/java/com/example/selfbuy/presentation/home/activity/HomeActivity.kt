@@ -32,6 +32,8 @@ class HomeActivity : BaseActivity() {
         }
 
         setUpBottomNavigationView()
+
+        supportActionBar?.hide()
     }
 
     override fun attachBaseContext(newBase: Context?) {
