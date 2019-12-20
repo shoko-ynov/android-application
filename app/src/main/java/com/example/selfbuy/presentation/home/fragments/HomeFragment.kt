@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar_list_product.background = null
         products_recycle_view.apply { bindHomeViewModel(this) }
         this.setSwipeRefreshListener()
         this.loadProducts()

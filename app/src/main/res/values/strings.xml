@@ -23,6 +23,7 @@
 
     <!-- List -->
     <string name="list_empty">Aucun résultat</string>
+    <string name="search">Rechercher...</string>
 
     <!-- Products list -->
     <string name="product_image_description">Image chocolat</string>

@@ -2,6 +2,7 @@ package com.example.selfbuy.presentation.home.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.SearchView
 import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.presentation.BaseActivity
@@ -10,6 +11,7 @@ import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.fragments.HomeFragment
 import com.example.selfbuy.presentation.profile.fragment.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_home.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class HomeActivity : BaseActivity() {
@@ -28,7 +30,8 @@ class HomeActivity : BaseActivity() {
                 .replace(R.id.home_activity_fragment_container, HomeFragment())
                 .commit()
 
-            this.title = getString(R.string.home)
+            tw_title.text = getString(R.string.home)
+            sw_product.visibility = SearchView.VISIBLE
         }
 
         setUpBottomNavigationView()
@@ -59,7 +62,8 @@ class HomeActivity : BaseActivity() {
                     .replace(R.id.home_activity_fragment_container, homeFragment)
                     .commit()
 
-                this.title = getString(R.string.home)
+                tw_title.text = getString(R.string.home)
+                sw_product.visibility = SearchView.VISIBLE
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_cart -> {
@@ -68,7 +72,8 @@ class HomeActivity : BaseActivity() {
                     .replace(R.id.home_activity_fragment_container, cartFragment)
                     .commit()
 
-                this.title = getString(R.string.cart)
+                tw_title.text = getString(R.string.cart)
+                sw_product.visibility = SearchView.GONE
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
@@ -85,7 +90,8 @@ class HomeActivity : BaseActivity() {
                         .replace(R.id.home_activity_fragment_container, connexionFragment)
                         .commit()
                 }
-                this.title = getString(R.string.profile)
+                sw_product.visibility = SearchView.GONE
+                tw_title.text = getString(R.string.profile)
                 return@OnNavigationItemSelectedListener true
             }
         }
