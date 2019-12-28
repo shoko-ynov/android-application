@@ -25,7 +25,7 @@ object ErrorUtils {
                 errorThrowable.code().toString()
             } else{
                 val resultApiBody = Gson().fromJson(errorBody, ResultApiDto::class.java)
-                resultApiBody.errorDto.code
+                resultApiBody.error.code
             }
         }
         catch (e: Exception) {
