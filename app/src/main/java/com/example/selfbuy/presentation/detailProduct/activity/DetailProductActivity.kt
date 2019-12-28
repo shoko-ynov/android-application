@@ -21,5 +21,7 @@ class DetailProductActivity : AppCompatActivity() {
                 .replace(R.id.product_activity_fragment_container, DetailProductFragment(idProduct))
                 .commit()
         }
+
+        this.title = getString(R.string.detail)
     }
 }

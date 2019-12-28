@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
@@ -12,11 +15,14 @@ import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.detailProduct.viewModel.ProductViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail_product.*
 
-class DetailProductFragment(val idProduct : String) : Fragment() {
+class DetailProductFragment(private val idProduct : String) : Fragment() {
 
     private val productViewModel = ProductViewModel()
+    private val quantities = arrayOf("1", "2", "3", "4", "5")
+    private var basePriceProduct: Double = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,10 +32,39 @@ class DetailProductFragment(val idProduct : String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (this.context != null){
+            val dataAdapter: ArrayAdapter<String> = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, quantities)
+            dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+            spinner_quantity.adapter = dataAdapter
+        }
+
         this.bindProductViewModel()
 
         progressBar_detail_product.visibility = View.VISIBLE
         productViewModel.getProductById(idProduct)
+    }
+
+    /**
+     * Appelé lorsque la valeur selectionne dans le spinner est modifié
+     */
+    private fun spinnerItemOnClickListener(){
+        spinner_quantity.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?,
+                selectedItemView: View,
+                position: Int,
+                id: Long
+            ) {
+                val newQty = basePriceProduct * quantities[position].toInt()
+                val priceFormated = "$newQty ${getString(R.string.euro_symbol)}"
+                tw_detail_product_price.text = priceFormated
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) { // your code here
+                val priceFormated = "$basePriceProduct ${getString(R.string.euro_symbol)}"
+                tw_detail_product_price.text = priceFormated
+            }
+        }
     }
 
     /**
@@ -40,7 +75,17 @@ class DetailProductFragment(val idProduct : String) : Fragment() {
             progressBar_detail_product.visibility = View.GONE
             val product = resultDto.data
 
-            view?.let { v -> Snackbar.make(v, product?.name.toString(), Snackbar.LENGTH_LONG).show() }
+            if(product != null){
+                Picasso.get().load(product.images[0]).into(tw_detail_product_image)
+                tw_detail_product_name.text = product.name
+                tw_detail_product_description.text = product.description
+
+                val priceFormated = "${product.price} ${getString(R.string.euro_symbol)}"
+                tw_detail_product_price.text = priceFormated
+
+                this.basePriceProduct = product.price
+                this.spinnerItemOnClickListener()
+            }
         })
 
         productViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->

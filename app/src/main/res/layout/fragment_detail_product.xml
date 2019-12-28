@@ -5,20 +5,81 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".presentation.home.fragments.HomeFragment">
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fragment Product Detail"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/tw_detail_product_image"
+                android:layout_width="340dp"
+                android:layout_height="187dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tw_detail_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="0dp"
+                android:textSize="20sp"
+                style="@style/ProductTitle"/>
+
+            <TextView
+                android:id="@+id/tw_detail_product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="0dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/tw_detail_product_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:textSize="18sp"
+                    style="@style/ProductTitle"/>
+
+                <Spinner
+                    android:id="@+id/spinner_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="50dp"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_detail_product_add_cart"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_button"
+                android:text="@string/add_cart"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+    </ScrollView>
 
     <include
         android:id="@+id/progressBar_detail_product"
