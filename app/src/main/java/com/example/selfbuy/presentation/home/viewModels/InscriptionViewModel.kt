@@ -3,7 +3,6 @@ package com.example.selfbuy.presentation.home.viewModels
 import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.selfbuy.data.entity.remote.TokenDto
 import com.example.selfbuy.data.entity.local.Inscription
 import com.example.selfbuy.data.entity.remote.InscriptionDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
@@ -13,11 +12,11 @@ import io.reactivex.schedulers.Schedulers
 
 class InscriptionViewModel: ViewModel() {
 
-    val userLiveData: MutableLiveData<ResultApiDto<InscriptionDto>> = MutableLiveData()
-    val errorLiveData: MutableLiveData<Throwable> = MutableLiveData()
+    val userRegisterLiveData: MutableLiveData<ResultApiDto<InscriptionDto>> = MutableLiveData()
+    val errorRegisterLiveData: MutableLiveData<Throwable> = MutableLiveData()
 
     /**
-    Permet à un utilisateur de se connecter
+     *  Permet l'inscription d'un utilisateur avec l'email passé en parametre
      */
     @SuppressLint("CheckResult")
     fun inscription(inscription: Inscription) {
@@ -28,9 +27,9 @@ class InscriptionViewModel: ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                userLiveData.postValue(it)
+                userRegisterLiveData.postValue(it)
             }, {e ->
-                errorLiveData.postValue(e)
+                errorRegisterLiveData.postValue(e)
             })
     }
 }

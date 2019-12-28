@@ -44,5 +44,8 @@ class ApiManager {
      */
     fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>> = service.getProducts()
 
+    /**
+     *  Permet l'inscription d'un utilisateur avec l'email passé en parametre
+     */
     fun inscription(inscription: Inscription):Single<ResultApiDto<InscriptionDto>> = service.inscription(inscription)
 }

@@ -42,7 +42,6 @@ class HomeFragment : Fragment() {
     private fun bindHomeViewModel(recycleView: RecyclerView){
 
         homeViewModel.productLiveData.observe(viewLifecycleOwner, Observer { resultDto: ResultApiDto<ArrayList<ProductDto>> ->
-            view?.let { v -> Snackbar.make(v, resultDto.data!![0].name.toString(), Snackbar.LENGTH_LONG).show() }
             progressBar_list_product.visibility = View.GONE
 
             products_recycle_view.layoutManager = GridLayoutManager(this.context, 2)
@@ -61,6 +60,8 @@ class HomeFragment : Fragment() {
             progressBar_list_product.visibility = View.GONE
             product_refresh_layout.isRefreshing = false
 
+            this.updateTextViewEmptyListProduct(productListAdapter.list)
+
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
         })
@@ -73,6 +74,13 @@ class HomeFragment : Fragment() {
         product_refresh_layout.isRefreshing = false
         productListAdapter.updateList(productList)
 
+        this.updateTextViewEmptyListProduct(productList)
+    }
+
+    /**
+     * Met à jour le textview indiquant que la liste est vide
+     */
+    private fun updateTextViewEmptyListProduct(productList: List<ProductDto>){
         if(productList.any()){
             twEmptyListProduct.visibility = TextView.INVISIBLE
         }
