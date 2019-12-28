@@ -20,7 +20,8 @@
     <string name="orders">Orders</string>
     <string name="payment">Payment</string>
     <string name="privacy">Privacy &amp; Policy</string>
-    <string name="aboutus">About us</string>
+    <string name="about_us">About us</string>
+    <string name="disconnect">Disconnect</string>
 
     <!-- Inscription -->
     <string name="register_title">Inscription</string>

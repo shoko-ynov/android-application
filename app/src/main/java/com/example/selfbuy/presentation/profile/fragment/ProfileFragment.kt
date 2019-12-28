@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
+import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.data.entity.remote.UserDto
+import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment(private val userDto: UserDto) : Fragment() {
@@ -44,8 +47,24 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
             Toast.makeText(this.activity, getString(R.string.privacy), Toast.LENGTH_LONG).show()
         }
 
-        btn_user_aboutus.setOnClickListener{
-            Toast.makeText(this.activity, getString(R.string.aboutus), Toast.LENGTH_LONG).show()
+        btn_user_about_us.setOnClickListener{
+            Toast.makeText(this.activity, getString(R.string.about_us), Toast.LENGTH_LONG).show()
+        }
+
+        btn_user_disconnect.setOnClickListener {
+            //On supprime l'utilisateur en cours
+            CurrentUser.tokenDto = null
+            CurrentUser.userDto = null
+
+            //On supprime les SharedPreferences (token et refreshToken)
+            SFApplication.app.loginPrefsEditor.clear()
+            SFApplication.app.loginPrefsEditor.commit()
+
+            //Redirection page connexion
+            this.activity?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.home_activity_fragment_container, ConnexionFragment())
+                ?.commit()
         }
     }
 }

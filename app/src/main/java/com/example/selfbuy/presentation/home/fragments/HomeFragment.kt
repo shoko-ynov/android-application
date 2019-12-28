@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
             progressBar_list_product.visibility = View.GONE
+            product_refresh_layout.isRefreshing = false
 
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
