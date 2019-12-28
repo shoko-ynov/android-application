@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".presentation.home.fragments.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.home.fragments.HomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,16 +20,18 @@
             android:orientation="vertical" android:layout_gravity="center_vertical">
 
             <TextView
-                android:id="@+id/tw_connect"
-                style="@style/Title"
+                android:id="@+id/tw_inscription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="0dp"
-                android:text="@string/loginDto"/>
+                android:text="@string/register_title"
+                android:textAlignment="center"
+                style="@style/Title"/>
 
             <TextView
+                android:id="@+id/tw_email_inscription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
@@ -38,56 +40,31 @@
                 android:text="@string/email" />
 
             <EditText
-                android:id="@+id/editText_email"
+                android:id="@+id/editText_email_inscription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:inputType="textEmailAddress"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="48dp"
-                android:text="@string/password" />
-
-            <EditText
-                android:id="@+id/editText_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
-                android:inputType="textPassword"/>
-
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+            
             <Button
-                android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="143dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="143dp"
-                android:layout_marginBottom="20dp"
-                android:text="@string/connect"
-                android:background="@drawable/rounded_button"
-                android:textColor="@color/colorPrimary"/>
-
-            <Button
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_inscription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="143dp"
                 android:layout_marginEnd="143dp"
                 android:layout_marginBottom="40dp"
-                android:text="@string/register"
+                android:layout_marginTop="20dp"
+                android:text="@string/validate"
                 android:background="@drawable/rounded_button"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"/>
         </LinearLayout>
     </ScrollView>
 
     <include
-        android:id="@+id/progressBar_connexion"
+        android:id="@+id/progressBar_inscription"
         android:visibility="gone"
         layout="@layout/progress_bar"/>
 </FrameLayout>

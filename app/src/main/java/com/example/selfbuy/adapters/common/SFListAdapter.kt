@@ -14,7 +14,7 @@ abstract class SFListAdapter<EntityType, V, ViewHolderType: SFListAdapterViewHol
     abstract fun getViewHolder(view: View): ViewHolderType
 
     var onClickListener: (V) -> Unit = {}
-    private var list: MutableList<EntityType> = mutableListOf()
+    var list: MutableList<EntityType> = mutableListOf()
 
     fun updateList(list: List<EntityType>) {
         this.list.clear()

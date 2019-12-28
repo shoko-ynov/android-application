@@ -63,6 +63,9 @@ class HomeFragment : Fragment() {
 
         homeViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
             progressBar_list_product.visibility = View.GONE
+            product_refresh_layout.isRefreshing = false
+
+            this.updateTextViewEmptyListProduct(productListAdapter.list)
 
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
@@ -76,7 +79,14 @@ class HomeFragment : Fragment() {
         product_refresh_layout.isRefreshing = false
         productListAdapter.updateList(productList)
 
-        if (productList.any()) {
+        this.updateTextViewEmptyListProduct(productList)
+    }
+
+    /**
+     * Met à jour le textview indiquant que la liste est vide
+     */
+    private fun updateTextViewEmptyListProduct(productList: List<ProductDto>){
+        if(productList.any()){
             twEmptyListProduct.visibility = TextView.INVISIBLE
         } else {
             twEmptyListProduct.visibility = TextView.VISIBLE
