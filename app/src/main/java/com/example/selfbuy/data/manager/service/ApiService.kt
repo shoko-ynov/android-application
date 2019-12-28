@@ -1,12 +1,8 @@
 package com.example.selfbuy.data.manager.service
 
-import com.example.selfbuy.data.entity.local.CurrentUser
-import com.example.selfbuy.data.entity.local.InscriptionDto
-import com.example.selfbuy.data.entity.remote.TokenDto
+import com.example.selfbuy.data.entity.local.Inscription
 import com.example.selfbuy.data.entity.local.Login
-import com.example.selfbuy.data.entity.remote.ProductDto
-import com.example.selfbuy.data.entity.remote.ResultApiDto
-import com.example.selfbuy.data.entity.remote.UserDto
+import com.example.selfbuy.data.entity.remote.*
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.*
@@ -43,5 +39,5 @@ interface ApiService {
      * Route pour l'inscription
      */
     @POST("users")
-    fun inscription(@Body inscriptionDto: InscriptionDto) : Single<ResultApiDto<TokenDto>>
+    fun inscription(@Body inscription: Inscription) : Single<ResultApiDto<InscriptionDto>>
 }

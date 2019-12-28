@@ -111,6 +111,7 @@ class ConnexionFragment : Fragment() {
         })
     }
 
+
     /**
      * Abonnement aux évènements de bouton de connexion et d'inscription
      */
@@ -118,29 +119,18 @@ class ConnexionFragment : Fragment() {
         btn_login.setOnClickListener{
             if (checkFields()){
                 val login = Login(editText_email.text.toString(), editText_password.text.toString())
-
                 progressBar_connexion.visibility = View.VISIBLE
-
                 connexionViewModel.authenticate(login)
             }
         }
 
         btn_register.setOnClickListener{
-
-
             val inscriptionFragment = InscriptionFragment()
             val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
                 replace(R.id.home_activity_fragment_container,inscriptionFragment)
                 addToBackStack(null)
             }
             fragmentTransaction.commit()
-            /*
-            this.activity?.supportFragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.home_activity_fragment_container, HomeFragment())
-                ?.commit()
-
-            view?.let { v -> Snackbar.make(v, "Inscription OK", Snackbar.LENGTH_SHORT).show() }*/
         }
     }
 

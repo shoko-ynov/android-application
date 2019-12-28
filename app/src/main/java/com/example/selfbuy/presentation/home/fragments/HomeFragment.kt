@@ -40,7 +40,9 @@ class HomeFragment : Fragment() {
      * On s'abonne aux differents evenements de HomeViewModel
      */
     private fun bindHomeViewModel(recycleView: RecyclerView){
+
         homeViewModel.productLiveData.observe(viewLifecycleOwner, Observer { resultDto: ResultApiDto<ArrayList<ProductDto>> ->
+            view?.let { v -> Snackbar.make(v, resultDto.data!![0].name.toString(), Snackbar.LENGTH_LONG).show() }
             progressBar_list_product.visibility = View.GONE
 
             products_recycle_view.layoutManager = GridLayoutManager(this.context, 2)

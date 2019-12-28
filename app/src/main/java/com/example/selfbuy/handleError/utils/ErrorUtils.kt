@@ -3,6 +3,9 @@ package com.example.selfbuy.handleError.utils
 import com.example.selfbuy.data.entity.remote.ErrorApiDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.user.InvalidUserError
+
+
+
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.BufferedReader
@@ -18,7 +21,6 @@ object ErrorUtils {
         try {
             val error = errorThrowable as HttpException
             val reader = BufferedReader(InputStreamReader(error.response().errorBody()?.byteStream()))
-
             val errorBody = reader.readLine()
 
             codeResult = if (errorBody == "Unauthorized"){

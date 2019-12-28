@@ -1,11 +1,8 @@
 package com.example.selfbuy.data.manager
 
-import com.example.selfbuy.data.entity.local.InscriptionDto
-import com.example.selfbuy.data.entity.remote.TokenDto
+import com.example.selfbuy.data.entity.local.Inscription
 import com.example.selfbuy.data.entity.local.Login
-import com.example.selfbuy.data.entity.remote.ProductDto
-import com.example.selfbuy.data.entity.remote.ResultApiDto
-import com.example.selfbuy.data.entity.remote.UserDto
+import com.example.selfbuy.data.entity.remote.*
 import com.example.selfbuy.data.manager.api.BaseApi.API_BASE_URL
 import com.example.selfbuy.data.manager.service.InterceptorService
 import com.example.selfbuy.data.manager.service.ApiService
@@ -47,5 +44,5 @@ class ApiManager {
      */
     fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>> = service.getProducts()
 
-    fun inscription(inscriptionDto: InscriptionDto):Single<ResultApiDto<TokenDto>> = service.inscription(inscriptionDto)
+    fun inscription(inscription: Inscription):Single<ResultApiDto<InscriptionDto>> = service.inscription(inscription)
 }
