@@ -2,6 +2,7 @@ package com.example.selfbuy.presentation.home.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.SearchView
 import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.local.CurrentUser
@@ -44,11 +45,21 @@ class HomeActivity : BaseActivity() {
     }
 
     /**
-     * Initialisation des onglets avec l'onglet bus et trams
+     * Initialisation des différents onglets
      */
     private fun setUpBottomNavigationView() {
         val navView: BottomNavigationView = findViewById(R.id.navbar_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+
+    /**
+     * Evenement appelé lorsque sélectionne une option native à la plateforme (comme le bouton retour dans l'actionbar)
+     */
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+            if(item != null && item.itemId == android.R.id.home) {
+                super.onBackPressed()
+            }
+        return super.onOptionsItemSelected(item)
     }
 
     /**
@@ -64,6 +75,7 @@ class HomeActivity : BaseActivity() {
 
                 tw_title.text = getString(R.string.home)
                 sw_product.visibility = SearchView.VISIBLE
+                this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_cart -> {
@@ -74,10 +86,11 @@ class HomeActivity : BaseActivity() {
 
                 tw_title.text = getString(R.string.cart)
                 sw_product.visibility = SearchView.GONE
+                this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-                
+
                 if (CurrentUser.userDto != null){
                     supportFragmentManager
                         .beginTransaction()
@@ -92,6 +105,7 @@ class HomeActivity : BaseActivity() {
                 }
                 sw_product.visibility = SearchView.GONE
                 tw_title.text = getString(R.string.profile)
+                this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 return@OnNavigationItemSelectedListener true
             }
         }

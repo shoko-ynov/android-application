@@ -11,7 +11,9 @@
     <string name="email">Email</string>
     <string name="password">Mot de passe</string>
     <string name="connect">Connexion</string>
+
     <string name="register">S\'inscrire</string>
+    <string name="validate">Valider</string>
     <string name="mail_invalid">Le mail n\'est pas correct</string>
     <string name="complete_password">Veuillez renseigner votre mot de passe</string>
     <string name="account">Account</string>
@@ -20,6 +22,16 @@
     <string name="privacy">Privacy &amp; Policy</string>
     <string name="about_us">About us</string>
     <string name="disconnect">Disconnect</string>
+
+    <!-- Inscription -->
+    <string name="register_title">Inscription</string>
+    <string name="finish_register">Finaliser l\'inscription</string>
+    <string name="popUp_message_OK">"Vous allez recevoir un e-mail de confirmation pour saisir votre mot de passe, une fois que ceci sera fait vous pourrez désormais vous connecter avec vos identifiants</string>
+    <string name="failed_inscription_title">"Activer votre compte"</string>
+    <string name="popUp_message_NOT_OK">"Une inscription a déjà été effectuée avec cette adresse mail, mais vous n'avez pas activé votre compte. Un nouveau mail vous a été envoyeé pour l'activation de votre compte."</string>
+
+    <string name="button_popUp_OK">OK</string>
+    <string name="button_popUp_cancel">Annuler</string>
 
     <!-- List -->
     <string name="list_empty">Aucun résultat</string>
@@ -34,6 +46,9 @@
     <string name="cannot_update_user">Une erreur est survenue lors de la mise à jour de vos donneées</string>
     <string name="error_call_api">Un problème est survenu lors de l\'appel au serveur</string>
 
+    <!-- Inscription error !-->
+    <string name="mail_already_using">Adresse mail déjà utilisée, veuillez en saisir une nouvelle</string>
+
     <!-- Progressbar -->
     <string name="loading_in_progress">Chargement en cours...</string>
 
@@ -42,4 +57,8 @@
 
     <!-- Currency -->
     <string name="euro_symbol">€</string>
+
+    <!-- Product detail -->
+    <string name="detail">Détail</string>
+    <string name="add_cart">Ajouter au panier</string>
 </resources>

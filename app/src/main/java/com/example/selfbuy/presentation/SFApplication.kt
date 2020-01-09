@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.selfbuy.data.manager.ApiManager
 import com.example.selfbuy.data.repository.connexion.ConnexionRepository
+import com.example.selfbuy.data.repository.connexion.InscriptionRepository
 import com.example.selfbuy.data.repository.product.ProductRepository
 import com.example.selfbuy.data.repository.user.UserRepository
 import com.example.selfbuy.room.database.AppDatabase
@@ -18,6 +19,7 @@ class SFApplication: Application() {
     }
 
     lateinit var connexionRepository: ConnexionRepository
+    lateinit var inscriptionRepository: InscriptionRepository
     lateinit var userRepository: UserRepository
     lateinit var productRepository: ProductRepository
 
@@ -38,6 +40,7 @@ class SFApplication: Application() {
     private fun initInjection() {
         val apiManager = ApiManager()
         connexionRepository = ConnexionRepository(apiManager)
+        inscriptionRepository = InscriptionRepository(apiManager)
         userRepository = UserRepository(apiManager)
         productRepository = ProductRepository(apiManager)
     }
