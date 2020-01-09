@@ -23,6 +23,7 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
     private val productViewModel = ProductViewModel()
     private val quantities = arrayOf("1", "2", "3", "4", "5")
     private var basePriceProduct: Double = 0.0
+    private var selectedQuantity = quantities[0]
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +40,19 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
         }
 
         this.bindProductViewModel()
+        this.setBtnAddCartOnClickListener()
 
         progressBar_detail_product.visibility = View.VISIBLE
         productViewModel.getProductById(idProduct)
+    }
+
+    /**
+     * Appelé lorsque le bouton ajouter au panier est cliqué
+     */
+    private fun setBtnAddCartOnClickListener(){
+        btn_detail_product_add_cart.setOnClickListener {
+            view?.let { v -> Snackbar.make(v, selectedQuantity.toString(), Snackbar.LENGTH_LONG).show() }
+        }
     }
 
     /**
@@ -55,8 +66,9 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                val newQty = basePriceProduct * quantities[position].toInt()
-                val priceFormated = "$newQty ${getString(R.string.euro_symbol)}"
+                selectedQuantity = quantities[position]
+                val newPrice = basePriceProduct * quantities[position].toInt()
+                val priceFormated = "$newPrice ${getString(R.string.euro_symbol)}"
                 tw_detail_product_price.text = priceFormated
             }
 
