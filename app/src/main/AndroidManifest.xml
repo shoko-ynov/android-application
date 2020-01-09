@@ -19,7 +19,7 @@
         <activity
             android:name=".presentation.detailProduct.activity.DetailProductActivity"
             android:parentActivityName=".presentation.home.activity.HomeActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"/>
         <activity android:name=".presentation.home.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
