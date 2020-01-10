@@ -6,18 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.selfbuy.R
 import com.example.selfbuy.adapters.productCartList.SFProductCartListAdapter
-import com.example.selfbuy.data.entity.remote.ProductDto
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_cart.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class CartFragment : Fragment() {
 
@@ -59,19 +57,31 @@ class CartFragment : Fragment() {
         this.updateTextViewEmptyCartListProduct(product)
 
         productListAdapter.onClickListener = { id ->
-            Async {
-                val productToDelete = SFApplication.app.dbRoom.productDao().getById(id)
-                if (productToDelete != null) {
-                    SFApplication.app.dbRoom.productDao().delete(productToDelete)
-                    product.remove(productToDelete)
-                    // Get a handler that can be used to post to the main thread
-                    val mainHandler = Handler(this.context?.mainLooper)
-                    val myRunnable = Runnable {
-                        this.updateTextViewEmptyCartListProduct(product)
-                    }
-                    mainHandler.post(myRunnable)
+            val builder = this.context?.let { AlertDialog.Builder(it) }
+            if (builder != null) {
+                builder.setTitle(getString(R.string.information))
+                builder.setMessage(getString(R.string.delete_product))
+
+                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                    Async {
+                        val productToDelete = SFApplication.app.dbRoom.productDao().getById(id)
+                        if (productToDelete != null) {
+                            SFApplication.app.dbRoom.productDao().delete(productToDelete)
+                            product.remove(productToDelete)
+                            // Get a handler that can be used to post to the main thread
+                            val mainHandler = Handler(this.context?.mainLooper)
+                            val myRunnable = Runnable {
+                                this.updateTextViewEmptyCartListProduct(product)
+                            }
+                            mainHandler.post(myRunnable)
+                        }
+                    }.execute()
                 }
-            }.execute()
+                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+                }
+                builder.show()
+            }
         }
 
         recycleView.adapter = productListAdapter

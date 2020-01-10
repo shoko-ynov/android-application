@@ -13,12 +13,11 @@ class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product,
         itemView.tw_product_name_cart.text = entity.name
         Picasso.get().load(entity.image).into(itemView.img_product_cart)
 
-        val priceProduct = "${entity.price}${itemView.resources.getString(R.string.euro_symbol)}"
+        val priceTotalWithQty = entity.price * entity.quantity
+        val priceProduct = "$priceTotalWithQty${itemView.resources.getString(R.string.euro_symbol)}"
         itemView.tw_product_price_cart.text = priceProduct
 
         itemView.tw_product_qty_cart.text = entity.quantity.toString()
-
-        //itemView.setOnClickListener { onClick(entity.uid) }
 
         itemView.btn_remove_from_cart.setOnClickListener { onClick(entity.uid) }
     }

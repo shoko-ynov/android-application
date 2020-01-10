@@ -61,4 +61,10 @@
     <!-- Product detail -->
     <string name="detail">Détail</string>
     <string name="add_cart">Ajouter au panier</string>
+
+    <!-- Cart -->
+    <string name="remove">Retirer</string>
+    <string name="quantity">Quantité</string>
+    <string name="information">Information</string>
+    <string name="delete_product">Êtes-vous sûr de vouloir supprimer ce produit de votre panier ?</string>
 </resources>
