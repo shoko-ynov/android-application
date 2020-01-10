@@ -12,5 +12,5 @@ data class Product(
     @ColumnInfo(name = "price") val price: Double,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "category") val category: String,
-    @ColumnInfo(name = "quantity") val quantity: Int
+    @ColumnInfo(name = "quantity") var quantity: Int
 )

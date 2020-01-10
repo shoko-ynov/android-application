@@ -25,18 +25,12 @@ class CartFragment : Fragment() {
     }
 
     private fun mockProductCart(){
-        val product = Product("uid", "image", "name", 2.5, "description", "category", 2)
-
         Async {
-            val resultQuery = getAllProduct()
+            val resultQuery = SFApplication.app.dbRoom.productDao().getAll()
             if(resultQuery.count() > 0 )
-                view?.let { v -> Snackbar.make(v, resultQuery[0].name, Snackbar.LENGTH_LONG).show() }
+                view?.let { v -> Snackbar.make(v, "${resultQuery[0].name} - ${resultQuery[0].quantity}" , Snackbar.LENGTH_LONG).show() }
             else
                 view?.let { v -> Snackbar.make(v, "Empty", Snackbar.LENGTH_LONG).show() }
         }.execute()
-    }
-
-    private fun getAllProduct(): List<Product>{
-        return SFApplication.app.dbRoom.productDao().getAll()
     }
 }

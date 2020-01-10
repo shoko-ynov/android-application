@@ -13,7 +13,10 @@ import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.remote.ProductDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
+import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.detailProduct.viewModel.ProductViewModel
+import com.example.selfbuy.room.Async
+import com.example.selfbuy.room.entity.Product
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail_product.*
@@ -22,7 +25,7 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
 
     private val productViewModel = ProductViewModel()
     private val quantities = arrayOf("1", "2", "3", "4", "5")
-    private var basePriceProduct: Double = 0.0
+    private lateinit var product: ProductDto
     private var selectedQuantity = quantities[0]
 
     override fun onCreateView(
@@ -51,7 +54,27 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
      */
     private fun setBtnAddCartOnClickListener(){
         btn_detail_product_add_cart.setOnClickListener {
-            view?.let { v -> Snackbar.make(v, selectedQuantity.toString(), Snackbar.LENGTH_LONG).show() }
+            var productToAddToCart =
+                Product(this.product._id, this.product.images[0], this.product.name, this.product.price,
+                    this.product.description, this.product.category, selectedQuantity.toInt())
+
+            Async {
+                try {
+                    val resultGetById = SFApplication.app.dbRoom.productDao().getById(productToAddToCart.uid)
+                    if(resultGetById == null){
+                        SFApplication.app.dbRoom.productDao().insertAll(productToAddToCart)
+                    }
+                    else{
+                        productToAddToCart.quantity += resultGetById.quantity
+                        SFApplication.app.dbRoom.productDao().update(productToAddToCart)
+                    }
+
+                    view?.let { v -> Snackbar.make(v, "Produit ajouté au panier avec succès", Snackbar.LENGTH_LONG).show() }
+                }
+                catch (e: Exception){
+                    view?.let { v -> Snackbar.make(v, "Erreur lors de l'ajout au panier", Snackbar.LENGTH_LONG).show() }
+                }
+            }.execute()
         }
     }
 
@@ -67,13 +90,13 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
                 id: Long
             ) {
                 selectedQuantity = quantities[position]
-                val newPrice = basePriceProduct * quantities[position].toInt()
+                val newPrice = product.price * quantities[position].toInt()
                 val priceFormated = "$newPrice ${getString(R.string.euro_symbol)}"
                 tw_detail_product_price.text = priceFormated
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) { // your code here
-                val priceFormated = "$basePriceProduct ${getString(R.string.euro_symbol)}"
+                val priceFormated = "$product.price ${getString(R.string.euro_symbol)}"
                 tw_detail_product_price.text = priceFormated
             }
         }
@@ -95,7 +118,7 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
                 val priceFormated = "${product.price} ${getString(R.string.euro_symbol)}"
                 tw_detail_product_price.text = priceFormated
 
-                this.basePriceProduct = product.price
+                this.product = product
                 this.spinnerItemOnClickListener()
             }
         })
