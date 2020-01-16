@@ -15,10 +15,10 @@ import com.example.selfbuy.adapters.productCartList.SFProductCartListAdapter
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
+import com.example.selfbuy.utils.ManageThread
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment() {
-
     private val productListAdapter = SFProductCartListAdapter()
 
     override fun onCreateView(
@@ -41,12 +41,9 @@ class CartFragment : Fragment() {
         Async {
             val resultQuery = SFApplication.app.dbRoom.productDao().getAll()
 
-            // Get a handler that can be used to post to the main thread
-            val mainHandler = Handler(this.context?.mainLooper)
-            val myRunnable = Runnable {
+            ManageThread.executeOnMainThread(this.context!!){
                 loadDataInRecycleView(resultQuery.toMutableList(), recycleView)
             }
-            mainHandler.post(myRunnable)
         }.execute()
     }
 
@@ -68,12 +65,10 @@ class CartFragment : Fragment() {
                         if (productToDelete != null) {
                             SFApplication.app.dbRoom.productDao().delete(productToDelete)
                             product.remove(productToDelete)
-                            // Get a handler that can be used to post to the main thread
-                            val mainHandler = Handler(this.context?.mainLooper)
-                            val myRunnable = Runnable {
+
+                            ManageThread.executeOnMainThread(this.context!!){
                                 this.updateTextViewEmptyCartListProduct(product)
                             }
-                            mainHandler.post(myRunnable)
                         }
                     }.execute()
                 }

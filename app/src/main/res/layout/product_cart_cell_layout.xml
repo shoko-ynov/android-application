@@ -116,6 +116,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/tw_product_qty_cart"
                 app:layout_constraintVertical_bias="1.0" />
 
+            <Spinner
+                android:id="@+id/spinner_quantity_cart"
+                android:layout_width="184dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_remove_from_cart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_product_cart" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

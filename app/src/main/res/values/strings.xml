@@ -61,10 +61,28 @@
     <!-- Product detail -->
     <string name="detail">Détail</string>
     <string name="add_cart">Ajouter au panier</string>
+    <string name="product_added_to_cart">Produit ajouté au panier avec succès</string>
+    <string name="error_add_cart">Erreur lors de l\'ajout au panier</string>
+    <string name="error_load_product">Erreur lors du chargement du produit</string>
+    <string name="modify_quantity_product">Modifier la quantité</string>
 
     <!-- Cart -->
     <string name="remove">Retirer</string>
     <string name="quantity">Quantité</string>
     <string name="information">Information</string>
     <string name="delete_product">Êtes-vous sûr de vouloir supprimer ce produit de votre panier ?</string>
+
+    <!-- ressources quantities -->
+    <string-array name="quantities_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 </resources>
