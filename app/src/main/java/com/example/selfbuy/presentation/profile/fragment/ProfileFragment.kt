@@ -23,7 +23,7 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tw_user_mail.text = this.userDto.mail
+        //tw_user_mail.text = this.userDto.mail
         this.setOnClickListener()
     }
 
@@ -31,26 +31,6 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
      * On s'abonne aux evenements onclick des differents boutons de la vue
      */
     private fun setOnClickListener(){
-        btn_user_account.setOnClickListener{
-           Toast.makeText(this.activity, getString(R.string.account), Toast.LENGTH_LONG).show()
-        }
-
-        btn_user_orders.setOnClickListener{
-            Toast.makeText(this.activity, getString(R.string.orders), Toast.LENGTH_LONG).show()
-        }
-
-        btn_user_payment.setOnClickListener{
-            Toast.makeText(this.activity, getString(R.string.payment), Toast.LENGTH_LONG).show()
-        }
-
-        btn_user_privacy.setOnClickListener{
-            Toast.makeText(this.activity, getString(R.string.privacy), Toast.LENGTH_LONG).show()
-        }
-
-        btn_user_about_us.setOnClickListener{
-            Toast.makeText(this.activity, getString(R.string.about_us), Toast.LENGTH_LONG).show()
-        }
-
         btn_user_disconnect.setOnClickListener {
             //On supprime l'utilisateur en cours
             CurrentUser.tokenDto = null
