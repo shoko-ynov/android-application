@@ -7,4 +7,7 @@ data class UserDto(val isAdmin: Boolean,
                    val active: Boolean,
                    val registrationDate: Number,
                    val firstName: String?,
-                   val lastName: String?)
+                   val lastName: String?,
+                   val address: String?,
+                   val city: String?,
+                   val postalCode: String?)

@@ -30,12 +30,13 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"/>
 
-            <TextView
-                android:id="@+id/tw_name_profile_detail"
+            <EditText
+                android:id="@+id/editText_name_profile_modif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"/>
+                android:layout_marginEnd="48dp"
+                android:inputType="text" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -47,12 +48,13 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"/>
 
-            <TextView
-                android:id="@+id/tw_address_profile_detail"
+            <EditText
+                android:id="@+id/editText_address_profile_modif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"/>
+                android:layout_marginEnd="48dp"
+                android:inputType="text" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -64,12 +66,13 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"/>
 
-            <TextView
-                android:id="@+id/tw_email_profile_detail"
+            <EditText
+                android:id="@+id/editText_email_profile_modif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"/>
+                android:layout_marginEnd="48dp"
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,13 +84,14 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"/>
 
-            <TextView
-                android:id="@+id/tw_phone_profile_detail"
+            <EditText
+                android:id="@+id/editText_phone_profile_modif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:text="04 05 06 07 08" />
+                android:text="04 05 06 07 08"
+                android:inputType="phone" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -99,13 +103,17 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"/>
 
-            <TextView
-                android:id="@+id/tw_birthdate_profile_detail"
+            <!--<DatePicker
+                android:id="@+id/datePicker_birthdate_profile_modif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
-                android:text="23 Mars 2020" />
+                android:layout_marginEnd="48dp"/>-->
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/progressBar_profil_modif"
+        android:visibility="gone"
+        layout="@layout/progress_bar"/>
 </FrameLayout>

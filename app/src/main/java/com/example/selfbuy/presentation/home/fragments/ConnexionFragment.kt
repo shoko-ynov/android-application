@@ -18,7 +18,7 @@ import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
-import com.example.selfbuy.presentation.profile.fragment.ProfileFragment
+import com.example.selfbuy.presentation.profile.fragments.ProfileFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_connexion.*
 

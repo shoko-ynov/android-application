@@ -1,19 +1,15 @@
 package com.example.selfbuy.presentation.home.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.SearchView
 import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.home.fragments.CartFragment
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.fragments.HomeFragment
-import com.example.selfbuy.presentation.profile.fragment.ProfileFragment
+import com.example.selfbuy.presentation.profile.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_home.*
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class HomeActivity : BaseActivity() {
 
@@ -31,17 +27,14 @@ class HomeActivity : BaseActivity() {
                 .replace(R.id.home_activity_fragment_container, HomeFragment())
                 .commit()
 
-            tw_title.text = getString(R.string.home)
-            sw_product.visibility = SearchView.VISIBLE
+            //tw_title.text = getString(R.string.home)
+            setTitle(R.string.home)
+            //sw_product.visibility = SearchView.VISIBLE
         }
 
         setUpBottomNavigationView()
 
-        supportActionBar?.hide()
-    }
-
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+        //supportActionBar?.hide()
     }
 
     /**
@@ -56,9 +49,9 @@ class HomeActivity : BaseActivity() {
      * Evenement appelé lorsque sélectionne une option native à la plateforme (comme le bouton retour dans l'actionbar)
      */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-            if(item != null && item.itemId == android.R.id.home) {
-                super.onBackPressed()
-            }
+        if(item != null && item.itemId == android.R.id.home) {
+            super.onBackPressed()
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -73,8 +66,9 @@ class HomeActivity : BaseActivity() {
                     .replace(R.id.home_activity_fragment_container, homeFragment)
                     .commit()
 
-                tw_title.text = getString(R.string.home)
-                sw_product.visibility = SearchView.VISIBLE
+                //tw_title.text = getString(R.string.home)
+                setTitle(R.string.home)
+                //sw_product.visibility = SearchView.VISIBLE
                 this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 return@OnNavigationItemSelectedListener true
             }
@@ -84,8 +78,9 @@ class HomeActivity : BaseActivity() {
                     .replace(R.id.home_activity_fragment_container, cartFragment)
                     .commit()
 
-                tw_title.text = getString(R.string.cart)
-                sw_product.visibility = SearchView.GONE
+                //tw_title.text = getString(R.string.cart)
+                setTitle(R.string.cart)
+                //sw_product.visibility = SearchView.GONE
                 this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 return@OnNavigationItemSelectedListener true
             }
@@ -103,8 +98,9 @@ class HomeActivity : BaseActivity() {
                         .replace(R.id.home_activity_fragment_container, connexionFragment)
                         .commit()
                 }
-                sw_product.visibility = SearchView.GONE
-                tw_title.text = getString(R.string.profile)
+                //sw_product.visibility = SearchView.GONE
+                //tw_title.text = getString(R.string.profile)
+                setTitle(R.string.profile)
                 this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 return@OnNavigationItemSelectedListener true
             }
