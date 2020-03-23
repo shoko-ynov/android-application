@@ -17,12 +17,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".presentation.profile.activity.ProfileModifActivity"
-            android:parentActivityName=".presentation.home.activity.HomeActivity"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.detailProduct.activity.DetailProductActivity"
             android:parentActivityName=".presentation.home.activity.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".presentation.home.activity.HomeActivity">
+        <activity android:name=".presentation.home.activity.HomeActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

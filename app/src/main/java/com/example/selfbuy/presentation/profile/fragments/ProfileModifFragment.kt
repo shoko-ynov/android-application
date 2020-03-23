@@ -2,7 +2,6 @@ package com.example.selfbuy.presentation.profile.fragments
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
@@ -16,25 +15,6 @@ import kotlinx.android.synthetic.main.fragment_profile_modif.*
 class ProfileModifFragment : Fragment() {
 
     private lateinit var userViewModel: UserViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.profile_modif_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.profile_modif_menu_save) {
-            //On redirige vers la page de modif du profile en passant l'utilisateur en cours
-            Toast.makeText(this.context, "SAVE", Toast.LENGTH_LONG).show()
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
