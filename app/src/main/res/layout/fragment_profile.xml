@@ -108,4 +108,9 @@
                 android:text="23 Mars 2020" />
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/progressBar_profil_detail"
+        android:visibility="gone"
+        layout="@layout/progress_bar"/>
 </FrameLayout>

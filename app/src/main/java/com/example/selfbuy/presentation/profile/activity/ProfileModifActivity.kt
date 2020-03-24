@@ -26,24 +26,10 @@ class ProfileModifActivity : BaseActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.profile_modif_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var result = true
-
-        if(item.itemId == R.id.profile_modif_menu_save) {
-            //On redirige vers la page de modif du profile en passant l'utilisateur en cours
-            Toast.makeText(this, "SAVE", Toast.LENGTH_LONG).show()
-
-            result = super.onOptionsItemSelected(item)
-        }
-        else if(item.itemId == android.R.id.home){
+        if(item.itemId == android.R.id.home){
             super.onBackPressed()
         }
-
-        return result
+        return super.onOptionsItemSelected(item)
     }
 }

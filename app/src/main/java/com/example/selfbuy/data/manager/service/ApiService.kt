@@ -46,4 +46,10 @@ interface ApiService {
      */
     @POST("users")
     fun inscription(@Body inscription: Inscription) : Single<ResultApiDto<InscriptionDto>>
+
+    /**
+     * Route pour la mise à jour du profile utilisateur
+     */
+    @PUT("users/admin/{idUser}")
+    fun putUserById(@Path("idUser") idUser:String, @Body user: UserDto): Single<Boolean>
 }

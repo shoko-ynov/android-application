@@ -10,9 +10,12 @@
     <string name="loginDto">Se connecter</string>
     <string name="email">Email</string>
     <string name="name">Nom</string>
+    <string name="firstname">Prénom</string>
     <string name="phone">Téléphone</string>
     <string name="birth_date">Date de naissance</string>
     <string name="address">Adresse</string>
+    <string name="city">Ville</string>
+    <string name="postalcode">Code postal</string>
     <string name="password">Mot de passe</string>
     <string name="connect">Connexion</string>
 
