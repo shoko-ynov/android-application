@@ -12,6 +12,8 @@ import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
+import com.example.selfbuy.presentation.detailProduct.activity.DetailProductActivity
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.example.selfbuy.presentation.profile.activity.ProfileModifActivity
@@ -69,6 +71,7 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         this.bindUserViewModel()
+        this.setOnClickListenerBtnAddCreditCard()
 
         refreshUser(userDto)
     }
@@ -78,6 +81,13 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
 
         progressBar_profil_detail.visibility = View.VISIBLE
         userViewModel.getCurrentUser()
+    }
+
+    private fun setOnClickListenerBtnAddCreditCard(){
+        btn_add_credit_card.setOnClickListener {
+            val intent = Intent(this.context, CreditCardActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun refreshUser(user: UserDto){
@@ -101,7 +111,7 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
 
         userViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
             //si probleme revenir sur le fragment connexion
-            progressBar_profil_modif.visibility = View.GONE
+            progressBar_profil_detail.visibility = View.GONE
 
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }

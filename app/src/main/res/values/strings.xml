@@ -11,8 +11,6 @@
     <string name="email">Email</string>
     <string name="name">Nom</string>
     <string name="firstname">Prénom</string>
-    <string name="phone">Téléphone</string>
-    <string name="birth_date">Date de naissance</string>
     <string name="address">Adresse</string>
     <string name="city">Ville</string>
     <string name="postalcode">Code postal</string>
@@ -28,6 +26,7 @@
     <string name="edit">Modifier</string>
     <string name="logout">Déconnecter</string>
     <string name="edit_profil">Modifier profile</string>
+    <string name="add_credit_card">Ajouter une carte de crédit</string>
 
     <!-- Inscription -->
     <string name="register_title">Inscription</string>

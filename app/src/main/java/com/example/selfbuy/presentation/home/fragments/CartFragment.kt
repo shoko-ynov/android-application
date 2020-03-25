@@ -2,24 +2,42 @@ package com.example.selfbuy.presentation.home.fragments
 
 import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.selfbuy.R
 import com.example.selfbuy.adapters.productCartList.SFProductCartListAdapter
+import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
 import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.fragment_profile_modif.*
 
 class CartFragment : Fragment() {
     private val productListAdapter = SFProductCartListAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.cart_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.cart_menu_validate) {
+            Toast.makeText(this.context, "Valider panier", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

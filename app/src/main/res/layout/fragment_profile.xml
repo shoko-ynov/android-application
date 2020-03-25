@@ -71,41 +71,16 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"/>
 
-            <TextView
+            <Button
+                android:id="@+id/btn_add_credit_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
-                android:text="@string/phone"
+                android:text="@string/add_credit_card"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"/>
-
-            <TextView
-                android:id="@+id/tw_phone_profile_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
-                android:text="04 05 06 07 08" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="48dp"
-                android:text="@string/birth_date"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
-
-            <TextView
-                android:id="@+id/tw_birthdate_profile_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
-                android:text="23 Mars 2020" />
         </LinearLayout>
     </ScrollView>
 

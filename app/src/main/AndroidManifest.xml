@@ -16,14 +16,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.profile.activity.ProfileModifActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.creditCard.activity.CreditCardActivity"></activity>
+        <activity
+            android:name=".presentation.profile.activity.ProfileModifActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.detailProduct.activity.DetailProductActivity"
             android:parentActivityName=".presentation.home.activity.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".presentation.home.activity.HomeActivity"
-            android:screenOrientation="portrait" >
+        <activity
+            android:name=".presentation.home.activity.HomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
