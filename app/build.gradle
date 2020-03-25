@@ -64,4 +64,8 @@ dependencies {
 
     // Stripe Android SDK
     implementation 'com.stripe:stripe-android:14.2.0'
+
+    // OkHttp & GSON
+    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }

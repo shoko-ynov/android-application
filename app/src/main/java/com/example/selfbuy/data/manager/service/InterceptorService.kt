@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class InterceptorService : Interceptor {
 
-    override fun intercept(chain: Interceptor.Chain): Response? {
+    override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         var request = originalRequest
 
@@ -27,7 +27,7 @@ class InterceptorService : Interceptor {
                     val initialResponse = chain.proceed(request)
 
                     when {
-                        initialResponse.code() == 403 || initialResponse.code() == 401 -> {
+                        initialResponse.code == 403 || initialResponse.code == 401 -> {
                             val responseNewTokenLoginModel=
                                 Retrofit
                                     .Builder()

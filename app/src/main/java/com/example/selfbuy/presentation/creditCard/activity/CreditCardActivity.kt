@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import com.example.selfbuy.R
+import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.creditCard.fragment.CreditCardFragment
 
-class CreditCardActivity : AppCompatActivity() {
+class CreditCardActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
