@@ -13,43 +13,43 @@ interface ApiService {
      *  Route pour l'authentification
      */
     @Headers("Content-Type:application/json; charset=UTF-8")
-    @POST("auth")
+    @POST("api/auth")
     fun authenticate(@Body login: Login) : Single<ResultApiDto<TokenDto>>
 
     /**
      * Route pour le refreshToken
      */
     @Headers("Content-Type:application/json; charset=UTF-8")
-    @POST("auth/refresh")
+    @POST("api/auth/refresh")
     fun refreshToken(@Body refreshToken: TokenDto) : Call<ResultApiDto<TokenDto>>
 
     /**
      * Route permettant de récupérer les informations de l'utilisateur connecté en fonction de son token
      */
-    @GET("me")
+    @GET("api/me")
     fun getCurrentUser() : Single<ResultApiDto<UserDto>>
 
     /**
      * Route permettant de récupérer la liste de produit
      */
-    @GET("products")
+    @GET("api/products")
     fun getProducts() : Single<ResultApiDto<ArrayList<ProductDto>>>
 
     /**
      * Route permettant de récupérer le détail d'un produit
      */
-    @GET("products/{idProduct}")
+    @GET("api/products/{idProduct}")
     fun getProductById(@Path("idProduct") idProduct: String) : Single<ResultApiDto<ProductDto>>
 
     /**
      * Route pour l'inscription
      */
-    @POST("users")
+    @POST("api/users")
     fun inscription(@Body inscription: Inscription) : Single<ResultApiDto<InscriptionDto>>
 
     /**
      * Route pour la mise à jour du profile utilisateur
      */
-    @PUT("users/admin/{idUser}")
+    @PUT("api/users/{idUser}")
     fun putUserById(@Path("idUser") idUser:String, @Body user: UserDto): Single<Boolean>
 }

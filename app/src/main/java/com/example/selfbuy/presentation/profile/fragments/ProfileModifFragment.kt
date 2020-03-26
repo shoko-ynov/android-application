@@ -1,8 +1,8 @@
 package com.example.selfbuy.presentation.profile.fragments
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
@@ -11,7 +11,6 @@ import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile_modif.*
 
 class ProfileModifFragment : Fragment() {
@@ -32,18 +31,23 @@ class ProfileModifFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.profile_modif_menu_save) {
-            progressBar_profil_modif.visibility = View.VISIBLE
+            val canSave = isValideFields()
+            if(canSave) {
+                progressBar_profil_modif.visibility = View.VISIBLE
 
-            val updatedUser = UserDto(user.isAdmin, user._id,
-                editText_email_profile_modif.text.toString(),
-                user.activationKey, user.active, user.registrationDate,
-                editText_firstname_profile_modif.text.toString(),
-                editText_lastname_profile_modif.text.toString(),
-                editText_address_profile_modif.text.toString(),
-                editText_city_profile_modif.text.toString(),
-                editText_postalcode_profile_modif.text.toString())
+                val updatedUser = UserDto(
+                    user.isAdmin, user._id,
+                    editText_email_profile_modif.text.toString().trim(),
+                    user.activationKey, user.active, user.registrationDate,
+                    editText_firstname_profile_modif.text.toString().trim(),
+                    editText_lastname_profile_modif.text.toString().trim(),
+                    editText_address_profile_modif.text.toString().trim(),
+                    editText_city_profile_modif.text.toString().trim(),
+                    editText_postalcode_profile_modif.text.toString().trim()
+                )
 
-            userViewModel.putUserById(updatedUser)
+                userViewModel.putUserById(updatedUser)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -86,7 +90,7 @@ class ProfileModifFragment : Fragment() {
         })
 
         userViewModel.refreshUserLiveDate.observe(viewLifecycleOwner, Observer {
-            view?.let { v -> Snackbar.make(v, "Profile modifié avec succès.", Snackbar.LENGTH_LONG).show() }
+            view?.let { v -> Snackbar.make(v, getString(R.string.profile_saved), Snackbar.LENGTH_LONG).show() }
 
             this.activity?.finish()
         })
@@ -108,5 +112,24 @@ class ProfileModifFragment : Fragment() {
     private fun refreshUser(){
         progressBar_profil_modif.visibility = View.VISIBLE
         userViewModel.getCurrentUser()
+    }
+
+    private fun isValideFields(): Boolean{
+        var isValide = true
+        var messageIfNotValide: String? = null
+
+        if(editText_email_profile_modif.text.isNullOrEmpty()){
+            messageIfNotValide = getString(R.string.mail_empty)
+            isValide = false
+        }
+        else if(!Patterns.EMAIL_ADDRESS.matcher(editText_email_profile_modif.text.trim()).matches()){
+            messageIfNotValide = getString(R.string.mail_invalid)
+            isValide = false
+        }
+        if(messageIfNotValide != null){
+            view?.let { v -> Snackbar.make(v, messageIfNotValide, Snackbar.LENGTH_LONG).show() }
+        }
+
+        return isValide
     }
 }

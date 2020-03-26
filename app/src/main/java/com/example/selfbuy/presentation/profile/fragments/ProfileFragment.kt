@@ -3,7 +3,6 @@ package com.example.selfbuy.presentation.profile.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
@@ -13,13 +12,11 @@ import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
-import com.example.selfbuy.presentation.detailProduct.activity.DetailProductActivity
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.example.selfbuy.presentation.profile.activity.ProfileModifActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile_modif.*
 
 class ProfileFragment(private val userDto: UserDto) : Fragment() {
 
@@ -91,10 +88,31 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
     }
 
     private fun refreshUser(user: UserDto){
-        val name = "${user.firstName} ${user.lastName}"
+        var name = ""
+        if(!user.firstName.isNullOrEmpty()){
+            name = "${user.firstName}"
+        }
+        if(!user.lastName.isNullOrEmpty()){
+            name = "$name ${user.lastName}"
+        }
+        if(name.isEmpty()){
+            name = getString(R.string.unspecified)
+        }
         tw_name_profile_detail.text = name
 
-        val address = "${user.address} - ${user.postalCode} ${user.city}"
+        var address = ""
+        if(!user.address.isNullOrEmpty()){
+            address = "${user.address}"
+        }
+        if(!user.city.isNullOrEmpty()){
+            address = "$address ${user.city}"
+        }
+        if(!user.postalCode.isNullOrEmpty()){
+            address = "$address ${user.postalCode}"
+        }
+        if(address.isEmpty()){
+            address = getString(R.string.unspecified)
+        }
         tw_address_profile_detail.text = address
 
         tw_email_profile_detail.text = user.mail

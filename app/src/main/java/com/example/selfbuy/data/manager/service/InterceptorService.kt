@@ -26,8 +26,8 @@ class InterceptorService : Interceptor {
 
                     val initialResponse = chain.proceed(request)
 
-                    when {
-                        initialResponse.code == 403 || initialResponse.code == 401 -> {
+                    when (initialResponse.code) {
+                        403, 401 -> {
                             val responseNewTokenLoginModel=
                                 Retrofit
                                     .Builder()

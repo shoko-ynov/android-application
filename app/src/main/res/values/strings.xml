@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SelfBuy</string>
+    <string name="app_name">Shok\'o</string>
 
     <!-- Navbar -->
     <string name="home">Accueil</string>
@@ -16,10 +16,13 @@
     <string name="postalcode">Code postal</string>
     <string name="password">Mot de passe</string>
     <string name="connect">Connexion</string>
+    <string name="unspecified">- Non renseigné -</string>
+    <string name="profile_saved">Profile modifié avec succés</string>
 
     <string name="register">S\'inscrire</string>
     <string name="validate">Valider</string>
-    <string name="mail_invalid">Le mail n\'est pas correct</string>
+    <string name="mail_invalid">L\'adresse mail n\'est pas valide</string>
+    <string name="mail_empty">L\'adresse mail doit être renseigné</string>
     <string name="complete_password">Veuillez renseigner votre mot de passe</string>
     <string name="you_are_disconnected">Vous êtes déconnecté</string>
     <string name="save">Sauvegarder</string>

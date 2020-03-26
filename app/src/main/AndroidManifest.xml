@@ -9,15 +9,24 @@
     <application
         android:name=".presentation.SFApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_logo_ombre"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.creditCard.activity.CreditCardActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.splashScreen.activity.SplashScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.creditCard.activity.CreditCardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.profile.activity.ProfileModifActivity"
             android:screenOrientation="portrait" />
@@ -28,11 +37,6 @@
         <activity
             android:name=".presentation.home.activity.HomeActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".presentation.BaseActivity" />
     </application>

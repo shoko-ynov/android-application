@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:autofillHints="@string/name"
+                android:hint="@string/name"
                 android:inputType="text" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:autofillHints="@string/firstname"
+                android:hint="@string/firstname"
                 android:inputType="text" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:autofillHints="@string/address"
+                android:hint="@string/address"
                 android:inputType="text" />
 
             <TextView
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:autofillHints="@string/city"
+                android:hint="@string/city"
                 android:inputType="text" />
 
             <TextView
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:autofillHints="@string/postalcode"
+                android:hint="@string/postalcode"
                 android:inputType="text" />
 
             <TextView
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
-                android:autofillHints="@string/email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
     </ScrollView>
