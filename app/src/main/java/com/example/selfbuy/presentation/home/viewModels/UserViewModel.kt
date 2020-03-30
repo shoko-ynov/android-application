@@ -8,6 +8,9 @@ import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.presentation.SFApplication
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.lang.Exception
 
 class UserViewModel: ViewModel() {
@@ -44,12 +47,18 @@ class UserViewModel: ViewModel() {
             .app
             .userRepository
             .putUserById(user._id, user)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                refreshUserLiveDate.postValue(it)
-            }, {e ->
-                refreshUserLiveDate.postValue(true)
+            .enqueue(object : Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    if (response.code() == 200 || response.code() == 204) {
+                        refreshUserLiveDate.postValue(true)
+                    }
+                    else{
+                        errorLiveData.postValue(Throwable(response.code().toString()))
+                    }
+                }
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    errorLiveData.postValue(t)
+                }
             })
     }
 }

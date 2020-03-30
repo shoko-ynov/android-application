@@ -4,15 +4,28 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.selfbuy.R
+import com.example.selfbuy.data.entity.local.CurrentUser
+import com.example.selfbuy.data.entity.remote.ResultApiDto
+import com.example.selfbuy.data.entity.remote.StripeDto
+import com.example.selfbuy.data.entity.remote.UserDto
+import com.example.selfbuy.handleError.utils.ErrorUtils
+import com.example.selfbuy.presentation.creditCard.viewModel.StripeViewModel
+import com.example.selfbuy.presentation.profile.fragments.ProfileFragment
+import com.google.android.material.snackbar.Snackbar
 import com.stripe.android.ApiResultCallback
+import com.stripe.android.PaymentAuthConfig
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.Stripe
 import com.stripe.android.model.Card
 import com.stripe.android.model.Token
+import kotlinx.android.synthetic.main.fragment_connexion.*
 import kotlinx.android.synthetic.main.fragment_credit_card.*
 
 class CreditCardFragment : Fragment() {
+
+    private val stripeViewModel = StripeViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +41,6 @@ class CreditCardFragment : Fragment() {
         if (item.itemId == R.id.check_menu_validate) {
             val params = cardInputWidget.paymentMethodCreateParams
             if (params != null) {
-
                 val cardValues = params.toParamMap().entries.find {
                     it.key == "card"
                 }
@@ -57,12 +69,10 @@ class CreditCardFragment : Fragment() {
                         override fun onError(e: Exception) {
                             progressBar_add_card.visibility = View.GONE
 
-                            Toast.makeText(this@CreditCardFragment.context!!, e.localizedMessage, Toast.LENGTH_SHORT).show()
+                            view?.let { v -> Snackbar.make(v, e.localizedMessage, Snackbar.LENGTH_LONG).show() }
                         }
                         override fun onSuccess(result: Token) {
-                            progressBar_add_card.visibility = View.GONE
-
-                            Toast.makeText(this@CreditCardFragment.context!!, result.id, Toast.LENGTH_SHORT).show()
+                            stripeViewModel.linkCardToUser(StripeDto(result.id))
                         }
                     }
                 )
@@ -80,5 +90,22 @@ class CreditCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         cardInputWidget.setShouldShowPostalCode(false)
+        this.bindStripeViewModel()
+    }
+
+    private fun bindStripeViewModel(){
+        stripeViewModel.stripeDtoLiveData.observe(viewLifecycleOwner, Observer {
+            progressBar_add_card.visibility = View.GONE
+
+            Toast.makeText(this.context!!, getString(R.string.credit_card_saved), Toast.LENGTH_SHORT).show()
+            this.activity?.finish()
+        })
+
+        stripeViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
+            progressBar_add_card.visibility = View.GONE
+
+            val errorBodyApi = ErrorUtils.getErrorApi(error)
+            view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
+        })
     }
 }

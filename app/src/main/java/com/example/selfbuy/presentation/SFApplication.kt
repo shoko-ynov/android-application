@@ -8,6 +8,7 @@ import androidx.room.Room
 import com.example.selfbuy.data.manager.ApiManager
 import com.example.selfbuy.data.repository.connexion.ConnexionRepository
 import com.example.selfbuy.data.repository.connexion.InscriptionRepository
+import com.example.selfbuy.data.repository.payment.PaymentRepository
 import com.example.selfbuy.data.repository.product.ProductRepository
 import com.example.selfbuy.data.repository.user.UserRepository
 import com.example.selfbuy.room.database.AppDatabase
@@ -23,6 +24,7 @@ class SFApplication: Application() {
     lateinit var inscriptionRepository: InscriptionRepository
     lateinit var userRepository: UserRepository
     lateinit var productRepository: ProductRepository
+    lateinit var paymentRepository: PaymentRepository
 
     lateinit var loginPreferences: SharedPreferences
     lateinit var loginPrefsEditor: SharedPreferences.Editor
@@ -52,6 +54,7 @@ class SFApplication: Application() {
         inscriptionRepository = InscriptionRepository(apiManager)
         userRepository = UserRepository(apiManager)
         productRepository = ProductRepository(apiManager)
+        paymentRepository = PaymentRepository(apiManager)
     }
 
     @SuppressLint("CommitPrefEdits")

@@ -18,6 +18,7 @@
     <string name="connect">Connexion</string>
     <string name="unspecified">- Non renseigné -</string>
     <string name="profile_saved">Profile modifié avec succés</string>
+    <string name="credit_card_saved">Carte de banquaire enregistrée avec succés</string>
 
     <string name="register">S\'inscrire</string>
     <string name="validate">Valider</string>

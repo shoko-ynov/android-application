@@ -8,6 +8,7 @@ import com.example.selfbuy.data.manager.service.InterceptorService
 import com.example.selfbuy.data.manager.service.ApiService
 import io.reactivex.Single
 import okhttp3.OkHttpClient
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -57,5 +58,10 @@ class ApiManager {
     /**
      * Route pour la mise à jour du profile utilisateur
      */
-    fun putUserById(idUser: String, user: UserDto): Single<Boolean> = service.putUserById(idUser, user)
+    fun putUserById(idUser: String, user: UserDto): Call<Unit> = service.putUserById(idUser, user)
+
+    /**
+     * Route permettant de link une carte banquaire a l'utilisateur actif
+     */
+    fun linkCardToUser(stripeToken: StripeDto): Call<Unit> = service.linkCardToUser(stripeToken)
 }

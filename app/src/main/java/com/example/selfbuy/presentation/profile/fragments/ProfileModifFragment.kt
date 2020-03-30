@@ -3,6 +3,7 @@ package com.example.selfbuy.presentation.profile.fragments
 import android.os.Bundle
 import android.util.Patterns
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
@@ -90,7 +91,7 @@ class ProfileModifFragment : Fragment() {
         })
 
         userViewModel.refreshUserLiveDate.observe(viewLifecycleOwner, Observer {
-            view?.let { v -> Snackbar.make(v, getString(R.string.profile_saved), Snackbar.LENGTH_LONG).show() }
+            Toast.makeText(this.context!!, getString(R.string.profile_saved), Toast.LENGTH_LONG).show()
 
             this.activity?.finish()
         })

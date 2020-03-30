@@ -51,5 +51,12 @@ interface ApiService {
      * Route pour la mise à jour du profile utilisateur
      */
     @PUT("api/users/{idUser}")
-    fun putUserById(@Path("idUser") idUser:String, @Body user: UserDto): Single<Boolean>
+    fun putUserById(@Path("idUser") idUser:String, @Body user: UserDto): Call<Unit>
+
+    /**
+     * Route permettant de link une carte banquaire a l'utilisateur actif
+     */
+    @Headers("Content-Type:application/json; charset=UTF-8")
+    @POST("api/stripe/users/card")
+    fun linkCardToUser(@Body stripeToken: StripeDto): Call<Unit>
 }
