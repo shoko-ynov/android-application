@@ -11,6 +11,7 @@ import com.example.selfbuy.data.repository.connexion.InscriptionRepository
 import com.example.selfbuy.data.repository.product.ProductRepository
 import com.example.selfbuy.data.repository.user.UserRepository
 import com.example.selfbuy.room.database.AppDatabase
+import com.stripe.android.PaymentConfiguration
 
 class SFApplication: Application() {
 
@@ -35,6 +36,14 @@ class SFApplication: Application() {
         initInjection()
         initPreferences()
         initDatabaseRoom()
+        initStripe()
+    }
+
+    private fun initStripe(){
+        PaymentConfiguration.init(
+            applicationContext,
+            "pk_test_QaiIO5kPkgG7O1mVrUkBtxuT00e0pQ3xq2"
+        )
     }
 
     private fun initInjection() {

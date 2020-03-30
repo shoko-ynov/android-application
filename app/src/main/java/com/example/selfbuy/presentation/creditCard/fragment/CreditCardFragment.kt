@@ -5,6 +5,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
+import com.stripe.android.ApiResultCallback
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.Stripe
+import com.stripe.android.model.Card
+import com.stripe.android.model.Token
 import kotlinx.android.synthetic.main.fragment_credit_card.*
 
 class CreditCardFragment : Fragment() {
@@ -30,20 +35,37 @@ class CreditCardFragment : Fragment() {
                 val creditCardValues = cardValues?.value as Map<*, *>
 
                 var cvc = ""
-                var exp_month = ""
-                var exp_year = ""
+                var expMonth = ""
+                var expYear = ""
                 var number = ""
 
                 for ((key, value) in creditCardValues) {
                     when (key) {
                         "cvc" -> cvc = value.toString()
-                        "exp_month" -> exp_month = value.toString()
-                        "exp_year" -> exp_year = value.toString()
+                        "exp_month" -> expMonth = value.toString()
+                        "exp_year" -> expYear = value.toString()
                         "number" -> number = value.toString()
                     }
                 }
+                progressBar_add_card.visibility = View.VISIBLE
 
-                Toast.makeText(this.context!!, "$number - $exp_month - $exp_year - $cvc", Toast.LENGTH_SHORT).show()
+                val stripe = Stripe(this.context!!, PaymentConfiguration.getInstance(this.context!!).publishableKey)
+                val card = Card.create(number, expMonth.toInt(), expYear.toInt(), cvc)
+                stripe.createCardToken(
+                    card,
+                    callback = object : ApiResultCallback<Token> {
+                        override fun onError(e: Exception) {
+                            progressBar_add_card.visibility = View.GONE
+
+                            Toast.makeText(this@CreditCardFragment.context!!, e.localizedMessage, Toast.LENGTH_SHORT).show()
+                        }
+                        override fun onSuccess(result: Token) {
+                            progressBar_add_card.visibility = View.GONE
+
+                            Toast.makeText(this@CreditCardFragment.context!!, result.id, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
             }
         }
         return super.onOptionsItemSelected(item)
