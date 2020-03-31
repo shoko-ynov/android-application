@@ -1,9 +1,9 @@
 package com.example.selfbuy.presentation.home.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.selfbuy.R
 import com.example.selfbuy.adapters.productCartList.SFProductCartListAdapter
 import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
@@ -30,8 +31,9 @@ class CartFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.check_menu_validate) {
-            Toast.makeText(this.context, "Valider panier", Toast.LENGTH_SHORT).show()
+        if(item.itemId == R.id.check_menu_validate && productListAdapter.itemCount > 0) {
+            val intent = Intent(this.context, OrderActivity::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -48,7 +50,7 @@ class CartFragment : Fragment() {
     }
 
     /**
-     * Recuperer les produits dans la base room pour pouvoir les afficher dans le panierx
+     * Recuperer les produits dans la base room pour pouvoir les afficher dans le panier
      */
     private fun getCartProduct(recycleView: RecyclerView) {
         products_cart_recycle_view.layoutManager = LinearLayoutManager(this.context)

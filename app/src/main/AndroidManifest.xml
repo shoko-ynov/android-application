@@ -16,7 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.splashScreen.activity.SplashScreenActivity"
+        <activity android:name=".presentation.order.activity.OrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.splashScreen.activity.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,8 +39,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.home.activity.HomeActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".presentation.BaseActivity" />
     </application>
 

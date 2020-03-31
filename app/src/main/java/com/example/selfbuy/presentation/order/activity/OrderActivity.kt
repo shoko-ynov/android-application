@@ -1,26 +1,26 @@
-package com.example.selfbuy.presentation.creditCard.activity
+package com.example.selfbuy.presentation.order.activity
 
 import android.os.Bundle
 import android.view.MenuItem
 import com.example.selfbuy.R
 import com.example.selfbuy.presentation.BaseActivity
-import com.example.selfbuy.presentation.creditCard.fragment.CreditCardFragment
+import com.example.selfbuy.presentation.order.fragment.OrderFragment
 
-class CreditCardActivity : BaseActivity() {
+class OrderActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_credit_card)
+        setContentView(R.layout.activity_order)
 
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.credit_card_activity_fragment_container, CreditCardFragment())
+                .replace(R.id.order_activity_fragment_container, OrderFragment())
                 .commit()
 
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            setTitle(R.string.add_credit_card)
+            setTitle(R.string.resume_order)
         }
     }
 

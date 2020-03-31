@@ -5,7 +5,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.selfbuy.R
 import com.example.selfbuy.adapters.common.viewHolders.SFListAdapterViewHolder
+import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.product_cart_cell_layout.view.*
 
@@ -15,6 +18,8 @@ class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product,
     private var isFirstLoad = true
 
     override fun bind(entity: Product, onClick: (String) -> Unit) {
+        isFirstLoad = true
+
         itemView.tw_product_name_cart.text = entity.name
         Picasso.get().load(entity.image).into(itemView.img_product_cart)
 
@@ -25,10 +30,23 @@ class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product,
     }
 
     private fun setQuantity(product: Product){
+        updateQuantityInRoom(product)
+
         val priceTotalWithQty = product.price * product.quantity
         val priceProduct = "$priceTotalWithQty${itemView.resources.getString(R.string.euro_symbol)}"
         itemView.tw_product_price_cart.text = priceProduct
         itemView.tw_product_qty_cart.text = product.quantity.toString()
+    }
+
+    private fun updateQuantityInRoom(product: Product){
+        Async {
+            try {
+                SFApplication.app.dbRoom.productDao().update(product)
+            }
+            catch (e: Exception){
+                itemView.let { v -> Snackbar.make(v, itemView.resources.getString(R.string.error_add_cart), Snackbar.LENGTH_LONG).show() }
+            }
+        }.execute()
     }
 
     private fun initSpinnerAndSetOnClickListener(product: Product){
