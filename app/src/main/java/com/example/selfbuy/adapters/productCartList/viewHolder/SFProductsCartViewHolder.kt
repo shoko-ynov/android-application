@@ -21,7 +21,11 @@ class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product,
         isFirstLoad = true
 
         itemView.tw_product_name_cart.text = entity.name
-        Picasso.get().load(entity.image).into(itemView.img_product_cart)
+
+        Picasso.get()
+            .load(entity.image)
+            .placeholder(R.drawable.no_image_available)
+            .into(itemView.img_product_cart)
 
         this.initSpinnerAndSetOnClickListener(entity)
         this.setQuantity(entity)
@@ -32,7 +36,7 @@ class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product,
     private fun setQuantity(product: Product){
         updateQuantityInRoom(product)
 
-        val priceTotalWithQty = product.price * product.quantity
+        val priceTotalWithQty = "%.2f".format(product.price * product.quantity)
         val priceProduct = "$priceTotalWithQty${itemView.resources.getString(R.string.euro_symbol)}"
         itemView.tw_product_price_cart.text = priceProduct
         itemView.tw_product_qty_cart.text = product.quantity.toString()

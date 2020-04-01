@@ -16,9 +16,8 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:text="@string/list_empty"
-            android:textAlignment="center"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +34,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/product_cart_cell_layout" />
+            tools:listitem="@layout/product_cart_cell_layout"
+            android:scrollbars="vertical"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

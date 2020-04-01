@@ -1,4 +1,4 @@
-package com.example.selfbuy.presentation.order.fragment
+package com.example.selfbuy.presentation.order.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,6 +28,14 @@ class OrderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         resume_order_recycle_view.apply { getCartProduct(this) }
+        btn_resume_order_confirm.setOnClickListener {
+            val orderConfirmed = OrderConfirmedFragment()
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
+                replace(R.id.order_activity_fragment_container, orderConfirmed)
+                addToBackStack(null)
+            }
+            fragmentTransaction.commit()
+        }
     }
 
     /**
@@ -51,5 +59,13 @@ class OrderFragment : Fragment() {
     private fun loadDataInRecycleView(productList: List<Product>, recycleView: RecyclerView){
         resumeOrderListAdapter.updateList(productList)
         recycleView.adapter = resumeOrderListAdapter
+
+        var totalPrice = 0.0
+        productList.forEach { product: Product ->
+            totalPrice += product.price * product.quantity
+        }
+
+        val totalPriceToDisplay = "${"%.2f".format(totalPrice)}${getString(R.string.euro_symbol)}"
+        tw_resume_order_total.text = totalPriceToDisplay
     }
 }

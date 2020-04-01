@@ -40,7 +40,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/poppins_light"
-        android:text="x"
+        android:text="@string/x"
         android:textAlignment="viewStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_light"
-        android:text=" - "
+        android:text="@string/dash"
         app:layout_constraintStart_toEndOf="@+id/tw_product_label_qty_resume_order"
         app:layout_constraintTop_toBottomOf="@+id/tw_product_name_resume_order" />
 

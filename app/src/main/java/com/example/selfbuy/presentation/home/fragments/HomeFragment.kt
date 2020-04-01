@@ -99,6 +99,10 @@ class HomeFragment : Fragment() {
      */
     private fun loadProducts() {
         progressBar_list_product.visibility = View.VISIBLE
+        val productList: List<ProductDto> = emptyList()
+        productListAdapter.updateList(productList)
+        updateTextViewEmptyListProduct(productList)
+
         homeViewModel.getProducts()
     }
 

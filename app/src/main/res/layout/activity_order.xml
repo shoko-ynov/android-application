@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.order.fragment.OrderFragment">
+    tools:context=".presentation.order.fragments.OrderFragment">
 
     <FrameLayout
         android:id="@+id/order_activity_fragment_container"

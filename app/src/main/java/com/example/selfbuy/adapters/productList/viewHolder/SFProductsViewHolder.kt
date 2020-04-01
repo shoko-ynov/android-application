@@ -11,7 +11,11 @@ class SFProductsViewHolder(itemView: View): SFListAdapterViewHolder<ProductDto, 
 
     override fun bind(entity: ProductDto, onClick: (String) -> Unit) {
         itemView.tw_product_name.text = entity.name
-        Picasso.get().load(entity.images[0]).into(itemView.img_product)
+
+        Picasso.get()
+            .load(entity.images[0])
+            .placeholder(R.drawable.no_image_available)
+            .into(itemView.img_product)
 
         val priceProduct = "${entity.price}${itemView.resources.getString(R.string.euro_symbol)}"
         itemView.tw_product_price.text = priceProduct
