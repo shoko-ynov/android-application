@@ -8,7 +8,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="654dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,25 +17,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/name"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tw_name_profile_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"/>
+                android:layout_marginEnd="48dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,15 +43,15 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/address"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tw_address_profile_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"/>
+                android:layout_marginEnd="48dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -61,28 +60,28 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/email"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tw_email_profile_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"/>
+                android:layout_marginEnd="48dp" />
 
             <Button
                 android:id="@+id/btn_add_credit_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:background="@drawable/rounded_button"
-                android:layout_gravity="center_vertical"
                 android:text="@string/add_credit_card"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 

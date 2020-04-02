@@ -4,11 +4,17 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.selfbuy.data.entity.local.Inscription
+import com.example.selfbuy.data.entity.remote.ErrorApiDto
 import com.example.selfbuy.data.entity.remote.InscriptionDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
+import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.presentation.SFApplication
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import retrofit2.HttpException
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.lang.Exception
 
 class InscriptionViewModel: ViewModel() {
 
@@ -29,7 +35,12 @@ class InscriptionViewModel: ViewModel() {
             .subscribe({
                 userRegisterLiveData.postValue(it)
             }, {e ->
-                errorRegisterLiveData.postValue(e)
+                if(e is NoSuchElementException){
+                    userRegisterLiveData.postValue(ResultApiDto(true, null, null))
+                }
+                else{
+                    errorRegisterLiveData.postValue(e)
+                }
             })
     }
 }

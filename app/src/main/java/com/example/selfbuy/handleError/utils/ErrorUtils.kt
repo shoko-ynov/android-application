@@ -3,9 +3,6 @@ package com.example.selfbuy.handleError.utils
 import com.example.selfbuy.data.entity.remote.ErrorApiDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.user.InvalidUserError
-
-
-
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.BufferedReader
@@ -27,7 +24,7 @@ object ErrorUtils {
                 errorThrowable.code().toString()
             } else{
                 val resultApiBody = Gson().fromJson(errorBody, ResultApiDto::class.java)
-                resultApiBody.error.code
+                resultApiBody.error?.code.toString()
             }
         }
         catch (e: Exception) {

@@ -36,8 +36,6 @@
     <string name="register_title">Inscription</string>
     <string name="finish_register">Finaliser l\'inscription</string>
     <string name="popUp_message_OK">"Vous allez recevoir un e-mail de confirmation pour saisir votre mot de passe, une fois que ceci sera fait vous pourrez désormais vous connecter avec vos identifiants</string>
-    <string name="failed_inscription_title">"Activer votre compte"</string>
-    <string name="popUp_message_NOT_OK">"Une inscription a déjà été effectuée avec cette adresse mail, mais vous n'avez pas activé votre compte. Un nouveau mail vous a été envoyeé pour l'activation de votre compte."</string>
 
     <string name="button_popUp_OK">OK</string>
     <string name="button_popUp_cancel">Annuler</string>
@@ -71,6 +69,7 @@
     <string name="detail">Détail</string>
     <string name="add_cart">Ajouter au panier</string>
     <string name="product_added_to_cart">Produit ajouté au panier avec succès</string>
+    <string name="quantity_modified_to_cart">Quantité modifiée avec succès</string>
     <string name="error_add_cart">Erreur lors de l\'ajout au panier</string>
     <string name="error_load_product">Erreur lors du chargement du produit</string>
     <string name="modify_quantity_product">Modifier la quantité</string>

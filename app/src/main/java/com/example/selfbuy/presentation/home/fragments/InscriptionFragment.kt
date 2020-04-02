@@ -62,13 +62,7 @@ class InscriptionFragment : Fragment() {
         viewModelInscription.userRegisterLiveData.observe(viewLifecycleOwner, Observer { resultInscriptionDto: ResultApiDto<InscriptionDto> ->
             progressBar_inscription.visibility = View.GONE
 
-            if (resultInscriptionDto.data!=null) {
-                if (!resultInscriptionDto.data.userExist) {
-                    popUpRegisterSuccess()
-                } else {
-                    popUpRegisterFailed()
-                }
-            }
+            this.popUpRegisterSuccess()
         })
 
         viewModelInscription.errorRegisterLiveData.observe(viewLifecycleOwner, Observer {
@@ -132,24 +126,6 @@ class InscriptionFragment : Fragment() {
             ) { dialog, which ->
                 //ne fait rien
             }
-            show()
-        }
-    }
-
-    /**
-     * Affiche la popup lorsque l'inscription a échouée
-     */
-    private fun popUpRegisterFailed(){
-        val builder = AlertDialog.Builder(this.context!!)
-
-        with(builder)
-        {
-            setTitle(getString(R.string.failed_inscription_title))
-            setMessage(getString(R.string.popUp_message_NOT_OK))
-
-            builder.setNeutralButton(
-                getString(R.string.button_popUp_OK)
-            ) { dialog, which -> }
             show()
         }
     }

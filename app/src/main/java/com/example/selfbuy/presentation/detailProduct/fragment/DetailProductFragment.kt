@@ -66,14 +66,21 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
             Async {
                 try {
                     if(productInCart == null){
+                        productInCart = productToAddToCart
                         SFApplication.app.dbRoom.productDao().insertAll(productToAddToCart)
+
+                        ManageThread.executeOnMainThread(this.context!!) {
+                            selectQuantity()
+                        }
+
+                        view?.let { v -> Snackbar.make(v, getString(R.string.product_added_to_cart), Snackbar.LENGTH_LONG).show() }
                     }
                     else{
                         productToAddToCart.quantity = selectedQuantity
                         SFApplication.app.dbRoom.productDao().update(productToAddToCart)
-                    }
 
-                    view?.let { v -> Snackbar.make(v, getString(R.string.product_added_to_cart), Snackbar.LENGTH_LONG).show() }
+                        view?.let { v -> Snackbar.make(v, getString(R.string.quantity_modified_to_cart), Snackbar.LENGTH_LONG).show() }
+                    }
                 }
                 catch (e: Exception){
                     view?.let { v -> Snackbar.make(v, getString(R.string.error_add_cart), Snackbar.LENGTH_LONG).show() }
@@ -95,7 +102,7 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
             ) {
                 selectedQuantity = quantities[position].toInt()
                 val newPrice = product.price * quantities[position].toInt()
-                val priceFormated = "$newPrice ${getString(R.string.euro_symbol)}"
+                val priceFormated = "${"%.2f".format(newPrice)} ${getString(R.string.euro_symbol)}"
                 tw_detail_product_price.text = priceFormated
             }
 

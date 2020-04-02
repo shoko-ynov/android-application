@@ -54,7 +54,7 @@ interface ApiService {
     fun putUserById(@Path("idUser") idUser:String, @Body user: UserDto): Call<Unit>
 
     /**
-     * Route permettant de link une carte banquaire a l'utilisateur actif
+     * Route permettant de link une carte bancaire a l'utilisateur actif
      */
     @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("api/stripe/users/card")
