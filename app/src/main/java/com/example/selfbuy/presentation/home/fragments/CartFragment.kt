@@ -19,6 +19,8 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment() {
     private val productListAdapter = SFProductCartListAdapter()
+    private lateinit var recycleView: RecyclerView
+    private lateinit var menu:Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,13 @@ class CartFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.validate_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+
+        this.menu = menu
+        this.loadProductsAndUpdateMenu(menu, recycleView)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -53,13 +62,17 @@ class CartFragment : Fragment() {
      * Recuperer les produits dans la base room pour pouvoir les afficher dans le panier
      */
     private fun getCartProduct(recycleView: RecyclerView) {
+        this.recycleView = recycleView
         products_cart_recycle_view.layoutManager = LinearLayoutManager(this.context)
+    }
 
+    private fun loadProductsAndUpdateMenu(menu:Menu, recycleView: RecyclerView){
         Async {
             val resultQuery = SFApplication.app.dbRoom.productDao().getAll()
 
             ManageThread.executeOnMainThread(this.context!!){
                 loadDataInRecycleView(resultQuery.toMutableList(), recycleView)
+                menu.getItem(0).isEnabled = productListAdapter.itemCount > 0
             }
         }.execute()
     }
@@ -84,7 +97,7 @@ class CartFragment : Fragment() {
                             product.remove(productToDelete)
 
                             ManageThread.executeOnMainThread(this.context!!){
-                                this.updateTextViewEmptyCartListProduct(product)
+                                this.loadProductsAndUpdateMenu(menu, recycleView)
                             }
                         }
                     }.execute()
