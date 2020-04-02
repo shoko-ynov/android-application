@@ -15,6 +15,7 @@ import com.example.selfbuy.data.entity.remote.InscriptionDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.home.viewModels.InscriptionViewModel
+import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_inscription.*
 
@@ -48,8 +49,10 @@ class InscriptionFragment : Fragment() {
      * Gere l'affichage de bouton retour dans l'actionbar
      */
     private fun manageBackButtonActionBar(isVisible: Boolean){
-        val currentActivity = this.activity as AppCompatActivity
-        currentActivity.supportActionBar?.setDisplayHomeAsUpEnabled(isVisible)
+        if(this.activity !is OrderActivity){
+            val currentActivity = this.activity as AppCompatActivity
+            currentActivity.supportActionBar?.setDisplayHomeAsUpEnabled(isVisible)
+        }
     }
 
     /**

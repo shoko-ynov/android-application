@@ -18,6 +18,8 @@ import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
+import com.example.selfbuy.presentation.order.activity.OrderActivity
+import com.example.selfbuy.presentation.order.fragments.OrderFragment
 import com.example.selfbuy.presentation.profile.fragments.ProfileFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_connexion.*
@@ -70,10 +72,19 @@ class ConnexionFragment : Fragment() {
             if (user != null){
                 CurrentUser.userDto = user
 
-                this.activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.home_activity_fragment_container, ProfileFragment(user))
-                    ?.commit()
+                if(this.activity is OrderActivity){
+                    this.activity?.supportFragmentManager
+                        ?.beginTransaction()
+                        ?.replace(R.id.order_activity_fragment_container, OrderFragment())
+                        ?.commit()
+                }
+                else{
+                    this.activity?.supportFragmentManager
+                        ?.beginTransaction()
+                        ?.replace(R.id.home_activity_fragment_container, ProfileFragment(user))
+                        ?.commit()
+                }
+
             }
         })
 
@@ -125,12 +136,20 @@ class ConnexionFragment : Fragment() {
         }
 
         btn_register.setOnClickListener{
-            val inscriptionFragment = InscriptionFragment()
-            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
-                replace(R.id.home_activity_fragment_container,inscriptionFragment)
-                addToBackStack(null)
+            if(this.activity is OrderActivity){
+                this.activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.order_activity_fragment_container,InscriptionFragment())
+                    ?.addToBackStack(null)
+                    ?.commit()
             }
-            fragmentTransaction.commit()
+            else{
+                this.activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.home_activity_fragment_container,InscriptionFragment())
+                    ?.addToBackStack(null)
+                    ?.commit()
+            }
         }
     }
 

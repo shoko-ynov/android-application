@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,11 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(this.activity is AppCompatActivity){
+            val myActivity = this.activity as AppCompatActivity
+            myActivity.setTitle(R.string.resume_order)
+        }
 
         resume_order_recycle_view.apply { getCartProduct(this) }
         btn_resume_order_confirm.setOnClickListener {

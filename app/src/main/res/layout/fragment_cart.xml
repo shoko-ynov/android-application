@@ -38,4 +38,9 @@
             android:scrollbars="vertical"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/progressBar_cart_product"
+        android:visibility="gone"
+        layout="@layout/progress_bar"/>
 </FrameLayout>

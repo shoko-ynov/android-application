@@ -6,11 +6,17 @@ import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.selfbuy.R
 import com.example.selfbuy.adapters.productCartList.SFProductCartListAdapter
+import com.example.selfbuy.data.entity.local.CurrentUser
+import com.example.selfbuy.data.entity.remote.ResultApiDto
+import com.example.selfbuy.data.entity.remote.TokenDto
+import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
@@ -21,6 +27,8 @@ class CartFragment : Fragment() {
     private val productListAdapter = SFProductCartListAdapter()
     private lateinit var recycleView: RecyclerView
     private lateinit var menu:Menu
+
+    private var userViewModel = UserViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +49,21 @@ class CartFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.check_menu_validate && productListAdapter.itemCount > 0) {
-            val intent = Intent(this.context, OrderActivity::class.java)
-            startActivity(intent)
+            val tokenSaved = SFApplication.app.loginPreferences.getString("token", "")
+            val refreshTokenSaved = SFApplication.app.loginPreferences.getString("refreshToken", "")
+
+            //Check si le token est valide
+            if (!tokenSaved.isNullOrEmpty() && !refreshTokenSaved.isNullOrEmpty()){
+                progressBar_cart_product.visibility = View.VISIBLE
+
+                val token = TokenDto(tokenSaved.toString(), refreshTokenSaved.toString())
+                CurrentUser.tokenDto = token
+                userViewModel.getCurrentUser()
+            }
+            //Redirection page de login
+            else{
+                this.redirectionOrderActivity(false)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -56,6 +77,43 @@ class CartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         products_cart_recycle_view.apply { getCartProduct(this) }
+
+        this.bindUserViewModel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        userViewModel = UserViewModel()
+    }
+
+    /**
+     * On s'abonne aux differents evenements de UserViewModel
+     */
+    private fun bindUserViewModel(){
+        userViewModel.userDtoLiveData.observe(viewLifecycleOwner, Observer { resultDto: ResultApiDto<UserDto> ->
+            progressBar_cart_product.visibility = View.GONE
+            val user = resultDto.data
+
+            if (user != null){
+                CurrentUser.userDto = user
+
+                this.redirectionOrderActivity(true)
+            }
+        })
+
+        userViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
+            //si probleme revenir sur le fragment connexion
+            progressBar_cart_product.visibility = View.GONE
+
+            this.redirectionOrderActivity(false)
+        })
+    }
+
+    private fun redirectionOrderActivity(isConnected: Boolean){
+        val intent = Intent(this.context, OrderActivity::class.java)
+        intent.putExtra("IsConnected", isConnected)
+        startActivity(intent)
     }
 
     /**
