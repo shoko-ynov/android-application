@@ -19,7 +19,7 @@ class SelectCreditCardActivity : BaseActivity() {
                 .replace(R.id.select_credit_card_activity_fragment_container, SelectCreditCardFragment())
                 .commit()
 
-            setTitle(R.string.paiement_method)
+            setTitle(R.string.payement_method)
 
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }

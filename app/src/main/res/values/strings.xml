@@ -88,8 +88,12 @@
     <string name="dash">-</string>
     <string name="x">x</string>
     <string name="my_products">Mes produits</string>
-    <string name="paiement_method">Moyen de payement</string>
+    <string name="resume">Résumé</string>
+    <string name="payement_method">Moyen de paiement</string>
+    <string name="my_credit_cards_saved">Mes cartes bancaires enregistrées</string>
+    <string name="credit_card_selected">Carte sélectionnée</string>
     <string name="command_ended">Commande terminée</string>
+    <string name="select_credit_card">Sélectionner une carte</string>
 
     <!-- ressources quantities -->
     <string-array name="quantities_array">
@@ -103,5 +107,20 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+    </string-array>
+
+    <!-- ressources credit cards (TODO: To delete) -->
+    <string-array name="credit_cards_array">
+        <item>**** **** **** 4242</item>
+        <item>**** **** **** 5465</item>
+        <item>**** **** **** 2366</item>
+        <item>**** **** **** 3984</item>
+        <item>**** **** **** 1094</item>
+        <item>**** **** **** 5679</item>
+        <item>**** **** **** 2359</item>
+        <item>**** **** **** 3982</item>
+        <item>**** **** **** 7439</item>
+        <item>**** **** **** 5712</item>
+        <item>**** **** **** 1297</item>
     </string-array>
 </resources>
