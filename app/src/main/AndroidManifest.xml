@@ -16,8 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.order.activity.OrderActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.order.activity.SelectCreditCardActivity"></activity>
+        <activity
+            android:name=".presentation.order.activity.OrderActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.splashScreen.activity.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -39,7 +41,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.home.activity.HomeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".presentation.BaseActivity" />
     </application>
 

@@ -10,12 +10,11 @@ import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.activity.HomeActivity
-import com.example.selfbuy.presentation.order.activity.OrderActivity
+import com.example.selfbuy.presentation.order.activity.SelectCreditCardActivity
 import com.example.selfbuy.room.Async
-import com.example.selfbuy.utils.ManageThread
 import kotlinx.android.synthetic.main.fragment_order_confirmed.*
 
-class OrderConfirmedFragment : Fragment(), OrderActivity.OnBackPressedListener {
+class OrderConfirmedFragment : Fragment(), SelectCreditCardActivity.OnBackPressedListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +34,7 @@ class OrderConfirmedFragment : Fragment(), OrderActivity.OnBackPressedListener {
 
         val currentActivity = this.activity as AppCompatActivity
         currentActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        currentActivity.setTitle(R.string.command_ended)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

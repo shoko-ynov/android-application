@@ -84,9 +84,12 @@
     <string name="resume_order">Récapitulatif de la commande</string>
     <string name="total">Total</string>
     <string name="confirm_command">Confirmer la commande</string>
+    <string name="next">Continuer</string>
     <string name="dash">-</string>
     <string name="x">x</string>
     <string name="my_products">Mes produits</string>
+    <string name="paiement_method">Moyen de payement</string>
+    <string name="command_ended">Commande terminée</string>
 
     <!-- ressources quantities -->
     <string-array name="quantities_array">

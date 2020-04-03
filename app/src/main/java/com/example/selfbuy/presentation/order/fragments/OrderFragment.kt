@@ -1,5 +1,6 @@
 package com.example.selfbuy.presentation.order.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.selfbuy.R
 import com.example.selfbuy.adapters.resumeOrderList.SFResumeOrderListAdapter
 import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.presentation.order.activity.SelectCreditCardActivity
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
@@ -34,13 +36,9 @@ class OrderFragment : Fragment() {
         }
 
         resume_order_recycle_view.apply { getCartProduct(this) }
-        btn_resume_order_confirm.setOnClickListener {
-            val orderConfirmed = OrderConfirmedFragment()
-            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
-                replace(R.id.order_activity_fragment_container, orderConfirmed)
-                addToBackStack(null)
-            }
-            fragmentTransaction.commit()
+        btn_resume_order_next.setOnClickListener {
+            val intent = Intent(this.context!!, SelectCreditCardActivity::class.java)
+            startActivity(intent)
         }
     }
 
