@@ -59,7 +59,7 @@ class InscriptionFragment : Fragment() {
      * Lie le viewModel au fragment et s'abonne aux differents evenements
      */
     private fun bindViewModelInscription(){
-        viewModelInscription.userRegisterLiveData.observe(viewLifecycleOwner, Observer { resultInscriptionDto: ResultApiDto<InscriptionDto> ->
+        viewModelInscription.userRegisterLiveData.observe(viewLifecycleOwner, Observer {
             progressBar_inscription.visibility = View.GONE
 
             this.popUpRegisterSuccess()
@@ -111,7 +111,7 @@ class InscriptionFragment : Fragment() {
 
             builder.setNeutralButton(
                 getString(R.string.button_popUp_OK)
-            ) { dialog, which ->
+            ) { _, _ ->
                 val connexionFragment = ConnexionFragment()
                 val fragmentTransaction =
                     activity!!.supportFragmentManager.beginTransaction().apply {
@@ -123,7 +123,7 @@ class InscriptionFragment : Fragment() {
             }
             builder.setNegativeButton(
                 getString(R.string.button_popUp_cancel)
-            ) { dialog, which ->
+            ) { _, _ ->
                 //ne fait rien
             }
             show()

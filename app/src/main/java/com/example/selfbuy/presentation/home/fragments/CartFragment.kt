@@ -102,7 +102,7 @@ class CartFragment : Fragment() {
             }
         })
 
-        userViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
+        userViewModel.errorLiveData.observe(viewLifecycleOwner, Observer {
             //si probleme revenir sur le fragment connexion
             progressBar_cart_product.visibility = View.GONE
 
@@ -147,7 +147,7 @@ class CartFragment : Fragment() {
                 builder.setTitle(getString(R.string.information))
                 builder.setMessage(getString(R.string.delete_product))
 
-                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                builder.setPositiveButton(android.R.string.yes) { _, _ ->
                     Async {
                         val productToDelete = SFApplication.app.dbRoom.productDao().getById(id)
                         if (productToDelete != null) {
@@ -160,7 +160,7 @@ class CartFragment : Fragment() {
                         }
                     }.execute()
                 }
-                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                builder.setNegativeButton(android.R.string.no) { _, _ ->
 
                 }
                 builder.show()
