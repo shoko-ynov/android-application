@@ -122,7 +122,10 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
             val product = resultDto.data
 
             if(product != null){
-                Picasso.get().load(product.images[0]).into(tw_detail_product_image)
+                Picasso.get()
+                    .load(product.images[0])
+                    .placeholder(R.drawable.no_image_available)
+                    .into(tw_detail_product_image)
                 tw_detail_product_name.text = product.name
                 tw_detail_product_description.text = product.description
 
