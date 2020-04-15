@@ -65,4 +65,10 @@ interface ApiService {
      */
     @GET("api/cards")
     fun getUserCards() : Single<ResultApiDto<ArrayList<CreditCardDto>>>
+
+    /**
+     * Route permettant de créer le paiement
+     */
+    @POST("api/stripe/pay")
+    fun createPaymentIntent(@Body orderDto: OrderDto) : Single<ResultApiDto<PaymentIntentDto>>
 }

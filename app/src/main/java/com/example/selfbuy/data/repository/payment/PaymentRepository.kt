@@ -1,8 +1,6 @@
 package com.example.selfbuy.data.repository.payment
 
-import com.example.selfbuy.data.entity.remote.CreditCardDto
-import com.example.selfbuy.data.entity.remote.ResultApiDto
-import com.example.selfbuy.data.entity.remote.StripeDto
+import com.example.selfbuy.data.entity.remote.*
 import com.example.selfbuy.data.manager.ApiManager
 import com.example.selfbuy.data.repository.DataRepository
 import io.reactivex.Single
@@ -19,4 +17,9 @@ class PaymentRepository(apiManager: ApiManager) : DataRepository(apiManager) {
      * Route permettant de lister les cartes de l'utilisateur actif
      */
     fun getUserCards() : Single<ResultApiDto<ArrayList<CreditCardDto>>> = apiManager.getUserCards()
+
+    /**
+     * Route permettant de créer le paiement
+     */
+    fun createPaymentIntent(orderDto: OrderDto) : Single<ResultApiDto<PaymentIntentDto>> = apiManager.createPaymentIntent(orderDto)
 }

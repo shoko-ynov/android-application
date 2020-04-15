@@ -69,4 +69,9 @@ class ApiManager {
      * Route permettant de lister les cartes de l'utilisateur actif
      */
     fun getUserCards() : Single<ResultApiDto<ArrayList<CreditCardDto>>> = service.getUserCards()
+
+    /**
+     * Route permettant de créer le paiement
+     */
+    fun createPaymentIntent(orderDto: OrderDto) : Single<ResultApiDto<PaymentIntentDto>> = service.createPaymentIntent(orderDto)
 }

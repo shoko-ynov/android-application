@@ -9,8 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
-import com.example.selfbuy.data.entity.remote.CreditCardDto
-import com.example.selfbuy.data.entity.remote.ResultApiDto
+import com.example.selfbuy.data.entity.remote.*
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.order.viewModel.CreditCardViewModel
@@ -36,21 +35,46 @@ class SelectCreditCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_confirm_command.setOnClickListener {
-            val orderConfirmed = OrderConfirmedFragment()
-            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
-                replace(R.id.select_credit_card_activity_fragment_container, orderConfirmed)
-                addToBackStack(null)
-            }
-            fragmentTransaction.commit()
-        }
-
+        this.btnConfirmClickListener()
         this.bindCreateCardViewModel()
         progressBar_list_cards_user.visibility = View.VISIBLE
         this.creditCardViewModel.getUserCards()
         this.getTotalPrices()
         this.spinnerItemOnClickListener()
         isFirstLoad = false
+    }
+
+    /**
+     * Evenement du click sur le bouton de confirmation de commande
+     */
+    private fun btnConfirmClickListener()
+    {
+        btn_confirm_command.setOnClickListener {
+            if (selectedCreditCard != null)
+            {
+                progressBar_list_cards_user.visibility = View.VISIBLE
+                Async {
+                    val resultQuery = SFApplication.app.dbRoom.productDao().getAll()
+                    ManageThread.executeOnMainThread(this.context!!) {
+                        val listDetailOrderDto: MutableList<DetailOrderDto> = arrayListOf()
+                        resultQuery.forEach {
+                            val detailOrderDto = DetailOrderDto(it.uid, it.quantity)
+                            listDetailOrderDto.add(detailOrderDto)
+                        }
+                        val finalListeDetailOrderDto: ArrayList<DetailOrderDto> = arrayListOf()
+                        finalListeDetailOrderDto.addAll(listDetailOrderDto)
+                        val orderDto = OrderDto(finalListeDetailOrderDto, selectedCreditCard!!._id)
+                        creditCardViewModel.createPaymentIntent(orderDto)
+                    }
+                }.execute()
+            }
+//            val orderConfirmed = OrderConfirmedFragment()
+//            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
+//                replace(R.id.select_credit_card_activity_fragment_container, orderConfirmed)
+//                addToBackStack(null)
+//            }
+//            fragmentTransaction.commit()
+        }
     }
 
     /**
@@ -126,5 +150,17 @@ class SelectCreditCardFragment : Fragment() {
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_SHORT).show() }
         })
+
+        creditCardViewModel.paymentIntentLiveData.observe(
+            viewLifecycleOwner,
+            Observer { resultDto: ResultApiDto<PaymentIntentDto> ->
+                progressBar_list_cards_user.visibility = View.GONE
+
+                if (resultDto.data != null)
+                {
+                    view?.let { v -> Snackbar.make(v, "${resultDto.data.clientSecret} -- ${resultDto.data.paymentIntentId}", Snackbar.LENGTH_SHORT).show() }
+
+                }
+            })
     }
 }
