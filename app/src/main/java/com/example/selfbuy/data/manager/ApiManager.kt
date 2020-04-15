@@ -64,4 +64,9 @@ class ApiManager {
      * Route permettant de link une carte banquaire a l'utilisateur actif
      */
     fun linkCardToUser(stripeToken: StripeDto): Call<Unit> = service.linkCardToUser(stripeToken)
+
+    /**
+     * Route permettant de lister les cartes de l'utilisateur actif
+     */
+    fun getUserCards() : Single<ResultApiDto<ArrayList<CreditCardDto>>> = service.getUserCards()
 }

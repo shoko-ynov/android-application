@@ -7,17 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.lifecycle.Observer
 import com.example.selfbuy.R
+import com.example.selfbuy.data.entity.remote.CreditCardDto
+import com.example.selfbuy.data.entity.remote.ResultApiDto
+import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.presentation.order.viewModel.CreditCardViewModel
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_select_credit_card.*
 
 class SelectCreditCardFragment : Fragment() {
 
-    private lateinit var creditCards: Array<String>
-    private var selectedCreditCard: String = ""
+    private val creditCards : MutableList<String> = arrayListOf()
+    private var selectedCreditCard : CreditCardDto? = null
+    private var listCreditCardUser : ArrayList<CreditCardDto> = arrayListOf()
+    private val creditCardViewModel = CreditCardViewModel()
+    private var isFirstLoad : Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,19 +45,12 @@ class SelectCreditCardFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
+        this.bindCreateCardViewModel()
+        progressBar_list_cards_user.visibility = View.VISIBLE
+        this.creditCardViewModel.getUserCards()
         this.getTotalPrices()
-        this.initSpinnerCreditCards(view)
         this.spinnerItemOnClickListener()
-    }
-
-    /**
-     * Initialise le spinner des cartes de credits de l'utilisateur connecté
-     */
-    private fun initSpinnerCreditCards(view: View){
-        creditCards = view.resources.getStringArray(R.array.credit_cards_array)
-        val dataAdapter: ArrayAdapter<String> = ArrayAdapter(context!!, R.layout.support_simple_spinner_dropdown_item, creditCards)
-        dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-        spinner_credit_cards.adapter = dataAdapter
+        isFirstLoad = false
     }
 
     /**
@@ -62,11 +64,19 @@ class SelectCreditCardFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                selectedCreditCard = creditCards[position]
+                if (isFirstLoad && listCreditCardUser.size>0)
+                {
+                    selectedCreditCard = listCreditCardUser.find { it.isDefaultCard }
+                }
+                else
+                {
+                    selectedCreditCard = listCreditCardUser[position]
+                    view?.let { v -> Snackbar.make(v, selectedCreditCard!!._id, Snackbar.LENGTH_SHORT).show() }
+                }
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) {
-                selectedCreditCard = creditCards[0]
+                selectedCreditCard = listCreditCardUser[0]
             }
         }
     }
@@ -88,5 +98,33 @@ class SelectCreditCardFragment : Fragment() {
                 tw_total_select_credit_card.text = totalPriceToDisplay
             }
         }.execute()
+    }
+
+    /**
+     * On s'abonne aux differents evenements de CreditCardViewModel
+     */
+    private fun bindCreateCardViewModel() {
+        creditCardViewModel.creditCardsLiveData.observe(
+            viewLifecycleOwner,
+            Observer { resultDto: ResultApiDto<ArrayList<CreditCardDto>> ->
+                progressBar_list_cards_user.visibility = View.GONE
+
+                if (resultDto.data != null)
+                {
+                    listCreditCardUser = resultDto.data
+                    resultDto.data.forEach{
+                        creditCards.add("**** **** **** ${it.last4}           ${it.expMonth}/${it.expYear}")
+                    }
+                    val dataAdapter: ArrayAdapter<String> = ArrayAdapter(context!!, R.layout.support_simple_spinner_dropdown_item, creditCards)
+                    dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+                    spinner_credit_cards.adapter = dataAdapter
+                }
+            })
+
+        creditCardViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
+            progressBar_list_cards_user.visibility = View.GONE
+            val errorBodyApi = ErrorUtils.getErrorApi(error)
+            view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_SHORT).show() }
+        })
     }
 }

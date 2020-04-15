@@ -59,4 +59,10 @@ interface ApiService {
     @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("api/stripe/users/card")
     fun linkCardToUser(@Body stripeToken: StripeDto): Call<Unit>
+
+    /**
+     * Route permettant de lister les cartes de l'utilisateur actif
+     */
+    @GET("api/cards")
+    fun getUserCards() : Single<ResultApiDto<ArrayList<CreditCardDto>>>
 }
