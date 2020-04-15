@@ -1,6 +1,7 @@
 package com.example.selfbuy.presentation.order.fragments
 
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -149,48 +150,43 @@ class SelectCreditCardFragment : Fragment() {
         creditCardViewModel.paymentIntentLiveData.observe(
             viewLifecycleOwner,
             Observer { resultDto: ResultApiDto<PaymentIntentDto> ->
-                Thread {
-                    //Do some Network Request
-                    ManageThread.executeOnMainThread(this.context!!)
-                    {
-                        progressBar_list_cards_user.visibility = View.GONE
-
-                        if (resultDto.data != null) {
-                            view?.let { v ->
-                                Snackbar.make(
-                                    v,
-                                    "${resultDto.data.clientSecret} -- ${resultDto.data.paymentIntentId}",
-                                    Snackbar.LENGTH_SHORT
-                                ).show()
-                            }
-
-                            val stripe = Stripe(
-                                this.context!!,
-                                PaymentConfiguration.getInstance(this.context!!).publishableKey
-                            )
-                            val result =
-                                stripe.retrievePaymentIntentSynchronous(resultDto.data.clientSecret)
-
-                            //                    ManageThread.executeOnMainThread(this.context!!){
-                            //                        if (result != null && result.status == StripeIntent.Status.Succeeded && result.nextAction == null)
-                            //                        {
-                            //                            val orderConfirmed = OrderConfirmedFragment()
-                            //                            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
-                            //                                replace(R.id.select_credit_card_activity_fragment_container, orderConfirmed)
-                            //                                addToBackStack(null)
-                            //                            }
-                            //                            fragmentTransaction.commit()
-                            //                        }
-                            //                        else
-                            //                        {
-                            //                            //WebView 3D secure
-                            //                        }
-                            //                    }
+                 progressBar_list_cards_user.visibility = View.GONE
+                    if (resultDto.data != null) {
+                        view?.let { v ->
+                            Snackbar.make(
+                                v,
+                                "${resultDto.data.clientSecret} -- ${resultDto.data.paymentIntentId}",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
                         }
-                    }}.start()
+
+                        val stripe = Stripe(
+                            this.context!!,
+                            PaymentConfiguration.getInstance(this.context!!).publishableKey
+                        )
+
+                        // Disable the `NetworkOnMainThreadException` and make sure it is just logged.
+                        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build())
+
+                        val result =
+                            stripe.retrievePaymentIntentSynchronous(resultDto.data.clientSecret)
+
+                        ManageThread.executeOnMainThread(this.context!!){
+                          if (result != null && result.status == StripeIntent.Status.Succeeded && result.nextAction == null)
+                           {
+                               val orderConfirmed = OrderConfirmedFragment()
+                              val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction().apply {
+                                    replace(R.id.select_credit_card_activity_fragment_container, orderConfirmed)
+                                    addToBackStack(null)
+                                }
+                                fragmentTransaction.commit()
+                            }
+                            else
+                            {
+                                //WebView 3D secure
+                            }
+                        }
+                    }
                 })
-
     }
-
-
 }
