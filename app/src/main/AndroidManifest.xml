@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.order.activity.SelectCreditCardActivity"></activity>
+        <activity android:name=".presentation.order.activity.SelectCreditCardActivity" />
         <activity
             android:name=".presentation.order.activity.OrderActivity"
             android:screenOrientation="portrait" />

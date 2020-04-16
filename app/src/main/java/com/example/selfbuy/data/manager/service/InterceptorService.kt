@@ -28,6 +28,8 @@ class InterceptorService : Interceptor {
 
                     when (initialResponse.code) {
                         403, 401 -> {
+                            initialResponse.close()
+
                             val responseNewTokenLoginModel=
                                 Retrofit
                                     .Builder()

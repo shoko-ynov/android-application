@@ -94,6 +94,7 @@
     <string name="credit_card_selected">Carte sélectionnée</string>
     <string name="command_ended">Commande terminée</string>
     <string name="select_credit_card">Sélectionner une carte</string>
+    <string name="error_during_payment">Une erreur technique est survenue lors de votre paiement., veuillez ressayer ultérieurement.</string>
 
     <!-- ressources quantities -->
     <string-array name="quantities_array">
