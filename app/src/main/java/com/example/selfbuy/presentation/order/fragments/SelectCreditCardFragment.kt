@@ -18,6 +18,7 @@ import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.remote.*
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
+import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
 import com.example.selfbuy.presentation.home.activity.HomeActivity
 import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.presentation.order.viewModel.CreditCardViewModel
@@ -52,12 +53,22 @@ class SelectCreditCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         this.btnConfirmClickListener()
+        this.btnAddCreditCardCommandClickListener()
         this.bindCreateCardViewModel()
         progressBar_list_cards_user.visibility = View.VISIBLE
         this.creditCardViewModel.getUserCards()
         this.getTotalPrices()
         this.spinnerItemOnClickListener()
         isFirstLoad = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if(!isFirstLoad){
+            progressBar_list_cards_user.visibility = View.VISIBLE
+            this.creditCardViewModel.getUserCards()
+        }
     }
 
     /**
@@ -82,6 +93,16 @@ class SelectCreditCardFragment : Fragment() {
                     }
                 }.execute()
             }
+        }
+    }
+
+    /**
+     * Evenement du click sur le bouton d'ajout de carte de credit
+     */
+    private fun btnAddCreditCardCommandClickListener(){
+        btn_add_credit_card_command.setOnClickListener {
+            val intent = Intent(this.context, CreditCardActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -139,9 +160,15 @@ class SelectCreditCardFragment : Fragment() {
                 progressBar_list_cards_user.visibility = View.GONE
 
                 if (resultDto.data != null) {
+                    creditCards.clear()
+
                     listCreditCardUser = resultDto.data
                     resultDto.data.forEach {
-                        creditCards.add("**** **** **** ${it.last4}           ${it.expMonth}/${it.expYear}")
+                        var defaultCard = ""
+                        if(it.isDefaultCard){
+                            defaultCard = "-  ${getString(R.string.default_card)}"
+                        }
+                        creditCards.add("**** **** **** ${it.last4}  -  ${it.expMonth}/${it.expYear}  $defaultCard")
                     }
                     val dataAdapter: ArrayAdapter<String> = ArrayAdapter(
                         context!!,

@@ -57,7 +57,7 @@ interface ApiService {
      * Route permettant de link une carte bancaire a l'utilisateur actif
      */
     @Headers("Content-Type:application/json; charset=UTF-8")
-    @POST("api/stripe/users/card")
+    @POST("api/cards")
     fun linkCardToUser(@Body stripeToken: StripeDto): Call<Unit>
 
     /**
