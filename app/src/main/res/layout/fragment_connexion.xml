@@ -17,7 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="center_vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
 
             <TextView
                 android:id="@+id/tw_connect"
@@ -27,7 +28,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="0dp"
-                android:text="@string/loginDto"/>
+                android:text="@string/connect"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -35,7 +36,9 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
-                android:text="@string/email" />
+                android:text="@string/email"
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_email"
@@ -43,6 +46,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
+                android:hint="@string/complete_adresse_mail_hint"
+                android:textColorHint="@color/colorDarkGrey"
+                android:drawableEnd="@drawable/ic_email"
                 android:inputType="textEmailAddress"/>
 
             <TextView
@@ -51,7 +57,9 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
-                android:text="@string/password" />
+                android:text="@string/password"
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_password"
@@ -59,30 +67,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
+                android:hint="@string/complete_password_hint"
+                android:textColorHint="@color/colorDarkGrey"
+                android:drawableEnd="@drawable/ic_password"
                 android:inputType="textPassword"/>
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="143dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="143dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/connect"
+                android:text="@string/loginDto"
                 android:background="@drawable/rounded_button"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/inter_bold"/>
 
             <Button
                 android:id="@+id/btn_register"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="143dp"
                 android:layout_marginEnd="143dp"
                 android:layout_marginBottom="40dp"
                 android:text="@string/register"
-                android:background="@drawable/rounded_button"
-                android:textColor="@color/colorPrimary"/>
+                android:background="@drawable/rounded_button_white_bg"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/inter_bold"/>
         </LinearLayout>
     </ScrollView>
 

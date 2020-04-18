@@ -33,7 +33,6 @@
     <string name="add_credit_card">Ajouter une carte de crédit</string>
 
     <!-- Inscription -->
-    <string name="complete_adresse_mail">Saisir votre adresse mail</string>
     <string name="register_title">Inscription</string>
     <string name="finish_register">Finaliser l\'inscription</string>
     <string name="popUp_message_OK">"Vous allez recevoir un e-mail de confirmation pour saisir votre mot de passe, une fois que ceci sera fait vous pourrez désormais vous connecter avec vos identifiants</string>
@@ -97,6 +96,10 @@
     <string name="select_credit_card">Sélectionner une carte</string>
     <string name="error_during_payment">Une erreur technique est survenue lors de votre paiement., veuillez ressayer ultérieurement.</string>
     <string name="default_card">(défaut)</string>
+
+    <!-- EditText Hint -->
+    <string name="complete_password_hint"><font size="15">Saisir votre mot de passe</font></string>
+    <string name="complete_adresse_mail_hint"><font size="15">Saisir votre adresse mail</font></string>
 
     <!-- ressources quantities -->
     <string-array name="quantities_array">
