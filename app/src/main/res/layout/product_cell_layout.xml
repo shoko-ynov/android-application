@@ -54,7 +54,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="12dp"
                 android:textAlignment="viewStart"
-                android:textAppearance="@font/poppins_bold"
+                android:textAppearance="@font/inter_bold"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

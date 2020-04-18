@@ -35,9 +35,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginEnd="48dp"
-                android:text="@string/email" />
+                android:text="@string/email"
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_email_inscription"
@@ -46,20 +48,31 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
-            
+                android:inputType="textEmailAddress"
+                android:hint="@string/complete_adresse_mail"
+                android:textColorHint="@color/colorDarkGrey"
+                android:drawableEnd="@drawable/ic_email"/>
+
             <Button
                 android:id="@+id/btn_inscription"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="143dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="143dp"
-                android:layout_marginBottom="40dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/validate"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/rounded_button"
-                android:textColor="@color/colorPrimary"
+                android:text="@string/register"
+                android:textColor="@color/colorWhite"
                 android:textSize="14sp"/>
+
+            <ImageView
+                android:layout_width="225dp"
+                android:layout_height="136dp"
+                android:src="@drawable/ic_image_inscription"
+                android:layout_gravity="bottom|end"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"/>
         </LinearLayout>
     </ScrollView>
 

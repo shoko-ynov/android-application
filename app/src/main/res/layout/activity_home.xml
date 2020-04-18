@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="16dp"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/inter_bold"
         android:text="@string/home"
         android:textColor="@color/colorWhite"
         android:textSize="28sp"
@@ -73,5 +73,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navigation"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

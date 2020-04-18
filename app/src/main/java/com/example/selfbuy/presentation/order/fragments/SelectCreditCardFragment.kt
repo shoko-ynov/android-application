@@ -226,7 +226,6 @@ class SelectCreditCardFragment : Fragment() {
                 {
                     //WebView 3D secure
                     count3dSecureAction++
-                    val t = result.nextAction
                     result.nextAction?.forEach {
                         if(it.key == "use_stripe_sdk"){
                             val map = it.value as Map<String, String?>?

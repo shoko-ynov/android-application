@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#926848</color>
+    <color name="colorPrimary">#F5A216</color>
     <color name="colorPrimaryDark">#2D2D2D</color>
     <color name="colorStatusBar">#2E140A</color>
     <color name="colorBackground">#F5F5F5</color>
@@ -8,4 +8,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDefault">#808080</color>
     <color name="colorDarkGrey">#D3D3D3</color>
+    <color name="colorOrangeLeft">#F5C750</color>
+    <color name="colorOrangeRight">#F5A216</color>
 </resources>
