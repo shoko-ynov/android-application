@@ -104,11 +104,11 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
         if(!user.address.isNullOrEmpty()){
             address = "${user.address}"
         }
+        if(!user.postalCode.isNullOrEmpty()){
+            address = "$address \n${user.postalCode}"
+        }
         if(!user.city.isNullOrEmpty()){
             address = "$address ${user.city}"
-        }
-        if(!user.postalCode.isNullOrEmpty()){
-            address = "$address ${user.postalCode}"
         }
         if(address.isEmpty()){
             address = getString(R.string.unspecified)

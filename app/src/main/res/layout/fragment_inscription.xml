@@ -64,7 +64,7 @@
                 android:background="@drawable/rounded_button"
                 android:text="@string/register"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp"/>
+                android:fontFamily="@font/inter_bold"/>
 
             <ImageView
                 android:layout_width="225dp"

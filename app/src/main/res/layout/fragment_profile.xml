@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
     tools:context=".presentation.home.fragments.HomeFragment">
 
     <ScrollView
@@ -23,52 +24,68 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
+                android:layout_marginStart="50dp"
                 android:text="@string/name"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:textSize="15sp"
+                android:fontFamily="@font/inter_bold"
+                android:drawableStart="@drawable/ic_profile"
+                android:drawablePadding="30dp"/>
 
             <TextView
                 android:id="@+id/tw_name_profile_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp" />
+                android:layout_marginStart="99dp"
+                android:layout_marginEnd="48dp"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="13.5sp"
+                android:textColor="@color/colorDarkGrey"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="48dp"
                 android:text="@string/address"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_bold"
+                android:textSize="15sp"
+                android:drawableStart="@drawable/ic_address"
+                android:drawablePadding="25dp"/>
 
             <TextView
                 android:id="@+id/tw_address_profile_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp" />
+                android:layout_marginStart="99dp"
+                android:layout_marginEnd="48dp"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="13.5sp"
+                android:textColor="@color/colorDarkGrey"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="48dp"
                 android:text="@string/email"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_bold"
+                android:textSize="15sp"
+                android:drawableStart="@drawable/ic_mail_profile"
+                android:drawablePadding="25dp"/>
 
             <TextView
                 android:id="@+id/tw_email_profile_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp" />
+                android:layout_marginStart="99dp"
+                android:layout_marginEnd="48dp"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="13.5sp"
+                android:textColor="@color/colorDarkGrey"/>
 
             <Button
                 android:id="@+id/btn_add_credit_card"
@@ -80,8 +97,8 @@
                 android:layout_marginEnd="48dp"
                 android:background="@drawable/rounded_button"
                 android:text="@string/add_credit_card"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/inter_bold"/>
         </LinearLayout>
     </ScrollView>
 
