@@ -228,13 +228,13 @@ class SelectCreditCardFragment : Fragment() {
                     count3dSecureAction++
                     result.nextAction?.forEach {
                         if(it.key == "use_stripe_sdk"){
-                            val map = it.value as Map<String, String?>?
+                            val map = it.value as Map<*, *>?
 
                             map?.forEach{ it1 ->
                                 if(it1.key == "stripe_js"){
-                                    if (it1.value != null) {
+                                    if (it1.value != null && it1.value is String) {
                                         webview_3d_secure_include.visibility = View.VISIBLE
-                                        loadWebView3DSecure(it1.value!!)
+                                        loadWebView3DSecure(it1.value!!.toString())
                                     }
                                 }
                             }
