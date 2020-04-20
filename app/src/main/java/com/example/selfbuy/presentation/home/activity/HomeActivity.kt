@@ -13,23 +13,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : BaseActivity() {
 
-    private val homeFragment = HomeFragment()
-    private val cartFragment = CartFragment()
-    private val connexionFragment = ConnexionFragment()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.home_activity_fragment_container, HomeFragment())
-                .commit()
+            val showCart = intent.getBooleanExtra("showCart", false)
+            if(showCart){
+                val navView:BottomNavigationView = findViewById(R.id.navbar_view)
+                navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+                navView.selectedItemId = R.id.navigation_cart
+            }
+            else{
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.home_activity_fragment_container, HomeFragment())
+                    .commit()
 
-            //tw_title.text = getString(R.string.home)
-            setTitle(R.string.home)
-            //sw_product.visibility = SearchView.VISIBLE
+                //tw_title.text = getString(R.string.home)
+                setTitle(R.string.home)
+                //sw_product.visibility = SearchView.VISIBLE
+            }
         }
 
         setUpBottomNavigationView()
@@ -41,7 +45,7 @@ class HomeActivity : BaseActivity() {
      * Initialisation des différents onglets
      */
     private fun setUpBottomNavigationView() {
-        val navView: BottomNavigationView = findViewById(R.id.navbar_view)
+        val navView:BottomNavigationView = findViewById(R.id.navbar_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
@@ -63,7 +67,7 @@ class HomeActivity : BaseActivity() {
             R.id.navigation_home -> {
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.home_activity_fragment_container, homeFragment)
+                    .replace(R.id.home_activity_fragment_container, HomeFragment())
                     .commit()
 
                 //tw_title.text = getString(R.string.home)
@@ -73,15 +77,7 @@ class HomeActivity : BaseActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_cart -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.home_activity_fragment_container, cartFragment)
-                    .commit()
-
-                //tw_title.text = getString(R.string.cart)
-                setTitle(R.string.cart)
-                //sw_product.visibility = SearchView.GONE
-                this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                this.showAndSelectCartFragment()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
@@ -95,7 +91,7 @@ class HomeActivity : BaseActivity() {
                 else{
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.home_activity_fragment_container, connexionFragment)
+                        .replace(R.id.home_activity_fragment_container, ConnexionFragment())
                         .commit()
                 }
                 //sw_product.visibility = SearchView.GONE
@@ -106,5 +102,17 @@ class HomeActivity : BaseActivity() {
             }
         }
         false
+    }
+
+    private fun showAndSelectCartFragment(){
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.home_activity_fragment_container, CartFragment())
+            .commit()
+
+        //tw_title.text = getString(R.string.cart)
+        setTitle(R.string.cart)
+        //sw_product.visibility = SearchView.GONE
+        this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }

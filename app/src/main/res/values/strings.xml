@@ -68,6 +68,7 @@
     <!-- Product detail -->
     <string name="detail">Détail</string>
     <string name="add_cart">Ajouter au panier</string>
+    <string name="see_cart">Voir mon panier</string>
     <string name="product_added_to_cart">Produit ajouté au panier avec succès</string>
     <string name="quantity_modified_to_cart">Quantité modifiée avec succès</string>
     <string name="error_add_cart">Erreur lors de l\'ajout au panier</string>
@@ -96,6 +97,8 @@
     <string name="select_credit_card">Sélectionner une carte</string>
     <string name="error_during_payment">Une erreur technique est survenue lors de votre paiement., veuillez ressayer ultérieurement.</string>
     <string name="default_card">(défaut)</string>
+    <string name="back_to_home">Retourner à l\'accueil</string>
+    <string name="order_confirmer_successfully">Votre commande a été effectuée avec succès !</string>
 
     <!-- EditText Hint -->
     <string name="complete_password_hint"><font size="15">Saisir votre mot de passe</font></string>

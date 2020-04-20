@@ -1,5 +1,6 @@
 package com.example.selfbuy.presentation.detailProduct.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,10 @@ import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.detailProduct.viewModel.ProductViewModel
+import com.example.selfbuy.presentation.home.activity.HomeActivity
+import com.example.selfbuy.presentation.home.fragments.CartFragment
+import com.example.selfbuy.presentation.home.fragments.HomeFragment
+import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
@@ -42,13 +47,14 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
         selectedQuantity = quantities[0].toInt()
 
         if (this.context != null){
-            val dataAdapter: ArrayAdapter<String> = ArrayAdapter(context!!, R.layout.support_simple_spinner_dropdown_item, quantities)
+            val dataAdapter: ArrayAdapter<String> = ArrayAdapter(context!!, R.layout.spinner_item, quantities)
             dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             spinner_quantity.adapter = dataAdapter
         }
 
         this.bindProductViewModel()
         this.setBtnAddCartOnClickListener()
+        this.setBtnSeeCartOnClickListener()
 
         progressBar_detail_product.visibility = View.VISIBLE
         productViewModel.getProductById(idProduct)
@@ -90,6 +96,19 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
     }
 
     /**
+     * Appelé lorsque le bouton voir mon panier est cliqué
+     */
+    private fun setBtnSeeCartOnClickListener(){
+        btn_detail_product_see_cart.setOnClickListener {
+            val intent = Intent(this.context, HomeActivity::class.java)
+            intent.putExtra("showCart", true)
+            startActivity(intent)
+
+            this.activity?.finish()
+        }
+    }
+
+    /**
      * Appelé lorsque la valeur selectionne dans le spinner est modifié
      */
     private fun spinnerItemOnClickListener(){
@@ -102,12 +121,12 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
             ) {
                 selectedQuantity = quantities[position].toInt()
                 val newPrice = product.price * quantities[position].toInt()
-                val priceFormated = "${"%.2f".format(newPrice)} ${getString(R.string.euro_symbol)}"
+                val priceFormated = "%.2f".format(newPrice)
                 tw_detail_product_price.text = priceFormated
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) {
-                val priceFormated = "$product.price ${getString(R.string.euro_symbol)}"
+                val priceFormated = "${product.price}"
                 tw_detail_product_price.text = priceFormated
             }
         }
@@ -127,10 +146,15 @@ class DetailProductFragment(private val idProduct : String) : Fragment() {
                     .placeholder(R.drawable.no_image_available)
                     .into(tw_detail_product_image)
                 tw_detail_product_name.text = product.name
-                tw_detail_product_description.text = product.description
 
-                val priceFormated = "${product.price} ${getString(R.string.euro_symbol)}"
-                tw_detail_product_price.text = priceFormated
+                if(product.description.isNotEmpty()){
+                    tw_detail_product_description.text = product.description
+                }
+                else{
+                    tw_detail_product_description.text = getString(R.string.unspecified)
+                }
+
+                tw_detail_product_price.text = product.price.toString()
 
                 this.product = product
                 this.checkProductExistInCart()
