@@ -120,4 +120,17 @@
         <item>10</item>
     </string-array>
 
+    <string-array name="quantities_array_cart">
+        <item>QTÉ : 1</item>
+        <item>QTÉ : 2</item>
+        <item>QTÉ : 3</item>
+        <item>QTÉ : 4</item>
+        <item>QTÉ : 5</item>
+        <item>QTÉ : 6</item>
+        <item>QTÉ : 7</item>
+        <item>QTÉ : 8</item>
+        <item>QTÉ : 9</item>
+        <item>QTÉ : 10</item>
+    </string-array>
+
 </resources>

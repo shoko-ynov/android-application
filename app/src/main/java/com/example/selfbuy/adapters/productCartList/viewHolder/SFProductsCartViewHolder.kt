@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.product_cart_cell_layout.view.*
 
 class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product, String>(itemView) {
 
+    private val quantities_cart = itemView.resources.getStringArray(R.array.quantities_array_cart)
     private val quantities = itemView.resources.getStringArray(R.array.quantities_array)
     private var isFirstLoad = true
 
@@ -37,9 +38,8 @@ class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product,
         updateQuantityInRoom(product)
 
         val priceTotalWithQty = "%.2f".format(product.price * product.quantity)
-        val priceProduct = "$priceTotalWithQty${itemView.resources.getString(R.string.euro_symbol)}"
+        val priceProduct = "$priceTotalWithQty ${itemView.resources.getString(R.string.euro_symbol)}"
         itemView.tw_product_price_cart.text = priceProduct
-        itemView.tw_product_qty_cart.text = product.quantity.toString()
     }
 
     private fun updateQuantityInRoom(product: Product){
@@ -55,7 +55,7 @@ class SFProductsCartViewHolder(itemView: View): SFListAdapterViewHolder<Product,
 
     private fun initSpinnerAndSetOnClickListener(product: Product){
         if (this.itemView.context != null){
-            val dataAdapter: ArrayAdapter<String> = ArrayAdapter(this.itemView.context, R.layout.support_simple_spinner_dropdown_item, quantities)
+            val dataAdapter: ArrayAdapter<String> = ArrayAdapter(this.itemView.context, R.layout.spinner_item, quantities_cart)
             dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             this.itemView.spinner_quantity_cart.adapter = dataAdapter
         }

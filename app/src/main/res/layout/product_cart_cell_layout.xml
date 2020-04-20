@@ -31,6 +31,8 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 style="@style/ProductTitle"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/img_product_cart"
@@ -59,48 +61,26 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:textAlignment="viewStart"
-                android:textAppearance="@font/inter_bold"
-                android:textSize="13sp"
-                android:textStyle="bold"
+                android:textSize="18sp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toTopOf="@+id/btn_remove_from_cart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tw_product_name_cart"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/tw_product_label_qty_cart"
+            <Spinner
+                android:id="@+id/spinner_quantity_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="12dp"
-                android:text="@string/quantity"
-                android:textAlignment="viewStart"
-                android:textAppearance="@font/inter_bold"
-                android:textSize="13sp"
-                android:textStyle="bold"
+                android:theme="@style/SpinnerTheme"
+                android:background="#EEEEEE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_product_cart"
                 app:layout_constraintTop_toBottomOf="@+id/tw_product_name_cart"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/tw_product_qty_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="12dp"
-                android:textAlignment="viewStart"
-                android:textAppearance="@font/inter_bold"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tw_product_price_cart"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/tw_product_label_qty_cart"
-                app:layout_constraintTop_toBottomOf="@+id/tw_product_name_cart"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"/>
 
             <Button
                 android:id="@+id/btn_remove_from_cart"
@@ -113,21 +93,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.945"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tw_product_qty_cart"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_quantity_cart"
                 app:layout_constraintVertical_bias="1.0" />
-
-            <Spinner
-                android:id="@+id/spinner_quantity_cart"
-                android:layout_width="184dp"
-                android:layout_height="31dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_remove_from_cart"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_product_cart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

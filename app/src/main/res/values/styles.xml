@@ -82,4 +82,11 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
+
+    <style name="SpinnerTheme">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:background">#EEEEEE</item>
+    </style>
 </resources>
