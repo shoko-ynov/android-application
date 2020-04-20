@@ -26,8 +26,8 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/name"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_lastname_profile_modif"
@@ -44,8 +44,8 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/firstname"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_firstname_profile_modif"
@@ -62,8 +62,8 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/address"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_address_profile_modif"
@@ -80,8 +80,8 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/city"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_city_profile_modif"
@@ -98,8 +98,8 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/postalcode"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_postalcode_profile_modif"
@@ -116,8 +116,8 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="@string/email"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_medium"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/editText_email_profile_modif"
