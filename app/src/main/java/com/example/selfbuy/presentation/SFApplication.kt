@@ -44,7 +44,7 @@ class SFApplication: Application() {
     private fun initStripe(){
         PaymentConfiguration.init(
             applicationContext,
-            "pk_test_QaiIO5kPkgG7O1mVrUkBtxuT00e0pQ3xq2"
+            "pk_test_DVZuhr4U9oHxRlPNoLdy9z1p00MG8Fl8gf"
         )
     }
 

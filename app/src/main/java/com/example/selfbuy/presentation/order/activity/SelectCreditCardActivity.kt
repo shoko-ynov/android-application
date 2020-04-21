@@ -2,9 +2,9 @@ package com.example.selfbuy.presentation.order.activity
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
 import com.example.selfbuy.presentation.BaseActivity
+import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.order.fragments.SelectCreditCardFragment
 
 class SelectCreditCardActivity : BaseActivity() {
@@ -13,13 +13,25 @@ class SelectCreditCardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_credit_card)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.select_credit_card_activity_fragment_container, SelectCreditCardFragment())
-                .commit()
+        val isConnected = intent.getBooleanExtra("IsConnected", false)
 
-            setTitle(R.string.payement_method)
+        if (savedInstanceState == null) {
+            if(isConnected){
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.select_credit_card_activity_fragment_container, SelectCreditCardFragment())
+                    .commit()
+
+                setTitle(R.string.payement_method)
+            }
+            else{
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.select_credit_card_activity_fragment_container, ConnexionFragment())
+                    .commit()
+
+                setTitle(R.string.profile)
+            }
 
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
@@ -30,17 +42,5 @@ class SelectCreditCardActivity : BaseActivity() {
             super.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onBackPressed() {
-        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.select_credit_card_activity_fragment_container)
-
-        if (fragment !is OnBackPressedListener || !(fragment as OnBackPressedListener?)!!.onBackPressed()) {
-            super.onBackPressed()
-        }
-    }
-
-    interface OnBackPressedListener {
-        fun onBackPressed(): Boolean
     }
 }

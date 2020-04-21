@@ -18,6 +18,7 @@ import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.example.selfbuy.presentation.order.activity.OrderActivity
+import com.example.selfbuy.presentation.order.activity.SelectCreditCardActivity
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
@@ -111,7 +112,7 @@ class CartFragment : Fragment() {
     }
 
     private fun redirectionOrderActivity(isConnected: Boolean){
-        val intent = Intent(this.context, OrderActivity::class.java)
+        val intent = Intent(this.context, SelectCreditCardActivity::class.java)
         intent.putExtra("IsConnected", isConnected)
         startActivity(intent)
     }

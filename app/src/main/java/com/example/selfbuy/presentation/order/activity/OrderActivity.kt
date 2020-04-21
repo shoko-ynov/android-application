@@ -2,9 +2,9 @@ package com.example.selfbuy.presentation.order.activity
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
 import com.example.selfbuy.presentation.BaseActivity
-import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.order.fragments.OrderFragment
 
 open class OrderActivity : BaseActivity() {
@@ -13,27 +13,18 @@ open class OrderActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
 
-        val isConnected = intent.getBooleanExtra("IsConnected", false)
-
+        val selectedCreditCardId = intent.getStringExtra("selectedCreditCard")
         if (savedInstanceState == null) {
-            if(isConnected){
+
+            if(!selectedCreditCardId.isNullOrEmpty()){
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.order_activity_fragment_container, OrderFragment())
+                    .replace(R.id.order_activity_fragment_container, OrderFragment(selectedCreditCardId))
                     .commit()
 
                 setTitle(R.string.resume_order)
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
             }
-            else{
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.order_activity_fragment_container, ConnexionFragment())
-                    .commit()
-
-                setTitle(R.string.profile)
-            }
-
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
 
@@ -42,5 +33,17 @@ open class OrderActivity : BaseActivity() {
             super.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.order_activity_fragment_container)
+
+        if (fragment !is OnBackPressedListener || !(fragment as OnBackPressedListener?)!!.onBackPressed()) {
+            super.onBackPressed()
+        }
+    }
+
+    interface OnBackPressedListener {
+        fun onBackPressed(): Boolean
     }
 }

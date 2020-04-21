@@ -10,11 +10,12 @@ import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.activity.HomeActivity
+import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.presentation.order.activity.SelectCreditCardActivity
 import com.example.selfbuy.room.Async
 import kotlinx.android.synthetic.main.fragment_order_confirmed.*
 
-class OrderConfirmedFragment : Fragment(), SelectCreditCardActivity.OnBackPressedListener {
+class OrderConfirmedFragment : Fragment(), OrderActivity.OnBackPressedListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
