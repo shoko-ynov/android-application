@@ -43,9 +43,8 @@ open class OrderActivity : BaseActivity() {
 
         if (fragment !is OnBackPressedListener || !(fragment as OnBackPressedListener?)!!.onBackPressed()) {
             super.onBackPressed()
+            ManageStepOrder.previousStep(this)
         }
-
-        ManageStepOrder.previousStep(this)
     }
 
     interface OnBackPressedListener {
