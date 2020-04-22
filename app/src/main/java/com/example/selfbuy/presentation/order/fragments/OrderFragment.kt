@@ -41,6 +41,7 @@ class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
     private var orderEnded = false
     private var clientSecretOrder = ""
     private var count3dSecureAction = 0
+    private var orderDto: OrderDto? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,8 +75,8 @@ class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
                     }
                     val finalListeDetailOrderDto: ArrayList<DetailOrderDto> = arrayListOf()
                     finalListeDetailOrderDto.addAll(listDetailOrderDto)
-                    val orderDto = OrderDto(finalListeDetailOrderDto, selectedCreditCardId)
-                    creditCardViewModel.createPaymentIntent(orderDto)
+                    orderDto = OrderDto(finalListeDetailOrderDto, selectedCreditCardId)
+                    orderDto?.let { creditCardViewModel.createPaymentIntent(it) }
                 }
             }.execute()
         }
