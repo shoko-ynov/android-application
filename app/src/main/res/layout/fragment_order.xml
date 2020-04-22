@@ -59,7 +59,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/resume_order_recycle_view"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="300dp"
+                    android:minHeight="200dp"
                     tools:listitem="@layout/resume_order_cell_layout"
                     android:scrollbars="vertical"/>
             </androidx.cardview.widget.CardView>
