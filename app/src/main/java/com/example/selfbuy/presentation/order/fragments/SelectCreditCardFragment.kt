@@ -24,6 +24,7 @@ import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_select_credit_card.*
+import kotlinx.android.synthetic.main.product_cart_cell_layout.*
 
 class SelectCreditCardFragment : Fragment() {
 
@@ -99,11 +100,7 @@ class SelectCreditCardFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                if (isFirstLoad && listCreditCardUser.size > 0) {
-                    selectedCreditCard = listCreditCardUser.find { it.isDefaultCard }
-                } else {
-                    selectedCreditCard = listCreditCardUser[position]
-                }
+                selectedCreditCard = listCreditCardUser[position]
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) {
@@ -159,6 +156,16 @@ class SelectCreditCardFragment : Fragment() {
                     )
                     dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
                     spinner_credit_cards.adapter = dataAdapter
+
+                    if(selectedCreditCard != null){
+                        val indexSelectedCreditCard = listCreditCardUser.indexOf(selectedCreditCard!!)
+                        spinner_credit_cards.setSelection(indexSelectedCreditCard)
+                    }
+                    else{
+                        val defaultCreditCard = listCreditCardUser.find { it.isDefaultCard }
+                        val indexDefaultCreditCard = listCreditCardUser.indexOf(defaultCreditCard)
+                        spinner_credit_cards.setSelection(indexDefaultCreditCard)
+                    }
                 }
             })
 
