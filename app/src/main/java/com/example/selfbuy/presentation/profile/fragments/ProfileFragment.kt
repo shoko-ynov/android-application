@@ -69,7 +69,7 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         this.bindUserViewModel()
-        this.setOnClickListenerBtnAddCreditCard()
+        this.setOnClickListenerBtnListCreditsCards()
 
         refreshUser(userDto)
     }
@@ -81,8 +81,8 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
         userViewModel.getCurrentUser()
     }
 
-    private fun setOnClickListenerBtnAddCreditCard(){
-        btn_add_credit_card.setOnClickListener {
+    private fun setOnClickListenerBtnListCreditsCards(){
+        btn_list_credits_cards.setOnClickListener {
             val intent = Intent(this.context, ListCreditsCardActivity::class.java)
             startActivity(intent)
         }

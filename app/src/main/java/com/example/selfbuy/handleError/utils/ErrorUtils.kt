@@ -17,7 +17,7 @@ object ErrorUtils {
 
         try {
             val error = errorThrowable as HttpException
-            val reader = BufferedReader(InputStreamReader(error.response()?.errorBody()?.byteStream()))
+            val reader = BufferedReader(InputStreamReader(error.response().errorBody()?.byteStream()))
             val errorBody = reader.readLine()
 
             codeResult = if (errorBody == "Unauthorized"){

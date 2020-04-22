@@ -1,5 +1,6 @@
 package com.example.selfbuy.presentation.creditCard.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -12,9 +13,9 @@ import com.example.selfbuy.adapters.creditCardList.SFCreditCardListAdapter
 import com.example.selfbuy.data.entity.remote.CreditCardDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
+import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
 import com.example.selfbuy.presentation.order.viewModel.CreditCardViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_list_credits_cards.*
 
 class ListCreditsCardFragment : Fragment() {
@@ -31,12 +32,17 @@ class ListCreditsCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fab_add_credits_card.setOnClickListener {
-            progressBar_list_credits_cards.visibility = View.VISIBLE
+            val intent = Intent(this.context, CreditCardActivity::class.java)
+            startActivity(intent)
         }
 
         progressBar_list_credits_cards.background = null
         credits_cards_recycle_view.apply { bindCreditCardViewModel(this) }
-        this.setSwipeRefreshListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         this.loadProducts()
     }
 
@@ -65,7 +71,6 @@ class ListCreditsCardFragment : Fragment() {
 
         creditCardViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
             progressBar_list_credits_cards.visibility = View.GONE
-            credits_cards_refresh_layout.isRefreshing = false
 
             this.updateTextViewEmptyListCreditCard(creditCardListAdapter.list)
 
@@ -78,7 +83,6 @@ class ListCreditsCardFragment : Fragment() {
      * Met a jour la liste des cartes de credits dans l'adapter
      */
     private fun updateList(creditCardsList: List<CreditCardDto>) {
-        credits_cards_refresh_layout.isRefreshing = false
         creditCardListAdapter.updateList(creditCardsList)
 
         this.updateTextViewEmptyListCreditCard(creditCardsList)
@@ -104,14 +108,5 @@ class ListCreditsCardFragment : Fragment() {
         creditCardListAdapter.updateList(creditCardsList)
 
         creditCardViewModel.getUserCards()
-    }
-
-    /**
-     * Gere le swipe refresh de la liste des creditCardsList
-     */
-    private fun setSwipeRefreshListener() {
-        credits_cards_refresh_layout.setOnRefreshListener {
-            this.loadProducts()
-        }
     }
 }

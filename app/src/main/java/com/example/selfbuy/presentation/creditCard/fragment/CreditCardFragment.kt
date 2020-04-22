@@ -6,21 +6,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
-import com.example.selfbuy.data.entity.local.CurrentUser
-import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.data.entity.remote.StripeDto
-import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.creditCard.viewModel.StripeViewModel
-import com.example.selfbuy.presentation.profile.fragments.ProfileFragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import com.stripe.android.ApiResultCallback
-import com.stripe.android.PaymentAuthConfig
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.Stripe
 import com.stripe.android.model.Card
 import com.stripe.android.model.Token
-import kotlinx.android.synthetic.main.fragment_connexion.*
 import kotlinx.android.synthetic.main.fragment_credit_card.*
 
 class CreditCardFragment : Fragment() {
@@ -62,20 +57,27 @@ class CreditCardFragment : Fragment() {
                 progressBar_add_card.visibility = View.VISIBLE
 
                 val stripe = Stripe(this.context!!, PaymentConfiguration.getInstance(this.context!!).publishableKey)
-                val card = Card.create(number, expMonth.toInt(), expYear.toInt(), cvc)
-                stripe.createCardToken(
-                    card,
-                    callback = object : ApiResultCallback<Token> {
-                        override fun onError(e: Exception) {
-                            progressBar_add_card.visibility = View.GONE
+                val card: Card = Card.create(number, expMonth.toInt(), expYear.toInt(), cvc)
 
-                            view?.let { v -> Snackbar.make(v, e.localizedMessage, Snackbar.LENGTH_LONG).show() }
+                val jsonCard = "{\"number\": ${card.number}, \"expMonth\": ${card.expMonth}, \"expYear\": ${card.expYear}, \"name\": \"${editext_name_credit_card.text.trim()}\", \"cvc\": ${card.cvc}, \"tokenType\": \"card\"}"
+                val cardString = Gson().fromJson(jsonCard, Card::class.java)
+
+                if (cardString != null) {
+                    stripe.createCardToken(
+                        cardString,
+                        callback = object : ApiResultCallback<Token> {
+                            override fun onError(e: Exception) {
+                                progressBar_add_card.visibility = View.GONE
+
+                                view?.let { v -> Snackbar.make(v, e.localizedMessage, Snackbar.LENGTH_LONG).show() }
+                            }
+
+                            override fun onSuccess(result: Token) {
+                                stripeViewModel.linkCardToUser(StripeDto(result.id))
+                            }
                         }
-                        override fun onSuccess(result: Token) {
-                            stripeViewModel.linkCardToUser(StripeDto(result.id))
-                        }
-                    }
-                )
+                    )
+                }
             }
         }
         return super.onOptionsItemSelected(item)

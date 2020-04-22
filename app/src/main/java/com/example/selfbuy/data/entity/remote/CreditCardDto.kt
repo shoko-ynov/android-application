@@ -7,5 +7,6 @@ data class CreditCardDto(
     val expMonth: Int,
     val expYear: Int,
     val last4: String,
-    val name: String?
+    val name: String?,
+    val brand: String?
 )

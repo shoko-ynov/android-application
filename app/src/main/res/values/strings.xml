@@ -18,7 +18,7 @@
     <string name="connect">Connexion</string>
     <string name="unspecified">- Non renseigné -</string>
     <string name="profile_saved">Profile modifié avec succés</string>
-    <string name="credit_card_saved">Carte de banquaire enregistrée avec succés</string>
+    <string name="credit_card_saved">Carte bancaire enregistrée avec succés</string>
 
     <string name="register">S\'inscrire</string>
     <string name="validate">Valider</string>
@@ -105,6 +105,7 @@
     <string name="complete_password_hint"><font size="15">Saisir votre mot de passe</font></string>
     <string name="complete_adresse_mail_hint"><font size="15">Saisir votre adresse mail</font></string>
     <string name="complete_lastname_hint"><font size="15">Saisir votre nom</font></string>
+    <string name="complete_lastname_hint_02">Saisir votre nom</string>
     <string name="complete_firstname_hint"><font size="15">Saisir votre prénom</font></string>
     <string name="complete_address_hint"><font size="15">Saisir votre adresse</font></string>
     <string name="complete_city_hint"><font size="15">Saisir votre ville</font></string>
@@ -115,7 +116,7 @@
 
     <!-- Liste des cartes de credits -->
     <string name="expiration_date">Expire le :</string>
-    <string name="card_index">Carte N°</string>
+    <string name="card_index">Carte n°</string>
     <string name="stars_cb_number"><font size="15">**** **** ****</font></string>
 
     <!-- ressources quantities -->
