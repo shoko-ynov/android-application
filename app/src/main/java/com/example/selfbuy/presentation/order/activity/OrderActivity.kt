@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.selfbuy.R
 import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.order.fragments.OrderFragment
+import com.example.selfbuy.utils.ManageStepOrder
 
 open class OrderActivity : BaseActivity() {
 
@@ -32,6 +33,8 @@ open class OrderActivity : BaseActivity() {
         if(item.itemId == android.R.id.home){
             super.onBackPressed()
         }
+
+        ManageStepOrder.previousStep(this)
         return super.onOptionsItemSelected(item)
     }
 
@@ -41,6 +44,8 @@ open class OrderActivity : BaseActivity() {
         if (fragment !is OnBackPressedListener || !(fragment as OnBackPressedListener?)!!.onBackPressed()) {
             super.onBackPressed()
         }
+
+        ManageStepOrder.previousStep(this)
     }
 
     interface OnBackPressedListener {

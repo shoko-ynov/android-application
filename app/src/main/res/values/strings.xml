@@ -109,6 +109,9 @@
     <string name="complete_city_hint"><font size="15">Saisir votre ville</font></string>
     <string name="complete_postalcode_hint"><font size="15">Saisir votre code postal</font></string>
 
+    <!-- Throw error -->
+    <string name="manage_step_order_init">Vous devez appeler la methode \'init\' avant de vouloir naviguer avec le stepper</string>
+
     <!-- ressources quantities -->
     <string-array name="quantities_array">
         <item>1</item>

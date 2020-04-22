@@ -16,15 +16,14 @@ import com.example.selfbuy.data.entity.remote.*
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
-import com.example.selfbuy.presentation.home.activity.HomeActivity
 import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.presentation.order.viewModel.CreditCardViewModel
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
+import com.example.selfbuy.utils.ManageStepOrder
 import com.example.selfbuy.utils.ManageThread
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_select_credit_card.*
-import kotlinx.android.synthetic.main.product_cart_cell_layout.*
 
 class SelectCreditCardFragment : Fragment() {
 
@@ -45,6 +44,8 @@ class SelectCreditCardFragment : Fragment() {
         if(this.activity is AppCompatActivity){
             val myActivity = this.activity as AppCompatActivity
             myActivity.setTitle(R.string.payement_method)
+
+            ManageStepOrder.initStep(myActivity)
         }
 
         btn_confirm_command.setOnClickListener {

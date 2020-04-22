@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ import com.example.selfbuy.presentation.home.activity.HomeActivity
 import com.example.selfbuy.presentation.order.viewModel.CreditCardViewModel
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
+import com.example.selfbuy.utils.ManageStepOrder
 import com.example.selfbuy.utils.ManageThread
 import com.google.android.material.snackbar.Snackbar
 import com.stripe.android.PaymentConfiguration
@@ -47,6 +49,8 @@ class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        ManageStepOrder.nextStep(this.activity as AppCompatActivity)
 
         resume_order_recycle_view.apply { getCartProduct(this) }
 

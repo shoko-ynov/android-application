@@ -13,6 +13,7 @@ import com.example.selfbuy.presentation.home.activity.HomeActivity
 import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.presentation.order.activity.SelectCreditCardActivity
 import com.example.selfbuy.room.Async
+import com.example.selfbuy.utils.ManageStepOrder
 import kotlinx.android.synthetic.main.fragment_order_confirmed.*
 
 class OrderConfirmedFragment : Fragment(), OrderActivity.OnBackPressedListener {
@@ -40,6 +41,8 @@ class OrderConfirmedFragment : Fragment(), OrderActivity.OnBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        ManageStepOrder.nextStep(this.activity as AppCompatActivity)
 
         this.deleteCartUser()
 

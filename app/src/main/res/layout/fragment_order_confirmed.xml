@@ -11,17 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include
+            android:id="@+id/stepper_select_credit_cards"
+            layout="@layout/stepper_order"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/imageView_order_confirmed"
             android:layout_width="350dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="72dp"
             android:src="@drawable/ic_image_commande"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/stepper_select_credit_cards" />
 
         <TextView
             android:id="@+id/tw_order_confirmed"
@@ -48,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="78dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/rounded_button"
             android:fontFamily="@font/inter_bold"
             android:padding="20dp"
