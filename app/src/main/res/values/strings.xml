@@ -92,6 +92,7 @@
     <string name="resume">Résumé</string>
     <string name="payement_method">Moyen de paiement</string>
     <string name="my_credit_cards_saved">Mes cartes bancaires enregistrées</string>
+    <string name="my_cards">Mes cartes</string>
     <string name="credit_card_selected">Carte sélectionnée</string>
     <string name="command_ended">Commande terminée</string>
     <string name="select_credit_card">Sélectionner une carte</string>
@@ -111,6 +112,11 @@
 
     <!-- Throw error -->
     <string name="manage_step_order_init">Vous devez appeler la methode \'init\' avant de vouloir naviguer avec le stepper</string>
+
+    <!-- Liste des cartes de credits -->
+    <string name="expiration_date">Expire le :</string>
+    <string name="card_index">Carte N°</string>
+    <string name="stars_cb_number"><font size="15">**** **** ****</font></string>
 
     <!-- ressources quantities -->
     <string-array name="quantities_array">

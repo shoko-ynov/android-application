@@ -12,6 +12,7 @@ import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
+import com.example.selfbuy.presentation.creditCard.activity.ListCreditsCardActivity
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
 import com.example.selfbuy.presentation.profile.activity.ProfileModifActivity
@@ -82,7 +83,7 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
 
     private fun setOnClickListenerBtnAddCreditCard(){
         btn_add_credit_card.setOnClickListener {
-            val intent = Intent(this.context, CreditCardActivity::class.java)
+            val intent = Intent(this.context, ListCreditsCardActivity::class.java)
             startActivity(intent)
         }
     }
