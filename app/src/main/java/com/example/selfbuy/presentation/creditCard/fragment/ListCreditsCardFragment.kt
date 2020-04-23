@@ -73,10 +73,10 @@ class ListCreditsCardFragment : Fragment() {
         creditCardViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error: Throwable ->
             progressBar_list_credits_cards.visibility = View.GONE
 
-            this.updateTextViewEmptyListCreditCard(creditCardListAdapter.list)
-
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
+
+            this.loadProducts()
         })
 
         creditCardViewModel.deleteCreditCard.observe(viewLifecycleOwner, Observer {
