@@ -92,6 +92,7 @@
     <string name="resume">Résumé</string>
     <string name="payement_method">Moyen de paiement</string>
     <string name="my_credit_cards_saved">Mes cartes bancaires enregistrées</string>
+    <string name="use_credit_cards_saved">Utiliser une carte bancaire enregistrée</string>
     <string name="my_cards">Mes cartes</string>
     <string name="credit_card_selected">Carte sélectionnée</string>
     <string name="command_ended">Commande terminée</string>
@@ -120,10 +121,14 @@
     <string name="stars_cb_number"><font size="15">**** **** ****</font></string>
     <string name="delete_card">Suppression carte bancaire</string>
     <string name="confirm_delete_card">Etes-vous sûr de vouloir supprimer cette carte de votre liste ?</string>
+    <string name="select_payment_method">Veuillez sélectionner un moyen de paiement</string>
     <string name="credit_card_deleted_sucessfully">Carte bancaire supprimée avec succés</string>
     <string name="credit_card_set_default_sucessfully">La carte par défaut a été modifiée avec succés</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="credit_card">Carte bancaire</string>
+    <string name="save_credit_card">Enregistrer cette carte bancaire</string>
+    <string name="want_to_save_credit_card">Voulez-vous enregistrer cette carte bancaire pour vos prochaines commandes ?</string>
 
     <!-- ressources quantities -->
     <string-array name="quantities_array">

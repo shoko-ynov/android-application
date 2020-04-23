@@ -67,5 +67,9 @@
             app:layout_constraintTop_toBottomOf="@+id/tw_order_confirmed"
             app:layout_constraintVertical_bias="0.0" />
 
+        <include
+            android:id="@+id/progress_bar_confirmed_order"
+            layout="@layout/progress_bar"
+            android:visibility="gone"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

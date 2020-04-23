@@ -31,6 +31,7 @@ import com.stripe.android.PaymentConfiguration
 import com.stripe.android.Stripe
 import com.stripe.android.model.StripeIntent
 import kotlinx.android.synthetic.main.fragment_order.*
+import kotlinx.android.synthetic.main.fragment_select_credit_card.*
 import kotlinx.android.synthetic.main.webview_3d_secure.*
 
 class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
@@ -101,6 +102,10 @@ class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
             progressBar_resume_order.visibility = View.GONE
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_SHORT).show() }
+        })
+
+        creditCardViewModel.deleteCreditCard.observe(viewLifecycleOwner, Observer {
+            progressBar_resume_order.visibility = View.GONE
         })
     }
 
@@ -235,5 +240,17 @@ class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
 
         orderEnded = false
         webview_3d_secure.loadUrl(url)
+    }
+
+    override fun onDestroyView() {
+        if(ManageCardUser.linkCardToUser == CardUserEnum.No && !ManageCardUser.selectedCardId.isNullOrEmpty()){
+            progressBar_resume_order.visibility = View.VISIBLE
+            creditCardViewModel.deleteCreditCard(ManageCardUser.selectedCardId!!)
+
+            ManageCardUser.linkCardToUser = CardUserEnum.Nothing
+            ManageCardUser.selectedCardId = null
+        }
+
+        super.onDestroyView()
     }
 }

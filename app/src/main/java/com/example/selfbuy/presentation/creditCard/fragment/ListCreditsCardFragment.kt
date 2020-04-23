@@ -64,12 +64,13 @@ class ListCreditsCardFragment : Fragment() {
                     creditCardListAdapter.onClickListener = { cardId ->
                         progressBar_list_credits_cards.visibility = View.VISIBLE
 
-                        if(cardId.contains(ManageRadioButton.RADIO_BUTTON)){
-                            val newCardId = cardId.substringAfter(ManageRadioButton.RADIO_BUTTON)
-                            creditCardViewModel.setDefaultCard(newCardId)
-                        }
-                        else {
-                            this.popUpValidateDeleteCreditCard(cardId)
+                        if (cardId != null) {
+                            if(cardId.contains(ManageRadioButton.RADIO_BUTTON)){
+                                val newCardId = cardId.substringAfter(ManageRadioButton.RADIO_BUTTON)
+                                creditCardViewModel.setDefaultCard(newCardId)
+                            } else {
+                                this.popUpValidateDeleteCreditCard(cardId)
+                            }
                         }
                     }
 

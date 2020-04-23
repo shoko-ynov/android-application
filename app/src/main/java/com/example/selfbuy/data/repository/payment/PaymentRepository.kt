@@ -11,7 +11,7 @@ class PaymentRepository(apiManager: ApiManager) : DataRepository(apiManager) {
     /**
      * Route permettant de link une carte banquaire a l'utilisateur actif
      */
-    fun linkCardToUser(stripeToken: StripeDto): Call<Unit> = apiManager.linkCardToUser(stripeToken)
+    fun linkCardToUser(stripeToken: StripeDto): Single<ResultApiDto<CreditCardDto>> = apiManager.linkCardToUser(stripeToken)
 
     /**
      * Route permettant de lister les cartes de l'utilisateur actif

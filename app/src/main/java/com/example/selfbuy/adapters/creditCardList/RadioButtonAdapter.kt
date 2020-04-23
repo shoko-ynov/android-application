@@ -19,7 +19,7 @@ class RadioButtonAdapter : RecyclerView.Adapter<RadioButtonAdapter.ViewHolder>()
     private var defaultCreditCard: CreditCardDto? = null
     private var isFirstLoad = false
     private val creditsCards: MutableList<CreditCardDto> = arrayListOf()
-    var onClickListener: (String) -> Unit = {}
+    var onClickListener: (String?) -> Unit = {}
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -108,7 +108,7 @@ class RadioButtonAdapter : RecyclerView.Adapter<RadioButtonAdapter.ViewHolder>()
         var selectionState: RadioButton = view.radioButton
         var btnDelete: ImageButton = view.btn_remove_from_credits_cards
 
-        fun bind(entity: CreditCardDto, onClick: (String) -> Unit){
+        fun bind(entity: CreditCardDto, onClick: (String?) -> Unit){
             btnDelete.setOnClickListener {
                 isFirstLoad = false
                 onClick(entity._id)

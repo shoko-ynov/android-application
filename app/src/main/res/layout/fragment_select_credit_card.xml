@@ -42,27 +42,69 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="@string/resume"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/inter_light"/>
 
                 <TextView
                     android:id="@+id/tw_label_total_select_credit_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="35dp"
                     android:layout_marginBottom="15dp"
                     android:text="@string/total"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:id="@+id/tw_total_select_credit_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="35dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="15dp"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cw_enter_credit_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cw_resume_total_select_credit_card">
+
+                <TextView
+                    android:id="@+id/tw_enter_payement_credit_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/credit_card"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_up_black_24dp"/>
+
+                <include
+                    android:id="@+id/include_enter_credit_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    layout="@layout/fragment_credit_card"/>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -76,7 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cw_resume_total_select_credit_card">
+                app:layout_constraintTop_toBottomOf="@+id/cw_enter_credit_card">
 
                 <TextView
                     android:id="@+id/tw_choose_payement_select_credit_card"
@@ -86,8 +128,9 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="15dp"
-                    android:text="@string/my_credit_cards_saved"
-                    android:textStyle="bold" />
+                    android:text="@string/use_credit_cards_saved"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_24dp"/>
 
                 <Spinner
                     android:id="@+id/spinner_credit_cards"
@@ -97,9 +140,10 @@
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="15dp"
+                    android:visibility="gone"
                     android:dropDownWidth="50dp"
                     android:prompt="@string/select_credit_card"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dialog"/>
             </androidx.cardview.widget.CardView>
 
             <Button

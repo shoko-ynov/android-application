@@ -11,7 +11,6 @@ import com.example.selfbuy.R
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.activity.HomeActivity
 import com.example.selfbuy.presentation.order.activity.OrderActivity
-import com.example.selfbuy.presentation.order.activity.SelectCreditCardActivity
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.utils.ManageStepOrder
 import kotlinx.android.synthetic.main.fragment_order_confirmed.*
