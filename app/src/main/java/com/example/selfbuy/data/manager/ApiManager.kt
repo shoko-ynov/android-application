@@ -79,4 +79,9 @@ class ApiManager {
      * Route permettant de supprimer une carte bancaire
      */
     fun deleteCreditCard(cardId: String): Call<Unit> = service.deleteCreditCard(cardId)
+
+    /**
+     * Route permettant de changer la carte bancaire par defaut
+     */
+    fun setDefaultCard(cardId: String): Call<Unit> = service.setDefaultCard(cardId)
 }

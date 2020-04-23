@@ -34,18 +34,13 @@ class SFCreditsCardsViewHolder(itemView: View): SFListAdapterViewHolder<CreditCa
         }
 
         itemView.tw_credit_card_expire.text = "${entity.expMonth}/${entity.expYear}"
-        ManageRadioButton.listItemView.add(itemView)
 
         itemView.radioButton.setOnClickListener {
-            ManageRadioButton.updateSelectedRadioButton(itemView)
+            onClick("${ManageRadioButton.RADIO_BUTTON}${entity._id}")
         }
 
         itemView.btn_remove_from_credits_cards.setOnClickListener {
             onClick(entity._id)
-        }
-
-        if(entity.isDefaultCard){
-            ManageRadioButton.updateSelectedRadioButton(itemView)
         }
     }
 
@@ -74,24 +69,5 @@ class SFCreditsCardsViewHolder(itemView: View): SFListAdapterViewHolder<CreditCa
 }
 
 object ManageRadioButton{
-    val listItemView: MutableList<View> = arrayListOf()
-    private lateinit var selectedItemView: View
-
-    fun updateSelectedRadioButton(itemView: View){
-        selectedItemView = itemView.radioButton
-        listItemView.forEach {
-            if(it == itemView){
-                it.radioButton.isChecked = true
-                it.tw_credit_card_default.text = "(Défaut)"
-            }
-            else{
-                it.radioButton.isChecked = false
-                it.tw_credit_card_default.text = ""
-            }
-        }
-    }
-
-    fun getSelectedItemView(): View{
-        return selectedItemView
-    }
+    const val RADIO_BUTTON = "RADIO_BUTTON_"
 }

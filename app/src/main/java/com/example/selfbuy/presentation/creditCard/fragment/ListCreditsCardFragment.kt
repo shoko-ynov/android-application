@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.selfbuy.R
 import com.example.selfbuy.adapters.creditCardList.SFCreditCardListAdapter
+import com.example.selfbuy.adapters.creditCardList.viewHolder.ManageRadioButton
 import com.example.selfbuy.data.entity.remote.CreditCardDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
@@ -63,7 +64,14 @@ class ListCreditsCardFragment : Fragment() {
                     updateList(resultDto.data)
                     creditCardListAdapter.onClickListener = { cardId ->
                         progressBar_list_credits_cards.visibility = View.VISIBLE
-                        this.popUpValidateDeleteCreditCard(cardId)
+
+                        if(cardId.contains(ManageRadioButton.RADIO_BUTTON)){
+                            val newCardId = cardId.substringAfter(ManageRadioButton.RADIO_BUTTON)
+                            creditCardViewModel.setDefaultCard(newCardId)
+                        }
+                        else {
+                            this.popUpValidateDeleteCreditCard(cardId)
+                        }
                     }
 
                     recycleView.adapter = creditCardListAdapter
@@ -82,8 +90,14 @@ class ListCreditsCardFragment : Fragment() {
         creditCardViewModel.deleteCreditCard.observe(viewLifecycleOwner, Observer {
             progressBar_list_credits_cards.visibility = View.GONE
 
-            Toast.makeText(this.context!!, getString(R.string.credit_card_deleted_sucessfully), Toast.LENGTH_SHORT).show()
+            view?.let { v -> Snackbar.make(v, getString(R.string.credit_card_deleted_sucessfully), Snackbar.LENGTH_SHORT).show() }
             this.loadCreditsCards()
+        })
+
+        creditCardViewModel.setDefaultCreditCard.observe(viewLifecycleOwner, Observer {
+            progressBar_list_credits_cards.visibility = View.GONE
+
+            view?.let { v -> Snackbar.make(v, getString(R.string.credit_card_set_default_sucessfully), Snackbar.LENGTH_SHORT).show() }
         })
     }
 

@@ -21,6 +21,7 @@ class CreditCardViewModel: ViewModel() {
     val errorLiveData: MutableLiveData<Throwable> = MutableLiveData()
 
     val deleteCreditCard: MutableLiveData<Boolean> = MutableLiveData()
+    val setDefaultCreditCard: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
      * Permet de recuperer la liste des cartes de crédit de l'utilisateur actif
@@ -58,7 +59,7 @@ class CreditCardViewModel: ViewModel() {
     }
 
     /**
-     * Route permettant de supprimer une carte bancaire
+     * Permet de supprimer une carte bancaire
      */
     @SuppressLint("CheckResult")
     fun deleteCreditCard(cardId: String) {
@@ -70,6 +71,30 @@ class CreditCardViewModel: ViewModel() {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                     if (response.code() == 200 || response.code() == 204) {
                         deleteCreditCard.postValue(true)
+                    }
+                    else{
+                        errorLiveData.postValue(Throwable(response.code().toString()))
+                    }
+                }
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    errorLiveData.postValue(t)
+                }
+            })
+    }
+
+    /**
+     * Permet de changer la carte bancaire par defaut
+     */
+    @SuppressLint("CheckResult")
+    fun setDefaultCard(cardId: String) {
+        SFApplication
+            .app
+            .paymentRepository
+            .setDefaultCard(cardId)
+            .enqueue(object : Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    if (response.code() == 200 || response.code() == 204) {
+                        setDefaultCreditCard.postValue(true)
                     }
                     else{
                         errorLiveData.postValue(Throwable(response.code().toString()))

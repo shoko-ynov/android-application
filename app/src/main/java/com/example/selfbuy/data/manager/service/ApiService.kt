@@ -77,4 +77,10 @@ interface ApiService {
      */
     @DELETE("api/cards/{cardId}")
     fun deleteCreditCard(@Path("cardId") cardId: String): Call<Unit>
+
+    /**
+     * Route permettant de changer la carte bancaire par defaut
+     */
+    @PUT("api/cards/default/{cardId}")
+    fun setDefaultCard(@Path("cardId") cardId: String): Call<Unit>
 }
