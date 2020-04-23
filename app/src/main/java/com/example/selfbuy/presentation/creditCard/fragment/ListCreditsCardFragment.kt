@@ -45,7 +45,7 @@ class ListCreditsCardFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        this.loadProducts()
+        this.loadCreditsCards()
     }
 
     /**
@@ -76,14 +76,14 @@ class ListCreditsCardFragment : Fragment() {
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
 
-            this.loadProducts()
+            this.loadCreditsCards()
         })
 
         creditCardViewModel.deleteCreditCard.observe(viewLifecycleOwner, Observer {
             progressBar_list_credits_cards.visibility = View.GONE
 
             Toast.makeText(this.context!!, getString(R.string.credit_card_deleted_sucessfully), Toast.LENGTH_SHORT).show()
-            this.loadProducts()
+            this.loadCreditsCards()
         })
     }
 
@@ -110,7 +110,7 @@ class ListCreditsCardFragment : Fragment() {
     /**
      * Charge la liste de creditCardsList
      */
-    private fun loadProducts() {
+    private fun loadCreditsCards() {
         progressBar_list_credits_cards.visibility = View.VISIBLE
         val creditCardsList: List<CreditCardDto> = emptyList()
         creditCardListAdapter.updateList(creditCardsList)
