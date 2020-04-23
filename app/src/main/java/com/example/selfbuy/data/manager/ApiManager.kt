@@ -74,4 +74,9 @@ class ApiManager {
      * Route permettant de créer le paiement
      */
     fun createPaymentIntent(orderDto: OrderDto) : Single<ResultApiDto<PaymentIntentDto>> = service.createPaymentIntent(orderDto)
+
+    /**
+     * Route permettant de supprimer une carte bancaire
+     */
+    fun deleteCreditCard(cardId: String): Call<Unit> = service.deleteCreditCard(cardId)
 }

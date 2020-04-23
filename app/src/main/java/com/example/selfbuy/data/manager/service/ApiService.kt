@@ -71,4 +71,10 @@ interface ApiService {
      */
     @POST("api/stripe/pay")
     fun createPaymentIntent(@Body orderDto: OrderDto) : Single<ResultApiDto<PaymentIntentDto>>
+
+    /**
+     * Route permettant de supprimer une carte bancaire
+     */
+    @DELETE("api/cards/{cardId}")
+    fun deleteCreditCard(@Path("cardId") cardId: String): Call<Unit>
 }

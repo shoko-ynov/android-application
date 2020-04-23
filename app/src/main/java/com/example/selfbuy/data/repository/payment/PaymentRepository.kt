@@ -22,4 +22,9 @@ class PaymentRepository(apiManager: ApiManager) : DataRepository(apiManager) {
      * Route permettant de créer le paiement
      */
     fun createPaymentIntent(orderDto: OrderDto) : Single<ResultApiDto<PaymentIntentDto>> = apiManager.createPaymentIntent(orderDto)
+
+    /**
+     * Route permettant de supprimer une carte bancaire
+     */
+    fun deleteCreditCard(cardId: String): Call<Unit> = apiManager.deleteCreditCard(cardId)
 }

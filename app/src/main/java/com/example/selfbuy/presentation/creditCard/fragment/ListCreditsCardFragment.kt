@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -59,11 +61,10 @@ class ListCreditsCardFragment : Fragment() {
 
                 if (resultDto.data != null) {
                     updateList(resultDto.data)
-                    /*productListAdapter.onClickListener = { id ->
-                        val intent = Intent(this.context, DetailProductActivity::class.java)
-                        intent.putExtra("idProduct", id)
-                        startActivity(intent)
-                    } */
+                    creditCardListAdapter.onClickListener = { cardId ->
+                        progressBar_list_credits_cards.visibility = View.VISIBLE
+                        this.popUpValidateDeleteCreditCard(cardId)
+                    }
 
                     recycleView.adapter = creditCardListAdapter
                 }
@@ -76,6 +77,13 @@ class ListCreditsCardFragment : Fragment() {
 
             val errorBodyApi = ErrorUtils.getErrorApi(error)
             view?.let { v -> Snackbar.make(v, errorBodyApi.message, Snackbar.LENGTH_LONG).show() }
+        })
+
+        creditCardViewModel.deleteCreditCard.observe(viewLifecycleOwner, Observer {
+            progressBar_list_credits_cards.visibility = View.GONE
+
+            Toast.makeText(this.context!!, getString(R.string.credit_card_deleted_sucessfully), Toast.LENGTH_SHORT).show()
+            this.loadProducts()
         })
     }
 
@@ -108,5 +116,31 @@ class ListCreditsCardFragment : Fragment() {
         creditCardListAdapter.updateList(creditCardsList)
 
         creditCardViewModel.getUserCards()
+    }
+
+    /**
+     * Affiche la popup validation suppression cb
+     */
+    private fun popUpValidateDeleteCreditCard(cardId:String){
+        val builder = AlertDialog.Builder(this.context!!)
+
+        with(builder)
+        {
+            setTitle(getString(R.string.delete_card))
+            setMessage(getString(R.string.confirm_delete_card))
+
+            builder.setNeutralButton(
+                getString(R.string.yes)
+            ) { _, _ ->
+                creditCardViewModel.deleteCreditCard(cardId)
+            }
+            builder.setNegativeButton(
+                getString(R.string.no)
+            ) { _, _ ->
+                //Ne pas supprimer
+                progressBar_list_credits_cards.visibility = View.GONE
+            }
+            show()
+        }
     }
 }

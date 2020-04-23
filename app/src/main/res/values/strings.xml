@@ -118,6 +118,11 @@
     <string name="expiration_date">Expire le :</string>
     <string name="card_index">Carte n°</string>
     <string name="stars_cb_number"><font size="15">**** **** ****</font></string>
+    <string name="delete_card">Suppression carte bancaire</string>
+    <string name="confirm_delete_card">Etes-vous sûr de vouloir supprimer cette carte de votre liste ?</string>
+    <string name="credit_card_deleted_sucessfully">Carte bancaire supprimée avec succés !</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 
     <!-- ressources quantities -->
     <string-array name="quantities_array">
