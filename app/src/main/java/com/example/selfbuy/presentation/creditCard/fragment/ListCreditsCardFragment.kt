@@ -4,15 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.selfbuy.R
-import com.example.selfbuy.adapters.creditCardList.SFCreditCardListAdapter
-import com.example.selfbuy.adapters.creditCardList.viewHolder.ManageRadioButton
+import com.example.selfbuy.adapters.creditCardList.ManageRadioButton
+import com.example.selfbuy.adapters.creditCardList.RadioButtonAdapter
 import com.example.selfbuy.data.entity.remote.CreditCardDto
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
@@ -24,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_list_credits_cards.*
 class ListCreditsCardFragment : Fragment() {
 
     private val creditCardViewModel = CreditCardViewModel()
-    private val creditCardListAdapter = SFCreditCardListAdapter()
+    private var creditCardListAdapter = RadioButtonAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
