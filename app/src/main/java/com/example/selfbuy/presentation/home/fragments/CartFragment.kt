@@ -2,7 +2,9 @@ package com.example.selfbuy.presentation.home.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -17,12 +19,13 @@ import com.example.selfbuy.data.entity.remote.TokenDto
 import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
-import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.presentation.order.activity.SelectCreditCardActivity
 import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
 import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.fragment_select_credit_card.*
+
 
 class CartFragment : Fragment() {
     private val productListAdapter = SFProductCartListAdapter()
@@ -50,21 +53,7 @@ class CartFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.check_menu_validate && productListAdapter.itemCount > 0) {
-            val tokenSaved = SFApplication.app.loginPreferences.getString("token", "")
-            val refreshTokenSaved = SFApplication.app.loginPreferences.getString("refreshToken", "")
-
-            //Check si le token est valide
-            if (!tokenSaved.isNullOrEmpty() && !refreshTokenSaved.isNullOrEmpty()){
-                progressBar_cart_product.visibility = View.VISIBLE
-
-                val token = TokenDto(tokenSaved.toString(), refreshTokenSaved.toString())
-                CurrentUser.tokenDto = token
-                userViewModel.getCurrentUser()
-            }
-            //Redirection page de login
-            else{
-                this.redirectionOrderActivity(false)
-            }
+           this.validateCart()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -80,12 +69,42 @@ class CartFragment : Fragment() {
         products_cart_recycle_view.apply { getCartProduct(this) }
 
         this.bindUserViewModel()
+
+        btn_valide_cart.setOnClickListener {
+            if(productListAdapter.itemCount > 0){
+                this.validateCart()
+            }
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
 
         userViewModel = UserViewModel()
+    }
+
+    private fun validateCart(){
+        progressBar_cart_product.visibility = View.VISIBLE
+
+        Handler().postDelayed({
+            progressBar_cart_product.visibility = View.GONE
+
+            val tokenSaved = SFApplication.app.loginPreferences.getString("token", "")
+            val refreshTokenSaved = SFApplication.app.loginPreferences.getString("refreshToken", "")
+
+            //Check si le token est valide
+            if (!tokenSaved.isNullOrEmpty() && !refreshTokenSaved.isNullOrEmpty()){
+                progressBar_cart_product.visibility = View.VISIBLE
+
+                val token = TokenDto(tokenSaved.toString(), refreshTokenSaved.toString())
+                CurrentUser.tokenDto = token
+                userViewModel.getCurrentUser()
+            }
+            //Redirection page de login
+            else{
+                this.redirectionOrderActivity(false)
+            }
+        }, 1000)
     }
 
     /**
@@ -132,6 +151,13 @@ class CartFragment : Fragment() {
             ManageThread.executeOnMainThread(this.context!!){
                 loadDataInRecycleView(resultQuery.toMutableList(), recycleView)
                 menu.getItem(0).isEnabled = productListAdapter.itemCount > 0
+
+                if(productListAdapter.itemCount > 0){
+                    btn_valide_cart.visibility = Button.VISIBLE
+                }
+                else{
+                    btn_valide_cart.visibility = Button.INVISIBLE
+                }
             }
         }.execute()
     }

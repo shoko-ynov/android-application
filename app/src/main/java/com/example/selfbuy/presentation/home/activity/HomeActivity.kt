@@ -1,7 +1,10 @@
 package com.example.selfbuy.presentation.home.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.Toast
 import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.presentation.BaseActivity
@@ -10,9 +13,12 @@ import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.fragments.HomeFragment
 import com.example.selfbuy.presentation.profile.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_cart.*
 
 class HomeActivity : BaseActivity() {
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -30,7 +36,6 @@ class HomeActivity : BaseActivity() {
                     .replace(R.id.home_activity_fragment_container, HomeFragment())
                     .commit()
 
-                //tw_title.text = getString(R.string.home)
                 setTitle(R.string.home)
                 //sw_product.visibility = SearchView.VISIBLE
             }
@@ -38,7 +43,7 @@ class HomeActivity : BaseActivity() {
 
         setUpBottomNavigationView()
 
-        //supportActionBar?.hide()
+        supportActionBar?.hide()
     }
 
     /**
@@ -65,12 +70,13 @@ class HomeActivity : BaseActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+                this.supportActionBar?.hide()
+
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.home_activity_fragment_container, HomeFragment())
                     .commit()
 
-                //tw_title.text = getString(R.string.home)
                 setTitle(R.string.home)
                 //sw_product.visibility = SearchView.VISIBLE
                 this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -81,8 +87,9 @@ class HomeActivity : BaseActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-
                 if (CurrentUser.userDto != null){
+                    this.supportActionBar?.show()
+
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.home_activity_fragment_container, ProfileFragment(CurrentUser.userDto!!))
@@ -94,8 +101,7 @@ class HomeActivity : BaseActivity() {
                         .replace(R.id.home_activity_fragment_container, ConnexionFragment())
                         .commit()
                 }
-                //sw_product.visibility = SearchView.GONE
-                //tw_title.text = getString(R.string.profile)
+
                 setTitle(R.string.profile)
                 this.supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 return@OnNavigationItemSelectedListener true
@@ -105,12 +111,13 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun showAndSelectCartFragment(){
+        supportActionBar?.hide()
+
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.home_activity_fragment_container, CartFragment())
             .commit()
 
-        //tw_title.text = getString(R.string.cart)
         setTitle(R.string.cart)
         //sw_product.visibility = SearchView.GONE
         this.supportActionBar?.setDisplayHomeAsUpEnabled(false)

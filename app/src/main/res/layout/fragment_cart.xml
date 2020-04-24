@@ -4,10 +4,50 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".presentation.home.fragments.HomeFragment">
+             tools:context=".presentation.home.fragments.CartFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/header_image"
+            layout="@layout/header_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tw_title_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/cart"
+            android:textColor="@color/colorWhite"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_valide_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_validate"
+            android:drawableTint="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="invisible"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tw_title_home"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/twEmptyCartListProduct"
@@ -29,6 +69,7 @@
             android:id="@+id/products_cart_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="110dp"
             android:layout_marginBottom="76dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

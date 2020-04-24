@@ -15,6 +15,7 @@ import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.data.entity.remote.TokenDto
 import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
+import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.SFApplication
 import com.example.selfbuy.presentation.home.viewModels.ConnexionViewModel
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
@@ -40,6 +41,11 @@ class ConnexionFragment : Fragment() {
         this.setOnClickListener()
         this.bindConnexionViewModel()
         this.bindUserViewModel()
+
+        if(this.activity is BaseActivity){
+            val baseActivity = activity as BaseActivity
+            baseActivity.supportActionBar(false)
+        }
     }
 
     @SuppressLint("CommitPrefEdits")

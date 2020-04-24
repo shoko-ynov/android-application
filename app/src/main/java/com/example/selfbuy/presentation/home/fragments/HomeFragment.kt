@@ -18,6 +18,7 @@ import com.example.selfbuy.handleError.utils.ErrorUtils
 import com.example.selfbuy.presentation.detailProduct.activity.DetailProductActivity
 import com.example.selfbuy.presentation.home.viewModels.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {

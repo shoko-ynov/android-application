@@ -1,7 +1,10 @@
 package com.example.selfbuy.presentation
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -9,6 +12,13 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 open class BaseActivity : AppCompatActivity() {
+
+    @SuppressLint("RestrictedApi")
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+
+        this.supportActionBar?.setShowHideAnimationEnabled(false)
+    }
 
     /**
      * Masque le clavier si on clique en dehors d'un champ
@@ -41,6 +51,15 @@ open class BaseActivity : AppCompatActivity() {
             val imm: InputMethodManager =
                 activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, 0)
+        }
+    }
+
+    fun supportActionBar(show: Boolean){
+        if(show){
+            this.supportActionBar?.show()
+        }
+        else{
+            this.supportActionBar?.hide()
         }
     }
 }

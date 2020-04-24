@@ -10,8 +10,8 @@ import com.example.selfbuy.data.entity.local.CurrentUser
 import com.example.selfbuy.data.entity.remote.ResultApiDto
 import com.example.selfbuy.data.entity.remote.UserDto
 import com.example.selfbuy.handleError.utils.ErrorUtils
+import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.SFApplication
-import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
 import com.example.selfbuy.presentation.creditCard.activity.ListCreditsCardActivity
 import com.example.selfbuy.presentation.home.fragments.ConnexionFragment
 import com.example.selfbuy.presentation.home.viewModels.UserViewModel
@@ -72,6 +72,11 @@ class ProfileFragment(private val userDto: UserDto) : Fragment() {
         this.setOnClickListenerBtnListCreditsCards()
 
         refreshUser(userDto)
+
+        if(this.activity is BaseActivity){
+            val baseActivity = activity as BaseActivity
+            baseActivity.supportActionBar(true)
+        }
     }
 
     override fun onResume() {
