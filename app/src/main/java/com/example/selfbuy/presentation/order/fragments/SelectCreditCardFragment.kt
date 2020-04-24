@@ -10,14 +10,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.selfbuy.R
 import com.example.selfbuy.data.entity.remote.*
 import com.example.selfbuy.handleError.utils.ErrorUtils
+import com.example.selfbuy.presentation.BaseActivity
 import com.example.selfbuy.presentation.SFApplication
-import com.example.selfbuy.presentation.creditCard.activity.CreditCardActivity
 import com.example.selfbuy.presentation.creditCard.viewModel.StripeViewModel
 import com.example.selfbuy.presentation.order.activity.OrderActivity
 import com.example.selfbuy.presentation.order.viewModel.CreditCardViewModel
@@ -72,11 +71,12 @@ class SelectCreditCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(this.activity is AppCompatActivity){
-            val myActivity = this.activity as AppCompatActivity
-            myActivity.setTitle(R.string.payement_method)
+        if(this.activity is BaseActivity){
+            val baseActivity = activity as BaseActivity
+            baseActivity.supportActionBar(true)
+            baseActivity.setTitle(R.string.payement_method)
 
-            ManageStepOrder.initStep(myActivity)
+            ManageStepOrder.initStep(baseActivity)
         }
 
         btn_confirm_command.setOnClickListener {
@@ -101,7 +101,6 @@ class SelectCreditCardFragment : Fragment() {
             }
         }
 
-        this.btnAddCreditCardCommandClickListener()
         this.bindCreateCardViewModel()
         this.bindStripeViewModel()
         progressBar_list_cards_user.visibility = View.VISIBLE
@@ -110,7 +109,7 @@ class SelectCreditCardFragment : Fragment() {
         this.spinnerItemOnClickListener()
         isFirstLoad = false
 
-        cw_list_credit_card.setOnClickListener {
+        tw_choose_payement_select_credit_card.setOnClickListener {
             if(spinner_credit_cards.visibility == Spinner.GONE){
                 spinner_credit_cards.visibility = Spinner.VISIBLE
                 tw_choose_payement_select_credit_card.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_up_black_24dp, 0)
@@ -128,7 +127,7 @@ class SelectCreditCardFragment : Fragment() {
             }
         }
 
-        cw_enter_credit_card.setOnClickListener {
+        tw_enter_payement_credit_card.setOnClickListener {
             if(include_enter_credit_card.visibility == View.GONE){
                 include_enter_credit_card.visibility = View.VISIBLE
                 tw_enter_payement_credit_card.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_up_black_24dp, 0)
@@ -163,16 +162,6 @@ class SelectCreditCardFragment : Fragment() {
         if(!isFirstLoad){
             progressBar_list_cards_user.visibility = View.VISIBLE
             this.creditCardViewModel.getUserCards()
-        }
-    }
-
-    /**
-     * Evenement du click sur le bouton d'ajout de carte de credit
-     */
-    private fun btnAddCreditCardCommandClickListener(){
-        btn_add_credit_card_command.setOnClickListener {
-            val intent = Intent(this.context, CreditCardActivity::class.java)
-            startActivity(intent)
         }
     }
 
@@ -338,7 +327,10 @@ class SelectCreditCardFragment : Fragment() {
                         override fun onError(e: Exception) {
                             progressBar_add_card.visibility = View.GONE
 
-                            view?.let { v -> Snackbar.make(v, e.localizedMessage, Snackbar.LENGTH_LONG).show() }
+                            val errorMessage = e.localizedMessage
+                            if(!errorMessage.isNullOrEmpty()){
+                                view?.let { v -> Snackbar.make(v, errorMessage, Snackbar.LENGTH_LONG).show() }
+                            }
                         }
 
                         override fun onSuccess(result: Token) {

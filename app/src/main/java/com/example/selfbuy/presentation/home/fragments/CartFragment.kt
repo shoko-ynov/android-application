@@ -24,7 +24,6 @@ import com.example.selfbuy.room.Async
 import com.example.selfbuy.room.entity.Product
 import com.example.selfbuy.utils.ManageThread
 import kotlinx.android.synthetic.main.fragment_cart.*
-import kotlinx.android.synthetic.main.fragment_select_credit_card.*
 
 
 class CartFragment : Fragment() {

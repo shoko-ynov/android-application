@@ -15,7 +15,7 @@ class DetailProductActivity : AppCompatActivity() {
 
         val idProduct = intent.getStringExtra("idProduct")
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && !idProduct.isNullOrEmpty()) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.product_activity_fragment_container, DetailProductFragment(idProduct))

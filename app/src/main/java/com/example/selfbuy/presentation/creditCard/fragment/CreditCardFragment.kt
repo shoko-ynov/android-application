@@ -69,7 +69,10 @@ class CreditCardFragment : Fragment() {
                             override fun onError(e: Exception) {
                                 progressBar_add_card.visibility = View.GONE
 
-                                view?.let { v -> Snackbar.make(v, e.localizedMessage, Snackbar.LENGTH_LONG).show() }
+                                val errorMessage = e.localizedMessage
+                                if(!errorMessage.isNullOrEmpty()){
+                                    view?.let { v -> Snackbar.make(v, errorMessage, Snackbar.LENGTH_LONG).show() }
+                                }
                             }
 
                             override fun onSuccess(result: Token) {

@@ -57,8 +57,8 @@ class HomeActivity : BaseActivity() {
     /**
      * Evenement appelé lorsque sélectionne une option native à la plateforme (comme le bouton retour dans l'actionbar)
      */
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item != null && item.itemId == android.R.id.home) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home) {
             super.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
