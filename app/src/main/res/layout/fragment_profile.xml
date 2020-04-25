@@ -96,7 +96,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:background="@drawable/rounded_button"
-                android:text="@string/my_credit_cards_saved"
+                android:text="@string/payement_method"
                 android:textColor="@color/colorWhite"
                 android:fontFamily="@font/inter_bold"/>
         </LinearLayout>
