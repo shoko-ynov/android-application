@@ -114,6 +114,7 @@
 
     <!-- Throw error -->
     <string name="manage_step_order_init">Vous devez appeler la methode \'init\' avant de vouloir naviguer avec le stepper</string>
+    <string name="validate_3d_secure">Il est nécessaire de valider l\'étape 3D Secure pour pouvoir valider la commande</string>
 
     <!-- Liste des cartes de credits -->
     <string name="expiration_date">Expire le :</string>

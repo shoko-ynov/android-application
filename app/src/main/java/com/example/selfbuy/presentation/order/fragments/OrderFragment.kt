@@ -31,7 +31,6 @@ import com.stripe.android.PaymentConfiguration
 import com.stripe.android.Stripe
 import com.stripe.android.model.StripeIntent
 import kotlinx.android.synthetic.main.fragment_order.*
-import kotlinx.android.synthetic.main.fragment_select_credit_card.*
 import kotlinx.android.synthetic.main.webview_3d_secure.*
 
 class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
@@ -42,6 +41,7 @@ class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
     private var orderEnded = false
     private var clientSecretOrder = ""
     private var count3dSecureAction = 0
+    private var old3dSecureAction =  0
     private var orderDto: OrderDto? = null
 
     override fun onCreateView(
@@ -166,6 +166,10 @@ class OrderFragment(private val selectedCreditCardId: String) : Fragment() {
                 }
                 else
                 {
+                    if(count3dSecureAction > 0 && count3dSecureAction != old3dSecureAction){
+                        view?.let { Snackbar.make(it, R.string.validate_3d_secure, Snackbar.LENGTH_SHORT).show() }
+                        old3dSecureAction++
+                    }
                     //WebView 3D secure
                     count3dSecureAction++
                     result.nextAction?.forEach {
