@@ -106,7 +106,7 @@
     <string name="complete_password_hint"><font size="15">Saisir votre mot de passe</font></string>
     <string name="complete_adresse_mail_hint"><font size="15">Saisir votre adresse mail</font></string>
     <string name="complete_lastname_hint"><font size="15">Saisir votre nom</font></string>
-    <string name="complete_lastname_hint_02">Saisir votre nom</string>
+    <string name="owner_card">Titulaire de la carte</string>
     <string name="complete_firstname_hint"><font size="15">Saisir votre prénom</font></string>
     <string name="complete_address_hint"><font size="15">Saisir votre adresse</font></string>
     <string name="complete_city_hint"><font size="15">Saisir votre ville</font></string>
