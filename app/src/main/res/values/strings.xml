@@ -22,6 +22,7 @@
 
     <string name="register">S\'inscrire</string>
     <string name="validate">Valider</string>
+    <string name="validate_my_cart">Valider mon panier</string>
     <string name="mail_invalid">L\'adresse mail n\'est pas valide</string>
     <string name="mail_empty">L\'adresse mail doit être renseigné</string>
     <string name="complete_password">Veuillez renseigner votre mot de passe</string>
@@ -31,6 +32,7 @@
     <string name="logout">Déconnecter</string>
     <string name="edit_profil">Modifier profile</string>
     <string name="add_credit_card">Ajouter une carte de crédit</string>
+    <string name="autorise_stripe_info">J\'autorise Stripe à envoyer des instructions à l\'institution financière qui a émis ma carte pour prélever des paiements sur mon compte de carte conformément aux termes de l\'accord que j\'ai passé avec vous.</string>
 
     <!-- Inscription -->
     <string name="register_title">Inscription</string>

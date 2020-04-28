@@ -32,23 +32,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_valide_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="24dp"
-            android:drawableEnd="@drawable/ic_validate"
-            android:drawableTint="@color/colorWhite"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="invisible"
-            android:background="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/tw_title_home"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/twEmptyCartListProduct"
             android:layout_width="match_parent"
@@ -77,6 +60,19 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/product_cart_cell_layout"
             android:scrollbars="vertical"/>
+
+        <Button
+            android:id="@+id/btn_valide_cart"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/validate_my_cart"
+            android:background="@drawable/rounded_button_white_bg"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintBottom_toBottomOf="@id/products_cart_recycle_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
