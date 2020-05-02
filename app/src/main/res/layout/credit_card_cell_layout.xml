@@ -18,10 +18,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <!--<ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_bg_credit_card"/>
+            android:src="@drawable/ic_bg_credit_card"/>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:gravity="center_vertical"
-                android:buttonTint="@color/colorWhite"
+                android:buttonTint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/radioButton"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/inter_light"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toStartOf="@+id/img_credit_card_brand"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/tw_credit_card_index"
@@ -85,7 +85,7 @@
                 android:fontFamily="@font/inter_medium"
                 android:gravity="center_vertical"
                 android:maxLines="2"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -103,7 +103,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:gravity="center_vertical"
                 android:maxLines="2"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
                 android:fontFamily="@font/inter_light"
                 android:gravity="center_vertical"
                 android:text="@string/expiration_date"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +133,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/tw_credit_card_expire_lbl"
@@ -145,11 +145,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="12dp"
-                android:background="@color/colorWhite"
                 android:src="@drawable/ic_trash"
                 android:text="@string/remove"
-                android:tint="@color/colorWhite"
-                android:backgroundTint="@color/colorPrimary"
+                android:tint="@color/colorPrimary"
+                android:backgroundTint="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.945"
